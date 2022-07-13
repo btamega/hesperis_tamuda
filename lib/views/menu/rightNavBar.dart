@@ -1,23 +1,51 @@
 import 'package:flutter/material.dart';
 
-class NavBar extends StatelessWidget {
-  const NavBar({ Key? key }) : super(key: key);
+class DropDownMenu extends StatefulWidget {
+  const DropDownMenu({ Key? key }) : super(key: key);
 
   @override
+  State<DropDownMenu> createState() => _DropDownMenuState();
+}
+
+class _DropDownMenuState extends State<DropDownMenu> {
+  @override
   Widget build(BuildContext context) {
+    String dropdownValue = 'Français';
     return Drawer(
       child: ListView(
-        // padding: EdgeInsets.zero,
-        children: [
+        children:  [
           const UserAccountsDrawerHeader(
             accountName: Text('Bougary TAMEGA'), 
-            accountEmail: Text("bougarytamega77@gmail.com"),
+            accountEmail: Text("bougarytamega77@gmail.com",),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 // child: Image(image: image),
               ),
             ),
             ),
+            DropdownButton<String>(
+              value: dropdownValue,
+              icon: const Icon(Icons.arrow_drop_down),
+              elevation: 16,
+              // style: const TextStyle(color: Colors.deepPurple),
+              // underline: Container(
+              //   height: 2,
+              //   color: Colors.deepPurpleAccent,
+              // ),
+              onChanged: (String? newValue) {
+                setState(() {
+                 dropdownValue = 'newValue';
+                 });
+              },
+              items: <String>['Français', 'English', 'عربي']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            
             const ListTile(
               leading: Icon(Icons.history),
               
