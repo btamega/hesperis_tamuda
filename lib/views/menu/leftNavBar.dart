@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../pages/home.dart';
+
 class NavBar extends StatelessWidget {
   const NavBar({ Key? key }) : super(key: key);
 
@@ -9,58 +11,44 @@ class NavBar extends StatelessWidget {
       child: Container(
       color: Colors.blueGrey,
       child: ListView(
-        
-        children: const [
-          
-          // const Image(
-          //   accountName: Text('Hespéris Tamuda'), 
-          //   // accountEmail: Text("bougarytamega77@gmail.com"),
-          //   currentAccountPicture: CircleAvatar(
-          //     child: ClipOval(
-          //     child: Image(
-          //       image: AssetImage(
-          //         '../assets/images/logo hespéris.png',
-          //         package: 'flutter_gallery_assets',
-          //       )
-          //     ),
-          //     ),
-          //   ),
-          //   ),
+        padding: EdgeInsets.zero,
+        children: [
+           const Image(image: AssetImage('assets/images/logo-hespéris.png')),
             ListTile(
-              leading: Icon(Icons.home),
+              leading: const Icon(Icons.home),
               
-              title: Text("HOME"),
-              onTap: null,
+              title: const Text("HOME"),
+              onTap: () {const HomePage();},
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.more_vert),
 
-              title: Text("ABOUT"),
+              title:  Text("ABOUT"),
             ),
-            ListTile(
-              leading: Icon(Icons.people),
+            const ListTile(
+              leading:  Icon(Icons.people),
 
-              title: Text("EDITORIAL COMMITTEE"),
+              title:  Text("EDITORIAL COMMITTEE"),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.info),
 
-              title: Text("RECOMMANDATIONS"),
+              title:  Text("RECOMMANDATIONS"),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.archive),
 
-              title: Text("ARCHIVES"),
+              title:  Text("ARCHIVES"),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.archive),
 
-              title: Text("LAST ISSUES"),
+              title:  Text("LAST ISSUES"),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.contacts),
 
-              title: Text("CONTACT"),
+              title:  Text("CONTACT"),
             ),
             // ListTile(
             //   leading: const Icon(Icons.notifications),
@@ -84,15 +72,15 @@ class NavBar extends StatelessWidget {
             //   ),
               
             // ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.settings),
 
-              title: Text("Paramètres"),
+              title:  Text("Paramètres"),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.logout),
 
-              title: Text("Se déconnecter"),
+              title:  Text("Se déconnecter"),
             ),
         ],
       ),

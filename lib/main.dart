@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/menu/leftNavBar.dart';
+import 'views/include/header.dart';
+import 'views/include/navbar.dart';
 import 'views/menu/rightNavBar.dart';
 import 'views/pages/home.dart';
 void main() {
@@ -12,12 +14,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Hespéris Tamuda',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
-      home: const MyHomePage(title: 'Hespéris Tamuda'),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blueGrey,
+        
+      // ),
+      color: Color.fromARGB(191, 7, 10, 164),
+      //  home: MenuDashboardPage(),
+     home: MyHomePage(title: 'Hespéris Tamuda'),
     );
   }
 }
@@ -31,45 +36,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 7,
-      child: Scaffold(
-      drawer: const NavBar(),
-      appBar: AppBar(
-        title: Text(widget.title),
-        bottom: const TabBar(
-            isScrollable: true,
-            tabs: [
-              Tab(text: 'HOME'),
-              Tab(text: 'ABOUT'),
-              Tab(text: 'EDITORIAL COMMITTEE'),
-              Tab(text: 'RECOMMANDATIONS'),
-              Tab(text: 'ARCHIVES'),
-              Tab(text: 'LAST ISSUES'),
-              Tab(text: 'CONTACT'),
-            ],
-          ),
-        centerTitle: true,
-      ),
-      endDrawer: const DropDownMenu(),
-      body: const SafeArea(
-       bottom: false,
-       child: TabBarView(
-        children: [
-          HomePage(),
-          AboutPage(),
-          EditorialCommitteePage(),
-          RecommandationPage(),
-          ArchivePage(),
-          LastIssuesPage(),
-          ContactPage(),
-        ]
-       ),
-      )
-      ),
-    );
+   return Scaffold(
+    drawer: const NavigationDrawerWidget(),
+    appBar: AppBar(
+      title: Text(widget.title),
+    ),
+   );
+      
   }
+  
 }
+
