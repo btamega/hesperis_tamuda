@@ -44,12 +44,12 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
             buildMenuItem(
               text: 'ARCHIVES',
-              icon: Icons.home,
+              icon: Icons.archive,
               onClicked: ()=>selectedItem(context, 4),
             ),
             buildMenuItem(
               text: 'LAST ISSUES',
-              icon: Icons.home,
+              icon: Icons.archive,
               onClicked: ()=>selectedItem(context, 5),
             ),
             buildMenuItem(

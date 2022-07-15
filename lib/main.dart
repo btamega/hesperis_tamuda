@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hesperis_tamuda/views/menu/leftNavBar.dart';
-import 'views/include/header.dart';
 import 'views/include/navbar.dart';
-import 'views/menu/rightNavBar.dart';
-import 'views/pages/home.dart';
+
 void main() {
   runApp(const MyApp());
 }
