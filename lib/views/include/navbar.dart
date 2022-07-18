@@ -5,6 +5,7 @@ import '../pages/about.dart';
 import '../pages/archives.dart';
 import '../pages/contact.dart';
 import '../pages/editorial.dart';
+import '../pages/ethic.dart';
 import '../pages/lastIssues.dart';
 import '../pages/recommandation.dart';
 
@@ -17,6 +18,7 @@ class NavigationDrawerWidget extends StatelessWidget {
       child: Container(
         color: Color.fromARGB(191, 7, 10, 164),
         child: ListView(
+          padding: EdgeInsets.zero,
           children: <Widget> [
            const Image(image: AssetImage('assets/images/logo-hespéris.png')),
              const SizedBox(
@@ -41,6 +43,11 @@ class NavigationDrawerWidget extends StatelessWidget {
               text: 'RECOMMANDATIONS',
               icon: Icons.info,
               onClicked: ()=>selectedItem(context, 3),
+            ),
+            buildMenuItem(
+              text: 'PUBLICATION ETHICS',
+              icon: Icons.publish,
+              onClicked: ()=>selectedItem(context, 7),
             ),
             buildMenuItem(
               text: 'ARCHIVES',
@@ -106,6 +113,9 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 6:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ContactPage(),));
+        break;
+      case 7:
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PublicationEthicPage(),));
         break;
       default:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
