@@ -11,6 +11,15 @@ class _DropDownMenuState extends State<DropDownMenu> {
   @override
   Widget build(BuildContext context) {
     String dropdownValue = 'Français';
+    return Scaffold(
+      appBar: AppBar(
+        title:Text('hi'),
+        leading: IconButton(
+          icon: Icon(Icons.accessible),
+          onPressed: () => Scaffold.of(context).openDrawer(),
+        ),
+      ),
+      );
     // return Drawer(
       
     //   child: ListView(
@@ -93,34 +102,6 @@ class _DropDownMenuState extends State<DropDownMenu> {
     //     ],
     //   ),
     // );
-    return Row(
-    children: <Widget>[
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          InkWell(
-            child: Icon(Icons.menu, color: Colors.white),
-            onTap: () {
-              setState(() {
-                
-              });
-            },
-          ),
-          Text("My Cards", style: TextStyle(fontSize: 24, color: Colors.white)),
-          InkWell(
-            child: Icon(Icons.settings, color: Colors.white),
-            onTap: () {
-              setState(() {
-                
-              });
-            },
-          )
-          
-          
-        ],
-      ),
-    ],
-    );
+    
   }
 }

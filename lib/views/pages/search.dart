@@ -5,21 +5,21 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
-class ContactPage extends StatefulWidget {
-  const ContactPage({ Key? key }) : super(key: key);
+class SearchPage extends StatefulWidget {
+  const SearchPage({ Key? key }) : super(key: key);
 
   @override
-  State<ContactPage> createState() => _ContactPageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _ContactPageState extends State<ContactPage> {
+class _SearchPageState extends State<SearchPage> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
    return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text('CONTACT', style: GoogleFonts.ibarraRealNova(),),
+        title: Text('SEARCH', style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
       ),

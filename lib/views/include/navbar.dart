@@ -16,7 +16,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Color.fromARGB(191, 7, 10, 164),
+        color:const Color(0xff3b5998),
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget> [
@@ -47,22 +47,22 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildMenuItem(
               text: 'PUBLICATION ETHICS',
               icon: Icons.publish,
-              onClicked: ()=>selectedItem(context, 7),
+              onClicked: ()=>selectedItem(context, 4),
             ),
             buildMenuItem(
               text: 'ARCHIVES',
               icon: Icons.archive,
-              onClicked: ()=>selectedItem(context, 4),
+              onClicked: ()=>selectedItem(context, 5),
             ),
             buildMenuItem(
               text: 'LAST ISSUES',
               icon: Icons.archive,
-              onClicked: ()=>selectedItem(context, 5),
+              onClicked: ()=>selectedItem(context, 6),
             ),
             buildMenuItem(
               text: 'CONTACT',
               icon: Icons.contacts,
-              onClicked: ()=>selectedItem(context, 6),
+              onClicked: ()=>selectedItem(context, 7),
             ),
             const SizedBox(height: 24,),
             const Divider(color: Colors.white,),
@@ -105,16 +105,16 @@ class NavigationDrawerWidget extends StatelessWidget {
       case 3:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RecommandationPage(),));
         break;
-      case 4:
+      case 5:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ArchivePage(),));
         break;
-      case 5:
+      case 6:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LastIssuesPage(),));
         break;
-      case 6:
+      case 7:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ContactPage(),));
         break;
-      case 7:
+      case 4:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PublicationEthicPage(),));
         break;
       default:

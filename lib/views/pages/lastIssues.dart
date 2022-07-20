@@ -1,18 +1,52 @@
 import 'package:flutter/material.dart';
-
-import '../include/navbar.dart';
-class LastIssuesPage extends StatelessWidget {
+import 'package:hesperis_tamuda/views/include/navbar.dart';
+import 'package:drop_cap_text/drop_cap_text.dart';
+import 'package:hesperis_tamuda/views/pages/home.dart';
+import 'package:hesperis_tamuda/views/pages/profile.dart';
+import 'package:hesperis_tamuda/views/pages/search.dart';
+import 'package:google_fonts/google_fonts.dart';
+class LastIssuesPage extends StatefulWidget {
   const LastIssuesPage({ Key? key }) : super(key: key);
 
   @override
+  State<LastIssuesPage> createState() => _LastIssuesPageState();
+}
+
+class _LastIssuesPageState extends State<LastIssuesPage> {
+  int _selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: const Text('Last Issues Page'),
+        title: Text('LAST ISSUES', style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: const Color(0xff3b5998),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        currentIndex: _selectedIndex,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+        ],
+        onTap: _onItemTapped,
+        ),
+    
     );
+  }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    if (_selectedIndex==0) {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
+    } else if(_selectedIndex==1){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchPage(),));
+    }else{
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage(),));
+    }
   }
 }
