@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/views/provider/locale_provider.dart';
 import 'views/include/navbar.dart';
+import 'views/menu/language.dart';
 import 'views/pages/home.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -11,18 +15,29 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+    create: (context) => LocaleProvider(),
+    builder: (context, child) {
+    final provider = Provider.of<LocaleProvider>(context);
+    return MaterialApp(
       title: 'Hespéris Tamuda',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blueGrey,
-        
-      // ),
-      color: Color.fromARGB(191, 7, 10, 164),
-      //  home: MenuDashboardPage(),
-     home: MyHomePage(title: 'Hespéris Tamuda'),
+      color:const Color(0xff3b5998),
+      localizationsDelegates: const[
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const[
+        Locale('en', ''), 
+        Locale('fr', ''), 
+        Locale('ar', ''), 
+      ],
+      locale: provider.locale,
+     home: const MyHomePage(title: 'Hespéris Tamuda'),
     );
   }
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -43,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
    );
       
   }
+
   
 }
 

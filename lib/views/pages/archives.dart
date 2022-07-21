@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
-import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../menu/language.dart';
 class ArchivePage extends StatefulWidget {
   const ArchivePage({ Key? key }) : super(key: key);
 
@@ -19,9 +20,10 @@ class _ArchivePageState extends State<ArchivePage> {
    return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text('ARCHIVES', style: GoogleFonts.ibarraRealNova(),),
+        title: Text(AppLocalizations.of(context)!.archive, style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
+        actions: const [LanguagePickerWidget()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,

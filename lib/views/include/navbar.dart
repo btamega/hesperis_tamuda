@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../pages/about.dart';
 import '../pages/archives.dart';
 import '../pages/contact.dart';
@@ -25,42 +25,42 @@ class NavigationDrawerWidget extends StatelessWidget {
               height: 48,
             ),
             buildMenuItem(
-              text: 'HOME',
+              text: AppLocalizations.of(context)!.accueil,
               icon: Icons.home,
               onClicked: ()=>selectedItem(context, 0),
             ),
             buildMenuItem(
-              text: 'ABOUT',
+              text: AppLocalizations.of(context)!.a_propos,
               icon: Icons.more_horiz,
               onClicked: ()=>selectedItem(context, 1),
             ),
             buildMenuItem(
-              text: 'EDITORIAL COMMITTEE',
+              text: AppLocalizations.of(context)!.comiteEditorial,
               icon: Icons.people,
               onClicked: ()=>selectedItem(context, 2),
             ),
             buildMenuItem(
-              text: 'RECOMMANDATIONS',
+              text: AppLocalizations.of(context)!.recommandation,
               icon: Icons.info,
               onClicked: ()=>selectedItem(context, 3),
             ),
             buildMenuItem(
-              text: 'PUBLICATION ETHICS',
+              text: AppLocalizations.of(context)!.titreEthique,
               icon: Icons.publish,
               onClicked: ()=>selectedItem(context, 4),
             ),
             buildMenuItem(
-              text: 'ARCHIVES',
+              text: AppLocalizations.of(context)!.archive,
               icon: Icons.archive,
               onClicked: ()=>selectedItem(context, 5),
             ),
             buildMenuItem(
-              text: 'LAST ISSUES',
+              text: AppLocalizations.of(context)!.derniersVolumes,
               icon: Icons.archive,
               onClicked: ()=>selectedItem(context, 6),
             ),
             buildMenuItem(
-              text: 'CONTACT',
+              text: AppLocalizations.of(context)!.contact,
               icon: Icons.contacts,
               onClicked: ()=>selectedItem(context, 7),
             ),

@@ -5,6 +5,8 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../menu/language.dart';
 class PublicationEthicPage extends StatefulWidget {
   const PublicationEthicPage({ Key? key }) : super(key: key);
 
@@ -19,9 +21,10 @@ class _PublicationEthicPageState extends State<PublicationEthicPage> {
    return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text('PUBLICATION ETHICS', style: GoogleFonts.ibarraRealNova(),),
+        title: Text(AppLocalizations.of(context)!.titreEthique, style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
+        actions: const [LanguagePickerWidget()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,

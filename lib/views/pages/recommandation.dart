@@ -4,6 +4,8 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../menu/language.dart';
 class RecommandationPage extends StatefulWidget {
   const RecommandationPage({ Key? key }) : super(key: key);
 
@@ -18,9 +20,10 @@ class _RecommandationPageState extends State<RecommandationPage> {
    return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text('RECOMMANDATIONS', style: GoogleFonts.ibarraRealNova(),),
+        title: Text(AppLocalizations.of(context)!.recommandation, style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
+        actions: const [LanguagePickerWidget()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
@@ -47,7 +50,7 @@ class _RecommandationPageState extends State<RecommandationPage> {
                   child: Column(
                     children: [
                       Text(
-                        "How to Submit and Rules of Editing",
+                        AppLocalizations.of(context)!.titreRecommandation,
                         style: GoogleFonts.ibarraRealNova(
                           textStyle:const TextStyle(
                            fontSize: 28.0,
@@ -65,46 +68,46 @@ class _RecommandationPageState extends State<RecommandationPage> {
                         child: Column(
                         children: <Widget> [
                           
-                          Text("Contributions submitted for publication in the journal are unpublished. They have not been published previously either in print or on the Internet in any other language and have not been submitted to other journals at the same time. Manuscripts must be written in the original language (Arabic, French, English, Spanish) in electronic format in Word format, with the following parameters: font Times New Roman, 12 points (09 in the notes, which must appear at the bottom of the page, numbered in correlation with Arabic numerals), simple interlinear separation (in text and notes) and 3 cm of lateral margins. The last page should include the summary and keywords, all translated into English, French, Spanish, and Arabic. The length of the abstract will be between 100 and 150 words and will describe the purpose of the research, the methodology used, the most outstanding results and the main conclusions. Send your articles to the following email address: (khalidbensrhir@gmail.com)\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_1_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,), color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("Each article will be evaluated by the editorial committee and, in case of agreement, it will be sent anonymously to at least two ad hoc readers. The latter may either recommend accepting the article as it is, or ask for modifications, or recommend not to retain the article. In case of request for modifications, the article will be submitted a second time to the evaluators.\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_2_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("In addition to the detailed style sheet below, we kindly ask our contributors to consult the last three issues of Hespéris-Tamuda published after 2016 to become familiar with the system recently adopted by Hespéris-Tamuda. This system is a bit difficult to apply at the beginning, especially for manuscripts written in French, Spanish and Arabic.\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_3_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("References System\n", 
+                          Text(AppLocalizations.of(context)!.titre_1_ParaRecommandation +"\n",
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,color: Colors.red),),textAlign: TextAlign.left
                           ),
-                          Text("Use the Chicago Manual of Style Reference System. Be careful, there are two citation systems linked to the Chicago style: the classic method and the author / date method. For the sake of precision and clarity we have opted for the classic method (or traditional) that uses reference notes at the bottom of the page and not at the end of the document, which return the reader to a bibliography.\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_4_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("Each article must be accompanied by an identification sheet of the quadrilingual article (French, English, Spanish and Arabic) with the title of the article (in four languages), the names of authors in the desired order, a short notice of presentation of each of the authors (5 lines maximum), a summary of 100 or 150 signs with 5-6 key words (in the four languages).\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_5_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("Footnotes\n", 
+                          Text(AppLocalizations.of(context)!.titre_2_ParaRecommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,color: Colors.red),),textAlign: TextAlign.left
                           ),
-                          Text("It is essential to use automatic continuous numbering with the footnotes. Note calls are preferably placed at the end of the sentence and simply inserted in the text (no parentheses). The note call in the text always comes after the punctuation mark. Example: “as Ibn Khaldoun wrote.” 8 In the footnote itself, the automatically generated number is followed by a space and then the contents of the note. The title of the article and the subtitles can not have a footnote.\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_6_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("Bibliography\n", 
+                          Text(AppLocalizations.of(context)!.titre_3_ParaRecommandation +"\n",
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,color: Colors.red),),textAlign: TextAlign.left
                           ),
-                          Text("The bibliography must be presented in alphabetical order. All sources are listed in the alphabetical order of the name of the author, regardless of the type of document (articles, books, websites, etc.). If the same author appears several times in the bibliography, we organize its works from the most recent to the oldest. The bibliography is single-spaced and requires a paragraph (i.e. tab) of approximately 1 cm at the beginning of the second line and subsequent lines of each reference.\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_7_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("Illustrations\n", 
+                          Text(AppLocalizations.of(context)!.titre_4_ParaRecommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,color: Colors.red),),textAlign: TextAlign.left
                           ),
-                          Text("The photographs and graphics that accompany the text should be of as good quality as possible (300 dpi minimum). Photocopies are not accepted. The photographs must be provided as scanned files in high definition, in .jpg format. The graphics are the subject of a separate file from the text and are transmitted as an image in .jpg format. The tables are designed directly in the article file (Word).\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_8_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("Specify the legend, the reference of origin and the placement in the text of the illustrations. Provide permission to reproduce and preferably use royalty-free iconography. The illustrations must be introduced by captions in the form of a short description or the title of the work. Legends start with Figure and are followed by a number and then a dot. The numbering is sequential from the beginning. Rather than including the source in a bibliography, it is inserted directly into the legend, following the description if there is one, or as the only legend. It must contain the name of the person who produced the illustration, its title, the date of production and the provenance of the illustration, quoted according to the appropriate method for the format of the source (book, journal, periodical, etc.) . If it is an image subject to copyright and permission has been obtained for reuse, it must be mentioned by adding Reproduced with permission of ... followed by the source from where comes the picture.\n", 
+                          Text(AppLocalizations.of(context)!.paragraphe_9_Recommandation +"\n", 
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
                           ),
-                          Text("Transliteration of Arabic words\n", 
+                          Text(AppLocalizations.of(context)!.titre_5_ParaRecommandation +"\n",
                             style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,color: Colors.red),),textAlign: TextAlign.left
                           ),
                           Text("The transliteration system of Arabic words used in Hespéris-Tamuda is as follows:\n", 

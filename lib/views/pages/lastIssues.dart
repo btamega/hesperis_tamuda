@@ -5,6 +5,10 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../menu/language.dart';
+
 class LastIssuesPage extends StatefulWidget {
   const LastIssuesPage({ Key? key }) : super(key: key);
 
@@ -19,9 +23,10 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
    return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text('LAST ISSUES', style: GoogleFonts.ibarraRealNova(),),
+        title: Text(AppLocalizations.of(context)!.derniersVolumes, style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
+        actions: const [LanguagePickerWidget()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
