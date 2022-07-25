@@ -22,7 +22,7 @@ class L10n {
   static String getFlag(String code) {
     switch (code) {
       case 'ar':
-        return 'ma';
+        return 'MA';
       case 'fr':
         return 'FR';
       case 'en':

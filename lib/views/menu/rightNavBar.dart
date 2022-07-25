@@ -10,12 +10,11 @@ class DropDownMenu extends StatefulWidget {
 class _DropDownMenuState extends State<DropDownMenu> {
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = 'Français';
     return Scaffold(
       appBar: AppBar(
-        title:Text('hi'),
+        title:const Text('hi'),
         leading: IconButton(
-          icon: Icon(Icons.accessible),
+          icon: const Icon(Icons.accessible),
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
       ),

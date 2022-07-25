@@ -4,7 +4,6 @@ import '../pages/about.dart';
 import '../pages/archives.dart';
 import '../pages/contact.dart';
 import '../pages/editorial.dart';
-import '../pages/home.dart';
 import '../pages/lastIssues.dart';
 import '../pages/recommandation.dart';
 class Header extends StatelessWidget {

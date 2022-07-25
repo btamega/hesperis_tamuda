@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/provider/locale_provider.dart';
 import 'views/include/navbar.dart';
-import 'views/menu/language.dart';
 import 'views/pages/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
