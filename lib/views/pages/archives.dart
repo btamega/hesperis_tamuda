@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/models/Volume.dart';
+import 'package:hesperis_tamuda/models/api_response.dart';
+import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
@@ -10,7 +13,7 @@ import 'about.dart';
 import 'contact.dart';
 import 'editorial.dart';
 import 'ethic.dart';
-import 'lastIssues.dart';
+import 'last_issues.dart';
 import 'recommandation.dart';
 class ArchivePage extends StatefulWidget {
   const ArchivePage({ Key? key }) : super(key: key);
@@ -20,6 +23,38 @@ class ArchivePage extends StatefulWidget {
 }
 
 class _ArchivePageState extends State<ArchivePage> {
+  late Future<Volume> futureAlbum;
+  void getVolumes() async {
+    ApiResponse response = await getVolumeDetails();
+      if (response.errors==null) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data}')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.errors}')));
+      }
+  }
+  void getData() async {
+    ApiResponse response = await getParticularData();
+      if (response.errors==null) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data}')));
+        // Center(
+        //   child: FutureBuilder<Volume>(
+        //     future: futureAlbum,
+        //     builder: (context, snapshot) {
+        //       if (snapshot.hasData) {
+        //         return Text('${snapshot.data!.titre}');
+        //       } else if (snapshot.hasError) {
+        //         return Text('${snapshot.error}');
+        //       }
+
+        //       // By default, show a loading spinner.
+        //       return const CircularProgressIndicator();
+        //     },
+        //   ),
+        // );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.errors}')));
+      }
+  }
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -59,7 +94,8 @@ class _ArchivePageState extends State<ArchivePage> {
               children: [
                 InkWell(
                   onTap: (){
-                    selectedItem(context, 0);
+                    getVolumes();
+                    // selectedItem(context, 0);
                     },
                     onDoubleTap: (){
                     selectedItem(context, 0);
@@ -80,7 +116,8 @@ class _ArchivePageState extends State<ArchivePage> {
               children: [
                 InkWell(
                   onTap: (){
-                    selectedItem(context, 3);
+                    getData();
+                    // selectedItem(context, 3);
                     },
                     onDoubleTap: (){
                     selectedItem(context, 3);

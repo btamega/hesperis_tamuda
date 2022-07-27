@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
-import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 class SearchPage extends StatefulWidget {
   const SearchPage({ Key? key }) : super(key: key);

@@ -4,7 +4,7 @@ import '../pages/about.dart';
 import '../pages/archives.dart';
 import '../pages/contact.dart';
 import '../pages/editorial.dart';
-import '../pages/lastIssues.dart';
+import '../pages/last_issues.dart';
 import '../pages/recommandation.dart';
 class Header extends StatelessWidget {
   const Header({ Key? key }) : super(key: key);

@@ -6,7 +6,7 @@ import '../pages/archives.dart';
 import '../pages/contact.dart';
 import '../pages/editorial.dart';
 import '../pages/ethic.dart';
-import '../pages/lastIssues.dart';
+import '../pages/last_issues.dart';
 import '../pages/recommandation.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
