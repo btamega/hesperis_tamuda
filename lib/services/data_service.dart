@@ -1,8 +1,32 @@
 
 import 'dart:convert';
+import 'package:hesperis_tamuda/models/volume.dart';
 import '../constant.dart';
 import '../models/api_response.dart';
 import 'package:http/http.dart' as http;
+
+Future<List<Volume>> getVolumes() async {
+    final response = await http.get(
+      Uri.parse(volumeURL),
+    );
+    var jsonData = jsonDecode(response.body);
+      if (jsonData!=null) {
+        List<Volume> volumes=[];
+        for (var item in jsonData) {
+          Volume volume = Volume(
+            idVolume: item['id_volume'], 
+            titre: item['Titre'], 
+            annee: item['Année'], 
+            imageCouverture: item['cover'], 
+            nomVolume: item['Nom_Volume']
+            );
+          volumes.add(volume);
+        }
+        return volumes;
+      } else {
+        throw Exception('Failed to load volume');
+      }
+  }
 
 Future<ApiResponse> getVolumeDetails() async {
   ApiResponse apiResponse = ApiResponse();

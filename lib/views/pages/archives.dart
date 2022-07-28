@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:hesperis_tamuda/models/Volume.dart';
-import 'package:hesperis_tamuda/models/api_response.dart';
+import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
+import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/models/volume.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
@@ -23,38 +23,8 @@ class ArchivePage extends StatefulWidget {
 }
 
 class _ArchivePageState extends State<ArchivePage> {
-  late Future<Volume> futureAlbum;
-  void getVolumes() async {
-    ApiResponse response = await getVolumeDetails();
-      if (response.errors==null) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data}')));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.errors}')));
-      }
-  }
-  void getData() async {
-    ApiResponse response = await getParticularData();
-      if (response.errors==null) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data}')));
-        // Center(
-        //   child: FutureBuilder<Volume>(
-        //     future: futureAlbum,
-        //     builder: (context, snapshot) {
-        //       if (snapshot.hasData) {
-        //         return Text('${snapshot.data!.titre}');
-        //       } else if (snapshot.hasError) {
-        //         return Text('${snapshot.error}');
-        //       }
-
-        //       // By default, show a loading spinner.
-        //       return const CircularProgressIndicator();
-        //     },
-        //   ),
-        // );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.errors}')));
-      }
-  }
+  
+  
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -78,145 +48,70 @@ class _ArchivePageState extends State<ArchivePage> {
         ],
         onTap: _onItemTapped,
         ),
-        body: GridView.count(
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-        childAspectRatio: (200 / 350),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(8),
-            // color: Colors.teal[100],
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    getVolumes();
-                    // selectedItem(context, 0);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 0);
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda (2020-2021)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                    ]),
+        body: FutureBuilder<List<Volume>>(
+          future: getVolumes(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return GridView.builder(
+                itemBuilder: (BuildContext, index) {
+                  return GestureDetector(
+                      onTap: () {
+                        // getItemAndNavigate(snapshot.data[index].id, context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(border: Border.all(),),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                },
+                                onDoubleTap: (){
+                                selectedItem(context, 0);
+                                },
+                                child: Column(children:[
+                                  Text(snapshot.data![index].titre+' '+snapshot.data![index].nomVolume, 
+                                  textAlign: TextAlign.center),
+                                  Image.network(
+                                    rootURL+'/'+snapshot.data![index].imageCouverture,
+                                    width: 300,
+                                    height:200
+                                  ),
+                                  Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
+                                ]),
+                            ),
+                          ],
+                        ),
+                    ),
+                      );
+                },
+                itemCount: snapshot.data!.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: (200 / 350),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
                 ),
-              ],
-            ),
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(20),
+                scrollDirection: Axis.vertical,
+              );
+            } else if (snapshot.hasError) {
+              return SizedBox(
+              height: MediaQuery.of(context).size.height / 1.3,
+              child: const Center(
+                child: Text(serverError),
+              ),
+            );
+            }
+            return SizedBox(
+              height: MediaQuery.of(context).size.height / 1.3,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
         ),
-        Container(
-          decoration: BoxDecoration(border: Border.all(),),
-          padding: const EdgeInsets.all(8),
-          // color: Colors.teal[100],
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    getData();
-                    // selectedItem(context, 3);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 3);
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda (2010-2019)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          // color: Colors.teal[300],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    selectedItem(context, 4);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 4);
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda (2000-2009)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          // color: Colors.teal[400],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    selectedItem(context, 5);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 5);
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda (1990-1999)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          // color: Colors.teal[300],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    selectedItem(context, 6);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 6);
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda (1980-1989)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                    ]),
-                ),
-                
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          // color: Colors.teal[400],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    selectedItem(context, 7);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 7);
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda (1970-1979)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                    ]),
-                ),
-              ],
-            ),
-        )
-      ],
-    ),
     );
   }
   void _onItemTapped(int index) {
@@ -262,4 +157,5 @@ class _ArchivePageState extends State<ArchivePage> {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
     }
   }
+  
 }

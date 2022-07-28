@@ -17,11 +17,11 @@ class User {
 
   factory User.fromJson(Map<String,dynamic> json){
     return User(
-      id: json['user']['id'],
-      name: json['user']['name'],
-      email: json['user']['email'],
-      password: json['user']['password'],
-      token: json['user']['token'],
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      password: json['password'],
+      token: json['token'],
     );
   }
 }

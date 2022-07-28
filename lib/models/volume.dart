@@ -1,18 +1,18 @@
 // ignore_for_file: file_names
 
 class Volume {
-  int ? idVolume;
-  String ? titre;
-  String ? annee;
-  String ? imageCouverture;
-  String ? nomVolume;
+  int  idVolume;
+  String  titre;
+  String  annee;
+  String  imageCouverture;
+  String  nomVolume;
 
   Volume({
-    this.idVolume,
-    this.titre,
-    this.annee,
-    this.imageCouverture,
-    this.nomVolume
+    required this.idVolume,
+    required this.titre,
+    required this.annee,
+    required this.imageCouverture,
+    required this.nomVolume
   });
   
   factory Volume.fromJson(Map<String,dynamic> json){
