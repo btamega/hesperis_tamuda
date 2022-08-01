@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/constant.dart';
+import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
@@ -43,103 +45,73 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
         ],
         onTap: _onItemTapped,
         ),
-        body: GridView.count(
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-        childAspectRatio: (200 / 430),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    selectedItem(context, 0);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 0);
-                    },
-                    child: Column(children: const[
-                      Text("Fascicule 1 (2022)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                      Text("\nLe Califat: Esquisses historiques / The Caliphate: Historical Sketches\n", textAlign: TextAlign.center,),
-                    ]),
+        body: FutureBuilder<List>(
+          future: getFascicules(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              debugPrint("Has data");
+              return GridView.builder(
+                // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
+                itemBuilder: (BuildContext, index) {
+                  return GestureDetector(
+                      onTap: () {
+                        // getItemAndNavigate(snapshot.data[index].id, context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(border: Border.all(),),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                },
+                                onDoubleTap: (){
+                                selectedItem(context, 0);
+                                },
+                                child: Column(children:[
+                                  Text(snapshot.data![index]["nom"]+' '+snapshot.data![index]["numero"], 
+                                  textAlign: TextAlign.center),
+                                  Image.network(
+                                    rootURL+'/'+snapshot.data![index]["nom"],
+                                    width: 300,
+                                    height:200
+                                  ),
+                                  Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
+                                ]),
+                            ),
+                          ],
+                        ),
+                    ),
+                      );
+                },
+                itemCount: snapshot.data!.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: (200 / 350),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
                 ),
-              ],
-            ),
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(20),
+                scrollDirection: Axis.vertical,
+              );
+            } else if (snapshot.hasError) {
+              debugPrint("has no data");
+              return SizedBox(
+              height: MediaQuery.of(context).size.height / 1.3,
+              child:  Center(
+                child: Text('${snapshot.error}'),
+              ),
+            );
+            }
+            return SizedBox(
+              height: MediaQuery.of(context).size.height / 1.3,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
         ),
-        Container(
-          decoration: BoxDecoration(border: Border.all(),),
-          padding: const EdgeInsets.all(8),
-          // color: Colors.teal[100],
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    selectedItem(context, 3);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 3);
-                    },
-                    child: Column(children: const[
-                      Text("Fascicule 1 (2022)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                      Text("\nLe Califat: Esquisses historiques / The Caliphate: Historical Sketches\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          // color: Colors.teal[300],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    selectedItem(context, 4);
-                    },
-                    onDoubleTap: (){
-                    selectedItem(context, 4);
-                    },
-                    child: Column(children: const[
-                      Text("Fascicule 1 (2022)\n", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/about.jpg"),),
-                      Text("\nLe Califat: Esquisses historiques / The Caliphate: Historical Sketches\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        // Container(
-        //   padding: const EdgeInsets.all(8),
-        //   // color: Colors.teal[400],
-        //   decoration: BoxDecoration(border: Border.all(),),
-        //   child: Column(
-        //       children: [
-        //         InkWell(
-        //           onTap: (){
-        //             selectedItem(context, 5);
-        //             },
-        //             onDoubleTap: (){
-        //             selectedItem(context, 5);
-        //             },
-        //             child: Column(children: const[
-        //               Text("Fascicule 1 (2022)\n", textAlign: TextAlign.center,),
-        //               Image(image: AssetImage("assets/images/about.jpg"),),
-        //               Text("\nLe Califat: Esquisses historiques / The Caliphate: Historical Sketches\n", textAlign: TextAlign.center,),
-        //             ]),
-        //         ),
-        //       ],
-        //     ),
-        // ),
-      ],
-    ),
     );
   }
   void _onItemTapped(int index) {

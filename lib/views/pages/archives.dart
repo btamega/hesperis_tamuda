@@ -49,10 +49,11 @@ class _ArchivePageState extends State<ArchivePage> {
         onTap: _onItemTapped,
         ),
         body: FutureBuilder<List<Volume>>(
-          future: getVolumes(),
+          future: getArchives(2022,2026),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return GridView.builder(
+                // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
                 itemBuilder: (BuildContext, index) {
                   return GestureDetector(
                       onTap: () {
@@ -99,8 +100,8 @@ class _ArchivePageState extends State<ArchivePage> {
             } else if (snapshot.hasError) {
               return SizedBox(
               height: MediaQuery.of(context).size.height / 1.3,
-              child: const Center(
-                child: Text(serverError),
+              child:  Center(
+                child: Text('${snapshot.error}'),
               ),
             );
             }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/provider/locale_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flag/flag.dart';
 class LanguagePickerWidget extends StatelessWidget {
   const LanguagePickerWidget({Key? key}) : super(key: key);
 
@@ -19,10 +19,19 @@ class LanguagePickerWidget extends StatelessWidget {
             final flag = L10n.getFlag(locale.languageCode);
             return DropdownMenuItem(
               child: Center(
-                child: Text(
-                  flag,
-                  style: const TextStyle(fontSize: 32),
-                ),
+                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Flag.fromCode(
+                      flag,
+                      height: 30,
+                      width: 45,
+                      fit: BoxFit.contain,
+                      replacement: const SizedBox.shrink(),
+                    ),
+                  ],
+                 ),
+                
               ),
               value: locale,
               onTap: () {

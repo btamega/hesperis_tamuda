@@ -7,6 +7,7 @@ import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../menu/language.dart';
+import 'dart:ui' as ui;
 class AboutPage extends StatefulWidget {
   const AboutPage({ Key? key }) : super(key: key);
 
@@ -21,7 +22,7 @@ class _AboutPageState extends State<AboutPage> {
    return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.a_propos +"\n", style: GoogleFonts.ibarraRealNova(),),
+        title: Text(AppLocalizations.of(context)!.a_propos, style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
         actions: const [LanguagePickerWidget()],
@@ -51,8 +52,7 @@ class _AboutPageState extends State<AboutPage> {
                   child: Column(
                     children: [
                       Text(
-                        "Hespéris-Tamuda "+
-                        AppLocalizations.of(context)!.titreAbout1 +"\n",
+                        getText(),
                         style: GoogleFonts.ibarraRealNova(
                           textStyle:const TextStyle(
                            fontSize: 28.0,
@@ -71,6 +71,7 @@ class _AboutPageState extends State<AboutPage> {
                         children: <Widget> [
                            DropCapText(
                             AppLocalizations.of(context)!.paragraphe_1_About +"\n", 
+                            textDirection:setDirection() ,
                             dropCap: DropCap(
                             width: 100,
                             height: 140,
@@ -141,6 +142,21 @@ class _AboutPageState extends State<AboutPage> {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchPage(),));
     }else{
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage(),));
+    }
+  }
+  setDirection() {
+    if (Localizations.localeOf(context).toString()=='ar') {
+      return ui.TextDirection.rtl;
+    } else {
+      return ui.TextDirection.ltr;
+    }
+  }
+
+  String getText() {
+    if (Localizations.localeOf(context).toString()=='ar') {
+      return AppLocalizations.of(context)!.titreAbout1 +"\n";
+    } else {
+      return "Hespéris-Tamuda "+ AppLocalizations.of(context)!.titreAbout1 +"\n";
     }
   }
 }

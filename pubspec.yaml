@@ -46,6 +46,9 @@ dependencies:
   expandable: ^5.0.1
   url_launcher: ^6.1.5
   http: ^0.13.4
+  flag: ^5.0.1
+  google_fonts_arabic: ^1.1.7
+  bulleted_list: ^0.0.1+0.1a
   
 
 dev_dependencies:

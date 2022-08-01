@@ -6,6 +6,7 @@ import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'dart:ui' as ui;
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
 
@@ -68,7 +69,8 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                         children: <Widget> [
                            DropCapText(
-                            AppLocalizations.of(context)!.paragraphe1 +"\n",  
+                            AppLocalizations.of(context)!.paragraphe1 +"\n", 
+                            textDirection:setDirection() ,
                             dropCap: DropCap(
                             width: 100,
                             height: 200,
@@ -111,4 +113,13 @@ class _HomePageState extends State<HomePage> {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage(),));
     }
   }
+
+  setDirection() {
+    if (Localizations.localeOf(context).toString()=='ar') {
+      return ui.TextDirection.rtl;
+    } else {
+      return ui.TextDirection.ltr;
+    }
+  }
 }
+

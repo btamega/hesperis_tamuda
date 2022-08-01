@@ -1,3 +1,4 @@
+import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 
 class LocaleProvider extends ChangeNotifier {
@@ -19,15 +20,15 @@ class L10n {
     const Locale('ar'),
     const Locale('fr'),
   ];
-  static String getFlag(String code) {
+  static FlagsCode getFlag(String code) {
     switch (code) {
       case 'ar':
-        return 'MA';
+        return FlagsCode.MA;
       case 'fr':
-        return 'FR';
+        return FlagsCode.FR;
       case 'en':
       default:
-        return '🇺🇸';
+        return FlagsCode.US;
     }
   }
 }
