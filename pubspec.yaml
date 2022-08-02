@@ -43,12 +43,13 @@ dependencies:
     sdk: flutter
     version: ^0.0.0
   intl: ^0.17.0
-  expandable: ^5.0.1
   url_launcher: ^6.1.5
   http: ^0.13.4
   flag: ^5.0.1
   google_fonts_arabic: ^1.1.7
-  bulleted_list: ^0.0.1+0.1a
+  expandable: ^5.0.1
+  flutter_pdfview: ^1.0.0+10
+  advance_pdf_viewer: ^2.0.1
   
 
 dev_dependencies:

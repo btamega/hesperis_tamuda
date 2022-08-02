@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
-import 'package:hesperis_tamuda/views/pages/archive_list.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1921_1929.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1930_1939.dart';
+import 'package:hesperis_tamuda/views/menu/language.dart';
+import 'package:hesperis_tamuda/views/pages/home.dart';
+import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
+import 'package:hesperis_tamuda/views/pages/profile.dart';
+import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1940_1949.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1950_1959.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1960_1969.dart';
@@ -11,35 +14,22 @@ import 'package:hesperis_tamuda/views/pages/archives/archive_1980_1989.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1990_1999.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_2000_2009.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_2010_2019.dart';
-import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/profile.dart';
-import 'package:hesperis_tamuda/views/pages/search.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../menu/language.dart';
-import 'about.dart';
-import 'contact.dart';
-import 'editorial.dart';
-import 'ethic.dart';
-import 'last_issues.dart';
-import 'recommandation.dart';
-class ArchivePage extends StatefulWidget {
-  const ArchivePage({ Key? key }) : super(key: key);
+
+class Archive19201929 extends StatefulWidget {
+  const Archive19201929({ Key? key }) : super(key: key);
 
   @override
-  State<ArchivePage> createState() => _ArchivePageState();
+  State<Archive19201929> createState() => _Archive19201929State();
 }
 
-class _ArchivePageState extends State<ArchivePage> {
-  
-  
+class _Archive19201929State extends State<Archive19201929> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
    return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.archive, style: GoogleFonts.ibarraRealNova(),),
+        title: Text("Hespéris (1921-1929)", style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
         actions: const [LanguagePickerWidget()],
@@ -58,14 +48,14 @@ class _ArchivePageState extends State<ArchivePage> {
         ),
         body: GridView.count(
         primary: false,
-        padding: const EdgeInsets.all(19),
+        padding: const EdgeInsets.all(22),
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         crossAxisCount: 2,
-        childAspectRatio: (200 / 350),
+        childAspectRatio: (200 / 358),
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.all(19),
+            padding: const EdgeInsets.all(24.3),
             decoration: BoxDecoration(border: Border.all(),),
             child: Column(
               children: [
@@ -73,13 +63,13 @@ class _ArchivePageState extends State<ArchivePage> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ArchiveListe()),
+                      MaterialPageRoute(builder: (context) => const PDFReader()),
                     );
                     },
                     child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/cover2020.gif"),),
-                      Text("(2020-2021)\n", textAlign: TextAlign.center,),
+                      Text("Hespéris", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1921ht.jpg"),),
+                      Text("1921\n", textAlign: TextAlign.center,),
                     ]),
                 ),
               ],
@@ -87,8 +77,7 @@ class _ArchivePageState extends State<ArchivePage> {
         ),
         Container(
           decoration: BoxDecoration(border: Border.all(),),
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[100],
+          padding: const EdgeInsets.all(24.3),
           child: Column(
               children: [
                 InkWell(
@@ -99,17 +88,16 @@ class _ArchivePageState extends State<ArchivePage> {
                     );
                     },
                     child: Column(children: const[
-                      Text("Hespéris-Tamuda ", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/2001-2.png"),),
-                      Text("(2010-2019)\n", textAlign: TextAlign.center,),
+                      Text("Hespéris ", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1922 TOME II FASC.1-2-3.jpg"),),
+                      Text("1922\n", textAlign: TextAlign.center,),
                     ]),
                 ),
               ],
             ),
         ),
         Container(
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[300],
+          padding: const EdgeInsets.all(23),
           decoration: BoxDecoration(border: Border.all(),),
           child: Column(
               children: [
@@ -121,16 +109,16 @@ class _ArchivePageState extends State<ArchivePage> {
                     );
                     },
                     child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/2001-2.png"),),
-                      Text("(2000-2009)\n", textAlign: TextAlign.center,),
+                      Text("Hespéris", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1923 TOMEIII FASC.1-2-3-4.jpg"),),
+                      Text("1923\n", textAlign: TextAlign.center,),
                     ]),
                 ),
               ],
             ),
         ),
         Container(
-          padding: const EdgeInsets.all(19),
+          padding: const EdgeInsets.all(23),
           decoration: BoxDecoration(border: Border.all(),),
           child: Column(
               children: [
@@ -142,9 +130,9 @@ class _ArchivePageState extends State<ArchivePage> {
                     );
                     },
                     child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1991.jpg"),),
-                      Text("(1990-1999)\n", textAlign: TextAlign.center,),
+                      Text("Hespéris", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1924 TOME IV FASC.1-2-3-4.jpg"),),
+                      Text("1924\n", textAlign: TextAlign.center,),
                     ]),
                 ),
               ],
@@ -152,7 +140,6 @@ class _ArchivePageState extends State<ArchivePage> {
         ),
         Container(
           padding: const EdgeInsets.all(19),
-          // color: Colors.teal[400],
           decoration: BoxDecoration(border: Border.all(),),
           child: Column(
               children: [
@@ -164,9 +151,9 @@ class _ArchivePageState extends State<ArchivePage> {
                     );
                     },
                     child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1980-81.png"),),
-                      Text("(1980-1989)\n", textAlign: TextAlign.center,),
+                      Text("Hespéris", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1925 TOMEV FASC.1-2-3-4.jpg"),),
+                      Text("1925", textAlign: TextAlign.center,),
                     ]),
                 ),
               ],
@@ -174,7 +161,6 @@ class _ArchivePageState extends State<ArchivePage> {
         ),
         Container(
           padding: const EdgeInsets.all(19),
-          // color: Colors.teal[400],
           decoration: BoxDecoration(border: Border.all(),),
           child: Column(
               children: [
@@ -186,9 +172,9 @@ class _ArchivePageState extends State<ArchivePage> {
                     );
                     },
                     child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1972.png"),),
-                      Text("(1970-1979)\n", textAlign: TextAlign.center,),
+                      Text("Hespéris", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1922 TOME II FASC.1-2-3.jpg"),),
+                      Text("1926", textAlign: TextAlign.center,),
                     ]),
                 ),
               ],
@@ -196,7 +182,6 @@ class _ArchivePageState extends State<ArchivePage> {
         ),
         Container(
           padding: const EdgeInsets.all(19),
-          // color: Colors.teal[300],
           decoration: BoxDecoration(border: Border.all(),),
           child: Column(
               children: [
@@ -208,9 +193,9 @@ class _ArchivePageState extends State<ArchivePage> {
                     );
                     },
                     child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1966.png"),),
-                      Text("(1960-1969)\n", textAlign: TextAlign.center,),
+                      Text("Hespéris", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1927 TOME VII FASC.1-2-3-4.jpg"),),
+                      Text("1927", textAlign: TextAlign.center,),
                     ]),
                 ),
 
@@ -231,8 +216,8 @@ class _ArchivePageState extends State<ArchivePage> {
                     },
                     child: Column(children: const[
                       Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1952ht.png"),),
-                      Text("(1950-1959)\n", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1928 TOME VIII FASC.1-2-3.jpg"),),
+                      Text("1928", textAlign: TextAlign.center,),
                     ]),
                 ),
               ],
@@ -252,58 +237,9 @@ class _ArchivePageState extends State<ArchivePage> {
                     },
                     child: Column(children: const[
                       Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1943ht.jpg"),fit: BoxFit.fill,),
-                      Text("(1940-1949)\n", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/1929 TOME IX FASC.1-2-3.jpg"),fit: BoxFit.fill,),
+                      Text("1929", textAlign: TextAlign.center,),
                     ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(21),
-          decoration: BoxDecoration(border: Border.all(),),
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19301939()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1931ht.jpg"),),
-                      Text("(1930-1939)\n", textAlign: TextAlign.center,),
-
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[400],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19201929()),
-                    );
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children:const [
-                      Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image:  AssetImage("assets/images/1921ht.jpg"),),
-                      Text("(1921-1929)", textAlign: TextAlign.center,),
-
-                    ],
-                    
-                    ),
                 ),
               ],
             ),
@@ -324,40 +260,5 @@ class _ArchivePageState extends State<ArchivePage> {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage(),));
     }
   }
-  void selectedItem(BuildContext context, int index){
-    Navigator.of(context).pop();
-    switch (index) {
-      case 0:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
-        break;
-      case 1:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AboutPage(),));
-        break;
-      case 2:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EditorialCommitteePage(),));
-        break;
-      case 3:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RecommandationPage(),));
-        break;
-      case 5:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ArchivePage(),));
-        break;
-      case 6:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LastIssuesPage(),));
-        break;
-      case 7:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ContactPage(),));
-        break;
-      case 4:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PublicationEthicPage(),));
-        break;
-      default:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
-    }
-  }
-
-  void getItemAndNavigate(int idVolume, BuildContext context) {
-    
-  }
-  
 }
+
