@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hesperis_tamuda/models/api_response.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1940_1949.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1950_1959.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1960_1969.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1970_1979.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1980_1989.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_1990_1999.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_2000_2009.dart';
-import 'package:hesperis_tamuda/views/pages/archives/archive_2010_2019.dart';
 
 class Archive19201929 extends StatefulWidget {
   const Archive19201929({ Key? key }) : super(key: key);
@@ -60,10 +53,17 @@ class _Archive19201929State extends State<Archive19201929> {
             child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async {
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201921.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const PDFReader()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -81,10 +81,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async {
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201922.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive20102019()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -102,10 +109,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async {
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201923.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive20002009()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -123,10 +137,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async{
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201924.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive19901999()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -144,10 +165,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async{
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201925.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive19801989()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -165,10 +193,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async{
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201926.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive19701979()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -186,10 +221,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async{
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201927.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive19601969()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -208,10 +250,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async{
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201928.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive19501959()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[
@@ -229,10 +278,17 @@ class _Archive19201929State extends State<Archive19201929> {
           child: Column(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () async{
+                    showDialog(context: context, builder: (context){
+                      return const Center(
+                        child:CircularProgressIndicator() ,
+                      );
+                    });
+                    const url = 'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201929.pdf';
+                    final file = await PDFApi.loadNetwork(url);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Archive19401949()),
+                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                     );
                     },
                     child: Column(children: const[

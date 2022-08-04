@@ -188,3 +188,4 @@ Future<ApiResponse> getArticleDetails() async {
   }
   return apiResponse;
 }
+

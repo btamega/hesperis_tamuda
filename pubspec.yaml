@@ -50,6 +50,9 @@ dependencies:
   expandable: ^5.0.1
   flutter_pdfview: ^1.0.0+10
   advance_pdf_viewer: ^2.0.1
+  file_picker: ^4.6.1
+  dio: ^4.0.6 
+  sn_progress_dialog: ^1.0.8
   
 
 dev_dependencies:
