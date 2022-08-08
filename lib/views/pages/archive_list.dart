@@ -24,6 +24,7 @@ class ArchiveListe extends StatefulWidget {
 }
 
 class _ArchiveListeState extends State<ArchiveListe> {
+   final ScrollController _controller = ScrollController();
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -47,11 +48,12 @@ class _ArchiveListeState extends State<ArchiveListe> {
         ],
         onTap: _onItemTapped,
         ),
-        body: FutureBuilder<List<Volume>>(
+        body:FutureBuilder<List<Volume>>(
           future: getArchives(2022,2026),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return GridView.builder(
+                itemCount : snapshot.data!.length,
                 // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
                 itemBuilder: (BuildContext, index) {
                   return GestureDetector(
@@ -85,7 +87,6 @@ class _ArchiveListeState extends State<ArchiveListe> {
                     ),
                       );
                 },
-                itemCount: snapshot.data!.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: (200 / 350),
                   crossAxisSpacing: 10,
@@ -111,8 +112,8 @@ class _ArchiveListeState extends State<ArchiveListe> {
               ),
             );
           },
-        ),
-    );
+        )
+        );
   }
   void _onItemTapped(int index) {
     setState(() {

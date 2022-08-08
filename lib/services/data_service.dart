@@ -1,7 +1,7 @@
 
 import 'dart:convert';
+import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
-import 'package:hesperis_tamuda/models/vignette.dart';
 import 'package:hesperis_tamuda/models/volume.dart';
 import '../constant.dart';
 import '../models/api_response.dart';
@@ -51,13 +51,13 @@ Future<List<Volume>> getArchives(var annee1,var annee2) async {
         throw Exception('Failed to load volume');
       }
   }
-  Future<List> getFascicules() async {
+  Future<List<Fascicule>> getFascicules() async {
     final response = await http.get(
       Uri.parse(rootURL+'/api/lastIssues'),
     );
     var jsonData = jsonDecode(response.body);
       if (jsonData!=null) {
-         var vignettes=[];
+         List<Fascicule> fascicules=[];
         for (var item in jsonData) {
           Fascicule fascicule = Fascicule(
             idFascicule: item['id_fascicule'], 
@@ -65,18 +65,12 @@ Future<List<Volume>> getArchives(var annee1,var annee2) async {
             nom: item['Nom'],
             annee: item['Année'], 
             titreFascicule: item['Titre_Fascicule'], 
-            numero: item['numero']
+            numero: item['numero'],
+            cover: item['couverture'],
             );
-            Vignette vignette =Vignette(
-              idVignette: item['id_vignette'],
-              idFascicule: item['id_fascicule'],
-              path: item['Path'],
-              type: item['Type'],
-            );
-           vignettes.add(fascicule);
-           vignettes.add(vignette);
+           fascicules.add(fascicule);
         }
-        return vignettes;
+        return fascicules;
       } else {
         throw Exception('Failed to load Fascicule');
       }
@@ -141,32 +135,6 @@ Future<ApiResponse> getParticularData() async {
   try {
     final response = await http.get(
       Uri.parse(rootURL+'/volume/10/fascicule/list'),
-    );
-    switch (response.statusCode) {
-      case 200:
-        apiResponse.data =jsonDecode(response.body);
-        break;
-      case 422:
-        final errors = jsonDecode(response.body)['errors'];
-        apiResponse.errors = errors[errors.keys.elementAt(0)][0];
-        break;
-      case 403:
-        apiResponse.errors = jsonDecode(response.body)['message'];
-        break;
-      default:
-        apiResponse.errors = somethingWrong;
-        break;
-    }
-  } catch (e) {
-        apiResponse.errors = serverError;
-  }
-  return apiResponse;
-}
-Future<ApiResponse> getArticleDetails() async {
-  ApiResponse apiResponse = ApiResponse();
-  try {
-    final response = await http.get(
-      Uri.parse(articleURL),
     );
     switch (response.statusCode) {
       case 200:

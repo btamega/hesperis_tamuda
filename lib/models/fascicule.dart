@@ -7,6 +7,7 @@ class Fascicule {
   String  annee;
   String  titreFascicule;
   String  numero;
+  String  cover;
 
   Fascicule({
     required this.idFascicule,
@@ -14,7 +15,8 @@ class Fascicule {
     required this.nom,
     required this.annee,
     required this.titreFascicule,
-    required this.numero
+    required this.numero,
+    required this.cover
   });
   
   factory Fascicule.fromJson(Map<String,dynamic> json){
@@ -25,6 +27,7 @@ class Fascicule {
       annee: json['Année'],
       titreFascicule: json['Titre_Fascicule'],
       numero: json['numero'],
+      cover: json['couverture'],
     );
   }
 }
