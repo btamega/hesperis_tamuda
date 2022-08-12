@@ -58,8 +58,9 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
         ],
         onTap: _onItemTapped,
         ),
-        body:FutureBuilder<List<Fascicule>>(
-                future: getFascicules(),
+        body:
+        FutureBuilder<List<Fascicule>>(
+                // future: getLastIssues(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return GridView.builder(
@@ -76,23 +77,23 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
                                 children: [
                                   InkWell(
                                     onTap: (){
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => ArticleList(idFascicule: snapshot.data![index].idFascicule)),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(builder: (context) => ArticleList(idFascicule: snapshot.data![index].idFascicule)),
+                                      // );
                                       },
                                       onDoubleTap: (){
                                       selectedItem(context, 0);
                                       },
                                       child: Column(children:[
-                                        Text(snapshot.data![index].nom+' '+snapshot.data![index].numero, 
-                                        textAlign: TextAlign.center),
-                                        Image.network(
-                                          rootURL+'/'+snapshot.data![index].cover,
-                                          width: 300,
-                                          height:250
-                                        ),
-                                        Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
+                                        // Text(snapshot.data![index].nom+' '+snapshot.data![index].numero, 
+                                        // textAlign: TextAlign.center),
+                                        // Image.network(
+                                        //   rootURL+'/'+snapshot.data![index].vignettes[],
+                                        //   width: 300,
+                                        //   height:250
+                                        // ),
+                                        // Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
                                       ]),
                                   ),
                                 ],
@@ -111,14 +112,8 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
                       padding: const EdgeInsets.all(20),
                       scrollDirection: Axis.vertical,
                     );
-                  } else if (snapshot.hasError) {
-                    debugPrint("has no data");
-                    return SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.3,
-                    child:  Center(
-                      child: Text('${snapshot.error}'),
-                    ),
-                  );
+                  } else if(snapshot.hasError){
+                    return Text(serverError+"\n"+snapshot.error.toString());
                   }
                   return SizedBox(
                     height: MediaQuery.of(context).size.height / 1.3,
@@ -172,44 +167,5 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
       default:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
     }
-  }
-
-  void loadFascicules() async{
-    setState(() {
-      _isloading = true;
-    });
-    final response = await http.get(
-      Uri.parse(rootURL+'/api/11/lastIssues'),
-    );
-    var jsonData = jsonDecode(response.body);
-      if (jsonData!=null) {
-         List<dynamic> listFascicules=[];
-         listFascicules.add(jsonData);
-        // for (var item in jsonData) {
-        //   Fascicule fascicule = Fascicule(
-        //     idFascicule: item[0]['id_fascicule'], 
-        //     idVolume: item[0]['id_volume'], 
-        //     nom: item[0]['Nom'],
-        //     annee: item[0]['Année'], 
-        //     titreFascicule: item[0]['Titre_Fascicule'], 
-        //     numero: item[0]['numero']
-        //     );
-        //     // Vignette vignette =Vignette(
-        //     //   idVignette: item['id_vignette'],
-        //     //   idFascicule: item['id_fascicule'],
-        //     //   path: item['Path'],
-        //     //   type: item['Type'],
-        //     // );
-        //    listFascicules.add(fascicule);
-        //   //  listFascicules.add(vignette);
-        // }
-        setState(() {
-          fascicules =listFascicules;
-          _isloading = false;
-        });
-       
-      } else {
-        throw Exception('Failed to load Fascicule');
-      }
   }
 }

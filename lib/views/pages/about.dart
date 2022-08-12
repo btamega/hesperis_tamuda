@@ -139,7 +139,8 @@ class _AboutPageState extends State<AboutPage> {
     if (_selectedIndex==0) {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
     } else if(_selectedIndex==1){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchPage(),));
+
+       Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchPage(),));
     }else{
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage(),));
     }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/article.dart';
+import 'package:hesperis_tamuda/models/fascicule.dart';
+import 'package:hesperis_tamuda/models/sommaire.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
@@ -30,7 +32,8 @@ final List<String> imgList = [
 ];
 class ArticleList extends StatefulWidget {
   final int idFascicule;
-  const ArticleList({ Key? key, required this.idFascicule }) : super(key: key);
+  final String titreFascicule;
+  const ArticleList({ Key? key, required this.idFascicule, required this.titreFascicule }) : super(key: key);
 
   @override
   State<ArticleList> createState() => _ArticleListState();
@@ -81,181 +84,136 @@ class _ArticleListState extends State<ArticleList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: Text("Articles", style: GoogleFonts.ibarraRealNova(),),
-        centerTitle: true,
-        backgroundColor: const Color(0xff3b5998),
-        actions: const [LanguagePickerWidget()],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ],
-        onTap: _onItemTapped,
+    return MaterialApp(
+      home: Scaffold(
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: Text(widget.titreFascicule, style: GoogleFonts.ibarraRealNova(),),
+          centerTitle: true,
+          backgroundColor: const Color(0xff3b5998),
+          actions: const [LanguagePickerWidget()],
         ),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          currentIndex: _selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+          ],
+          onTap: _onItemTapped,
+          ),
+          body: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
             children: [
-                 CarouselSlider(
-                  
-                  options: CarouselOptions(
-                    height: 120,
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: false,
-                    initialPage: 2,
-                    autoPlay: true,
-                  ),
-                    items: imageSliders,
-                  ),
-                  FutureBuilder<List<Article>>(
-                    future: getArticles(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return GridView.builder(
-                          // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-                          itemBuilder: (BuildContext, index) {
-                            return GestureDetector(
-                                onTap: () {
-                                  
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(border: Border.all(),),
-                                  child: Column(
-                                    children: [
-                                      
-                                      InkWell(
-                                        onTap: (){
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => ArticleList(idFascicule: snapshot.data![index].idFascicule)),
-                                          );
-                                          },
-                                          onDoubleTap: (){
-                                          selectedItem(context, 0);
-                                          },
-                                          child: Column(children:[
-                                            Text(snapshot.data![index].titre+' '+snapshot.data![index].nbrePage, 
-                                            textAlign: TextAlign.center),
-                                            // Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
-                                          ]),
-                                      ),
-
-                                    ],
-                                  ),
+              ListView(
+                shrinkWrap: true,
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                     CarouselSlider(
+                      options: CarouselOptions(
+                        height: 120,
+                        aspectRatio: 2.0,
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: false,
+                        initialPage: 2,
+                        autoPlay: true,
+                      ),
+                        items: imageSliders,
+                      ),
+                      Text("Sommaire-Contents-Sumario", style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 25.0,)), textAlign: TextAlign.center,),
+                      FutureBuilder<Fascicule>(
+                        future: getSommaires(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                              itemCount: snapshot.data!.data[0].sommaires.length,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(8),
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context,index) {
+                              return ListView(
+                                shrinkWrap: true,
+                                children: [
+                                  Text(snapshot.data!.data[0].sommaires[index].titre, style: GoogleFonts.ibarraRealNova(textStyle: const TextStyle(fontSize: 20)),),
+                                  Card(
+                                    child:Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ListView(
+                                        shrinkWrap: true,
+                                          children: <Widget>[
+                                            FutureBuilder<Article>(
+                                              future: getArticles(widget.idFascicule,snapshot.data!.data[0].sommaires[index].idSommaire),
+                                              builder: (context,snapshot1){
+                                                if (snapshot1.hasData) {
+                                                  return ListView.builder(
+                                                    shrinkWrap: true,
+                                                    itemCount: snapshot1.data!.data.length,
+                                                    itemBuilder: (context,index1){
+                                                      return Card(
+                                                        color: const Color.fromARGB(248, 238, 241, 245),
+                                                        child: ListView(
+                                                          shrinkWrap: true,
+                                                          children: [
+                                                            Row(
+                                                            children: <Widget>[
+                                                              Expanded(
+                                                                child: Text(snapshot1.data!.data[index1].titre, textAlign: TextAlign.left,
+                                                                style: const TextStyle(color:Color(0xff2796bd)),),
+                                                              ),
+                                                              Expanded(
+                                                                child: Text(snapshot1.data!.data[index1].nbrePage, textAlign: TextAlign.right),
+                                                              ),
+                                                              
+                                                            ],
+                                                          ),
+                                                          Expanded(
+                                                            child: Text('Date de publication: '+snapshot1.data!.data[index].datePublication, textAlign: TextAlign.left,)
+                                                          ),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    }
+                                                    );
+                                                }else if(snapshot.hasError){
+                                                  return Center(child:Text(serverError+"\n"+snapshot.error.toString()));
+                                                }
+                                                return SizedBox(
+                                                  height: MediaQuery.of(context).size.height / 1.3,
+                                                  child: const Center(
+                                                    child: CircularProgressIndicator(),
+                                                  ),
+                                                );
+                                              }
+                                              ),
+    
+                                          ],
+                                        ),
+                                        ),
+                                    ),
+                                ],
+                              );
+                              },
+                            );
+                            } else if(snapshot.hasError){
+                              return Center(child:Text(serverError+"\n"+snapshot.error.toString()));
+                            }
+                            return SizedBox(
+                              height: MediaQuery.of(context).size.height / 1.3,
+                              child: const Center(
+                                child: CircularProgressIndicator(),
                               ),
-                                );
-                          },
-                          itemCount: snapshot.data!.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: (200 / 350),
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            crossAxisCount: 2,
-                          ),
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(20),
-                          scrollDirection: Axis.vertical,
-                        );
-                      } else if (snapshot.hasError) {
-                        print(snapshot.error);
-                        return SizedBox(
-                        height: MediaQuery.of(context).size.height / 1.3,
-                        child:  Center(
-                          child: Text('${snapshot.error}'),
+                            );
+                        }
                         ),
-                      );
-                      }
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height / 1.3,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                  ),
+                ],
+              ),
             ],
           )
-       
-        )
-        
-        // FutureBuilder<List<Article>>(
-        //         future: getArticles(),
-        //         builder: (context, snapshot) {
-        //           if (snapshot.hasData) {
-        //             return GridView.builder(
-        //               // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-        //               itemBuilder: (BuildContext, index) {
-        //                 return GestureDetector(
-        //                     onTap: () {
-                              
-        //                     },
-        //                     child: Container(
-        //                       padding: const EdgeInsets.all(8),
-        //                       decoration: BoxDecoration(border: Border.all(),),
-        //                       child: Column(
-        //                         children: [
-                                  
-        //                           InkWell(
-        //                             onTap: (){
-        //                               Navigator.push(
-        //                                 context,
-        //                                 MaterialPageRoute(builder: (context) => ArticleList(idFascicule: snapshot.data![index].idFascicule)),
-        //                               );
-        //                               },
-        //                               onDoubleTap: (){
-        //                               selectedItem(context, 0);
-        //                               },
-        //                               child: Column(children:[
-        //                                 Text(snapshot.data![index].titre+' '+snapshot.data![index].nbrePage, 
-        //                                 textAlign: TextAlign.center),
-        //                                 // Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
-        //                               ]),
-        //                           ),
-
-        //                         ],
-        //                       ),
-        //                   ),
-        //                     );
-        //               },
-        //               itemCount: snapshot.data!.length,
-        //               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //                 childAspectRatio: (200 / 350),
-        //                 crossAxisSpacing: 10,
-        //                 mainAxisSpacing: 10,
-        //                 crossAxisCount: 2,
-        //               ),
-        //               shrinkWrap: true,
-        //               padding: const EdgeInsets.all(20),
-        //               scrollDirection: Axis.vertical,
-        //             );
-        //           } else if (snapshot.hasError) {
-        //             print(snapshot.error);
-        //             return SizedBox(
-        //             height: MediaQuery.of(context).size.height / 1.3,
-        //             child:  Center(
-        //               child: Text('${snapshot.error}'),
-        //             ),
-        //           );
-        //           }
-        //           return SizedBox(
-        //             height: MediaQuery.of(context).size.height / 1.3,
-        //             child: const Center(
-        //               child: CircularProgressIndicator(),
-        //             ),
-        //           );
-        //         },
-        //       ),
-    
+      
+      ),
     );
   }
   void _onItemTapped(int index) {
@@ -301,28 +259,27 @@ class _ArticleListState extends State<ArticleList> {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
     }
   }
-  Future<List<Article>> getArticles() async {
+  Future<Fascicule> getSommaires() async {
     final response = await http.get(
-      Uri.parse(rootURL+'/fascicule/'+widget.idFascicule.toString()+'/article/list')
+      Uri.parse(rootURL+'/api/fascicule/'+widget.idFascicule.toString())
     );
-    var jsonData = jsonDecode(response.body);
-    if (jsonData!=null) {
-        List<Article> articles =[];
-      for (var item in jsonData) {
-        Article article = Article(
-          idArticle: item['id_articles'], 
-          idFascicule: item['id_fascicule'], 
-          idSommaire: item['id_sommaire'],
-          titre: item['Titre'], 
-          nbrePage:item['Nbre_Page'], 
-          lienTelechargement: item['Lien_Telechargement'], 
-          datePublication: item['Date_Publication']
-          );
-          articles.add(article);
-          }
-          return articles;
-    } else {
-        throw Exception('Failed to load articles');
+    final fascicule = fasciculeFromJson(response.body.toString());
+    if (response.statusCode==200) {
+       return fascicule;
+    }else {
+        return fascicule;
+    }
+    
+}
+Future<Article> getArticles(var idFascicule,var idSommaire) async {
+    final response = await http.get(
+      Uri.parse(rootURL+'/api/fascicule/'+idFascicule.toString()+'/sommaire/'+idSommaire.toString()+'/articles')
+    );
+    final article = articleFromJson(response.body.toString());
+    if (response.statusCode==200) {
+       return article;
+    }else {
+        return article;
     }
     
 }

@@ -15,7 +15,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
   int _selectedIndex = 0;
+ 
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -30,10 +32,10 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+        items:  const[
+           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+           BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+           BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
         ],
         onTap: _onItemTapped,
         ),

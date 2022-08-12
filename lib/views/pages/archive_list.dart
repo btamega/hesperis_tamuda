@@ -11,27 +11,29 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../menu/language.dart';
 import 'about.dart';
+import 'article_list.dart';
 import 'contact.dart';
 import 'editorial.dart';
 import 'ethic.dart';
 import 'last_issues.dart';
 import 'recommandation.dart';
 class ArchiveListe extends StatefulWidget {
-  const ArchiveListe({ Key? key }) : super(key: key);
+  final int idVolume;
+  final String volNom;
+  const ArchiveListe({ Key? key, required this.idVolume, required this.volNom }) : super(key: key);
 
   @override
   State<ArchiveListe> createState() => _ArchiveListeState();
 }
 
 class _ArchiveListeState extends State<ArchiveListe> {
-   final ScrollController _controller = ScrollController();
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.archive, style: GoogleFonts.ibarraRealNova(),),
+        title: Text(widget.volNom, style: GoogleFonts.ibarraRealNova(),),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
         actions: const [LanguagePickerWidget()],
@@ -48,70 +50,64 @@ class _ArchiveListeState extends State<ArchiveListe> {
         ],
         onTap: _onItemTapped,
         ),
-        body:FutureBuilder<List<Volume>>(
-          future: getArchives(2022,2026),
+        body:FutureBuilder<Volume>(
+           future: getFascicules(widget.idVolume),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GridView.builder(
-                itemCount : snapshot.data!.length,
-                // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-                itemBuilder: (BuildContext, index) {
-                  return GestureDetector(
-                      onTap: () {
-                        // getItemAndNavigate(snapshot.data![index].idVolume, context);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(border: Border.all(),),
-                        child: Column(
-                          children: [
-                            InkWell(
-                              onTap: (){
-                                },
-                                onDoubleTap: (){
-                                selectedItem(context, 0);
-                                },
-                                child: Column(children:[
-                                  Text(snapshot.data![index].titre+' '+snapshot.data![index].nomVolume, 
-                                  textAlign: TextAlign.center),
-                                  Image.network(
-                                    rootURL+'/'+snapshot.data![index].imageCouverture,
-                                    width: 300,
-                                    height:200
+                  if (snapshot.hasData) {
+                        return GridView.builder(
+                          padding: const EdgeInsets.all(20),
+                          itemCount: snapshot.data!.data[0].fascicules!.length,
+                            itemBuilder: (context, index1) { 
+                              return Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(border: Border.all(),),
+                              child: Column(
+                                children: [
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => ArticleList(
+                                          idFascicule: snapshot.data!.data[0].fascicules![index1].idFascicule, 
+                                          titreFascicule: snapshot.data!.data[0].fascicules![index1].nom+' '+snapshot.data!.data[0].fascicules![index1].numero+' ('+snapshot.data!.data[0].fascicules![index1].anne+')',)
+                                          ),
+                                      );
+                                      },
+                                      onDoubleTap: (){
+                                      selectedItem(context, 0);
+                                      },
+                                      child: Column(children:[
+                                        Text(snapshot.data!.data[0].fascicules![index1].nom+' '+snapshot.data!.data[0].fascicules![index1].numero, 
+                                        textAlign: TextAlign.center),
+                                        Image.network(
+                                          rootURL+'/'+snapshot.data!.data[0].cover,
+                                          width: 300,
+                                          height:250
+                                        ),
+                                        Text(snapshot.data!.data[0].fascicules![index1].anne, textAlign: TextAlign.center,),
+                                      ]),
                                   ),
-                                  Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
-                                ]),
-                            ),
-                          ],
-                        ),
+                                ],
+                              ),
+                          );
+                             }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: (200 / 350),
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            crossAxisCount: 2,
+                          ),
+                            
+                            );
+                  } else if(snapshot.hasError){
+                    return Text(serverError+"\n"+snapshot.error.toString());
+                  }
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height / 1.3,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
                     ),
-                      );
+                  );
                 },
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: (200 / 350),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: 2,
-                ),
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(20),
-                scrollDirection: Axis.vertical,
-              );
-            } else if (snapshot.hasError) {
-              return SizedBox(
-              height: MediaQuery.of(context).size.height / 1.3,
-              child:  Center(
-                child: Text('${snapshot.error}'),
-              ),
-            );
-            }
-            return SizedBox(
-              height: MediaQuery.of(context).size.height / 1.3,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          },
         )
         );
   }

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/constant.dart';
+import 'package:hesperis_tamuda/models/api_response.dart';
+import 'package:hesperis_tamuda/models/volume.dart';
+import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/archive_list.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1921_1929.dart';
@@ -9,6 +13,7 @@ import 'package:hesperis_tamuda/views/pages/archives/archive_1960_1969.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1970_1979.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1980_1989.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1990_1999.dart';
+import 'package:hesperis_tamuda/views/pages/archives/archive_2000_2009.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
@@ -16,6 +21,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../menu/language.dart';
 import 'about.dart';
+import 'archives/archive_2010_2019.dart';
 import 'contact.dart';
 import 'editorial.dart';
 import 'ethic.dart';
@@ -29,8 +35,7 @@ class ArchivePage extends StatefulWidget {
 }
 
 class _ArchivePageState extends State<ArchivePage> {
-  
-  
+ 
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -62,33 +67,49 @@ class _ArchivePageState extends State<ArchivePage> {
         crossAxisCount: 2,
         childAspectRatio: (200 / 350),
         children: <Widget>[
-          ListView.builder(
-          itemCount: 20,
-          itemBuilder: (context, position) {
-            return 
-           Container(
-            padding: const EdgeInsets.all(19),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const ArchiveListe()),
-                    );
-                    },
-                    child: Column(children:[
-                      const Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      const Image(image: AssetImage("assets/images/cover2020.gif"),),
-                      Text(position.toString(), textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
+          FutureBuilder<Volume>(
+            future: fetchVolume(),
+            builder: (context,snapshot){
+              if(snapshot.hasData){
+              return ListView.builder(
+                itemCount: snapshot.data!.data.length,
+                itemBuilder: (context,index1){
+                  return Container(
+                    padding: const EdgeInsets.all(19),
+                    decoration: BoxDecoration(border: Border.all(),),
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ArchiveListe(idVolume: snapshot.data!.data[index1].idVolume, volNom: snapshot.data!.data[index1].titre+' '+snapshot.data!.data[index1].nomVolume,)),
+                            );
+                            },
+                            child: Column(children:[
+                               Text(snapshot.data!.data[index1].titre, textAlign: TextAlign.center,),
+                               Image.network(
+                                          rootURL+'/'+snapshot.data!.data[index1].cover,
+                                          width: 300,
+                                          height:250
+                                        ),
+                               Text(snapshot.data!.data[index1].anne, textAlign: TextAlign.center,),
+                            ]),
+                        ),
+                      ],
+                    ),
+                );
+                }
+                );
+              }else if(snapshot.hasError){
+                return Text(serverError+"\n"+snapshot.error.toString());
+              }
+              else{
+                return const Center(child: CircularProgressIndicator(),);
+              }
+            }
             ),
-        );
-          },
-        ),
+           
         //   Container(
         //     padding: const EdgeInsets.all(19),
         //     decoration: BoxDecoration(border: Border.all(),),
@@ -110,28 +131,28 @@ class _ArchivePageState extends State<ArchivePage> {
         //       ],
         //     ),
         // ),
-        // Container(
-        //   decoration: BoxDecoration(border: Border.all(),),
-        //   padding: const EdgeInsets.all(19),
-        //   // color: Colors.teal[100],
-        //   child: Column(
-        //       children: [
-        //         InkWell(
-        //           onTap: (){
-        //             Navigator.push(
-        //               context,
-        //               MaterialPageRoute(builder: (context) => const Archive20102019()),
-        //             );
-        //             },
-        //             child: Column(children: const[
-        //               Text("Hespéris-Tamuda ", textAlign: TextAlign.center,),
-        //               Image(image: AssetImage("assets/images/2001-2.png"),),
-        //               Text("(2010-2019)\n", textAlign: TextAlign.center,),
-        //             ]),
-        //         ),
-        //       ],
-        //     ),
-        // ),
+        Container(
+          decoration: BoxDecoration(border: Border.all(),),
+          padding: const EdgeInsets.all(19),
+          // color: Colors.teal[100],
+          child: Column(
+              children: [
+                InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Archive20102019()),
+                    );
+                    },
+                    child: Column(children: const[
+                      Text("Hespéris-Tamuda ", textAlign: TextAlign.center,),
+                      Image(image: AssetImage("assets/images/2001-2.png"),),
+                      Text("(2010-2019)\n", textAlign: TextAlign.center,),
+                    ]),
+                ),
+              ],
+            ),
+        ),
         Container(
           padding: const EdgeInsets.all(19),
           // color: Colors.teal[300],
@@ -142,7 +163,7 @@ class _ArchivePageState extends State<ArchivePage> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ArchiveListe()),
+                      MaterialPageRoute(builder: (context) => const Archive20002009()),
                     );
                     },
                     child: Column(children: const[
