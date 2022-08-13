@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 class SearchPage extends StatefulWidget {
   const SearchPage({ Key? key }) : super(key: key);
 
@@ -105,7 +101,7 @@ class _SearchPageState extends State<SearchPage> {
                         color: const Color.fromRGBO(222,226,230,0.5),
                         child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
+                          children: const <Widget>[
                             // Row(
                             //   children: <Widget>[
                             //     Expanded(

@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
-import 'package:hesperis_tamuda/models/vignette.dart';
-import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
-import 'package:hesperis_tamuda/views/pages/article_list.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
@@ -19,7 +14,6 @@ import 'editorial.dart';
 import 'ethic.dart';
 import 'recommandation.dart';
 import '../menu/language.dart';
-import 'package:http/http.dart' as http;
 
 class LastIssuesPage extends StatefulWidget {
   const LastIssuesPage({ Key? key }) : super(key: key);
@@ -29,14 +23,8 @@ class LastIssuesPage extends StatefulWidget {
 }
 
 class _LastIssuesPageState extends State<LastIssuesPage> {
-  bool _isloading =false;
   List<dynamic> fascicules = [];
   int _selectedIndex = 0;
-  // @override
-  // void initState() {
-  //   loadFascicules();
-  //   super.initState();
-  // }
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -85,7 +73,7 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
                                       onDoubleTap: (){
                                       selectedItem(context, 0);
                                       },
-                                      child: Column(children:[
+                                      child: Column(children:const[
                                         // Text(snapshot.data![index].nom+' '+snapshot.data![index].numero, 
                                         // textAlign: TextAlign.center),
                                         // Image.network(

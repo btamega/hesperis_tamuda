@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
-import 'package:hesperis_tamuda/models/sommaire.dart';
-import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:http/http.dart' as http;
@@ -170,7 +166,7 @@ class _ArticleListState extends State<ArticleList> {
                                                             ],
                                                           ),
                                                           Expanded(
-                                                            child: Text('Date de publication: '+snapshot1.data!.data[index].datePublication, textAlign: TextAlign.left,)
+                                                            child: Text('Date de publication: '+snapshot1.data!.data[index1].datePublication, textAlign: TextAlign.left,)
                                                           ),
                                                           ],
                                                         ),

@@ -47,7 +47,7 @@ class Datum {
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         idFascicule: json["id_fascicule"],
-        idVolume: json["id_volume"],
+        idVolume: int.parse(json["id_volume"]),
         nom: json["Nom"],
         anne: json["Année"],
         numero: json["numero"],
@@ -102,9 +102,9 @@ class Vignette {
     String type;
 
     factory Vignette.fromJson(Map<String, dynamic> json) => Vignette(
-        idVignette: json["id_vignette"],
+        idVignette: int.parse(json["id_vignette"]),
         path: json["Path"],
-        idFascicule: json["id_fascicule"],
+        idFascicule: int.parse(json["id_fascicule"]),
         type: json["Type"],
     );
 

@@ -47,8 +47,8 @@ class Datum {
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         idArticles: json["id_articles"],
-        idFascicule: json["id_fascicule"],
-        idSommaire: json["id_sommaire"],
+        idFascicule: int.parse(json["id_fascicule"]),
+        idSommaire: int.parse(json["id_sommaire"]),
         titre: json["Titre"],
         nbrePage: json["Nbre_Page"],
         lienTelechargement: json["Lien_Telechargement"],

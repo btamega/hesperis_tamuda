@@ -25,7 +25,9 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   late TextEditingController textEditingController;
   bool downloading = false;
   String progress='0';
+  // ignore: unused_field
   bool _isLoading = false;
+  // ignore: unused_field
   String _fileFullPath = '';
   late String path;
   int pageNumber =0;
@@ -158,7 +160,7 @@ Future _downloadAndSaveFileToStorage(String url, String fileName) async{
     
     _fileFullPath = file.path;
   } catch (e) {
-    print(e);
+    throw Exception(e.toString());
   }
 
   setState(() {

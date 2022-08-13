@@ -79,13 +79,12 @@ class Fascicule {
 
     factory Fascicule.fromJson(Map<String, dynamic> json) => Fascicule(
         idFascicule: json["id_fascicule"],
-        idVolume: json["id_volume"],
+        idVolume: int.parse(json["id_volume"]),
         nom: json["Nom"],
         anne: json["Année"],
         numero: json["numero"],
         titreFascicule: json["Titre_Fascicule"],
     );
-
     Map<String, dynamic> toJson() => {
         "id_fascicule": idFascicule,
         "id_volume": idVolume,
