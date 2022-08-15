@@ -20,14 +20,6 @@ Future<Volume> fetchVolume() async{
       return volume;
     }
   }
-  Future<Volume> getFascicules(var idVolume) async{
-    final response = await http.get(Uri.parse(rootURL+'/api/archive/'+'$idVolume'));
-    final volume = volumeFromJson(response.body.toString());
-    if (response.statusCode==200) {
-      return volume;
-    } else {
-      return volume;
-    }
-  }
+  
 
 

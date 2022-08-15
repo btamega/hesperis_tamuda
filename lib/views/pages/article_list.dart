@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/constant.dart';
+import 'package:hesperis_tamuda/models/api_response.dart';
 import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
+import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
 import 'package:http/http.dart' as http;
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
@@ -156,8 +158,24 @@ class _ArticleListState extends State<ArticleList> {
                                                             Row(
                                                             children: <Widget>[
                                                               Expanded(
-                                                                child: Text(snapshot1.data!.data[index1].titre, textAlign: TextAlign.left,
-                                                                style: const TextStyle(color:Color(0xff2796bd)),),
+                                                                child: InkWell(
+                                                                  onTap: () async{
+                                                                    showDialog(context: context, builder: (context){
+                                                                    return const Center(
+                                                                      child:CircularProgressIndicator() ,
+                                                                    );
+                                                                  });
+                                                                    final url=rootURL+'/Downloads/'+snapshot1.data!.data[index1].lienTelechargement;
+                                                                    final file = await PDFApi.loadNetwork(url);
+                                                                    Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                                                                    );
+                                                                  },
+                                                                  child: Text(snapshot1.data!.data[index1].titre, textAlign: TextAlign.left,
+                                                                  style: const TextStyle(color:Color(0xff2796bd)),
+                                                                ),
+                                                                ),
                                                               ),
                                                               Expanded(
                                                                 child: Text(snapshot1.data!.data[index1].nbrePage, textAlign: TextAlign.right),
@@ -267,6 +285,7 @@ class _ArticleListState extends State<ArticleList> {
     }
     
 }
+
 Future<Article> getArticles(var idFascicule,var idSommaire) async {
     final response = await http.get(
       Uri.parse(rootURL+'/api/fascicule/'+idFascicule.toString()+'/sommaire/'+idSommaire.toString()+'/articles')

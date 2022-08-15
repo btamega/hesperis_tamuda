@@ -9,11 +9,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'about.dart';
 import 'archives.dart';
+import 'article_list.dart';
 import 'contact.dart';
 import 'editorial.dart';
 import 'ethic.dart';
 import 'recommandation.dart';
 import '../menu/language.dart';
+import 'package:http/http.dart' as http;
 
 class LastIssuesPage extends StatefulWidget {
   const LastIssuesPage({ Key? key }) : super(key: key);
@@ -46,50 +48,55 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
         ],
         onTap: _onItemTapped,
         ),
-        body:
-        FutureBuilder<List<Fascicule>>(
-                // future: getLastIssues(),
+        body:FutureBuilder<Fascicule>(
+                future: getLastIssues(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return GridView.builder(
                       // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
                       itemBuilder: (BuildContext, index) {
-                        return GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(border: Border.all(),),
-                              child: Column(
-                                children: [
-                                  InkWell(
-                                    onTap: (){
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(builder: (context) => ArticleList(idFascicule: snapshot.data![index].idFascicule)),
-                                      // );
-                                      },
-                                      onDoubleTap: (){
-                                      selectedItem(context, 0);
-                                      },
-                                      child: Column(children:const[
-                                        // Text(snapshot.data![index].nom+' '+snapshot.data![index].numero, 
-                                        // textAlign: TextAlign.center),
-                                        // Image.network(
-                                        //   rootURL+'/'+snapshot.data![index].vignettes[],
-                                        //   width: 300,
-                                        //   height:250
-                                        // ),
-                                        // Text(snapshot.data![index].annee, textAlign: TextAlign.center,),
-                                      ]),
+                        return ListView.builder(
+                          itemCount: snapshot.data!.data.length,
+                          itemBuilder: (context, index1) { 
+                            return GestureDetector(
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(border: Border.all(),),
+                                  child: Column(
+                                    children: [
+                                      InkWell(
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => ArticleList(
+                                              idFascicule: snapshot.data!.data[index].idFascicule, 
+                                              titreFascicule: snapshot.data!.data[index].nom+' '+snapshot.data!.data[index].numero+' ('+snapshot.data!.data[index].anne+')',)),
+                                          );
+                                          },
+                                          onDoubleTap: (){
+                                          selectedItem(context, 0);
+                                          },
+                                          child: Column(
+                                            children:[
+                                            Text(snapshot.data!.data[index].nom+' '+snapshot.data!.data[index].numero, 
+                                            textAlign: TextAlign.center),
+                                            snapshot.data!.data[index].vignettes[index1].type=='jaune' ?
+                                            Image.network(
+                                              rootURL+'/'+snapshot.data!.data[index].vignettes[index1].path,
+                                              width: 300,
+                                              height:250
+                                            ): Container(),
+                                            Text(snapshot.data!.data[index].anne, textAlign: TextAlign.center,),
+                                          ]),
+                                      ),
+                                    ],
                                   ),
-                                ],
                               ),
-                          ),
-                            );
+                                );
+                           },
+                        );
                       },
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data!.data.length,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: (200 / 350),
                         crossAxisSpacing: 10,
@@ -113,6 +120,18 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
               ),
           );
   }
+  Future<Fascicule> getLastIssues() async {
+    final response = await http.get(
+      Uri.parse(rootURL+'/api/lastIssues/')
+    );
+    final fascicule = fasciculeFromJson(response.body.toString());
+    if (response.statusCode==200) {
+       return fascicule;
+    }else {
+        return fascicule;
+    }
+    
+}
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
