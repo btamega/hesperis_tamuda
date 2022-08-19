@@ -82,8 +82,7 @@ class _ArticleListState extends State<ArticleList> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
           title: Text(widget.titreFascicule, style: GoogleFonts.ibarraRealNova(),),
@@ -110,17 +109,17 @@ class _ArticleListState extends State<ArticleList> {
                 shrinkWrap: true,
                 // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                     CarouselSlider(
-                      options: CarouselOptions(
-                        height: 120,
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: false,
-                        initialPage: 2,
-                        autoPlay: true,
-                      ),
-                        items: imageSliders,
-                      ),
+                    //  CarouselSlider(
+                    //   options: CarouselOptions(
+                    //     height: 120,
+                    //     aspectRatio: 2.0,
+                    //     enlargeCenterPage: true,
+                    //     enableInfiniteScroll: false,
+                    //     initialPage: 2,
+                    //     autoPlay: true,
+                    //   ),
+                    //     items: imageSliders,
+                    //   ),
                       Text("Sommaire-Contents-Sumario", style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 25.0,)), textAlign: TextAlign.center,),
                       FutureBuilder<Fascicule>(
                         future: getSommaires(),
@@ -135,7 +134,7 @@ class _ArticleListState extends State<ArticleList> {
                               return ListView(
                                 shrinkWrap: true,
                                 children: [
-                                  Text(snapshot.data!.data[0].sommaires[index].titre, style: GoogleFonts.ibarraRealNova(textStyle: const TextStyle(fontSize: 20)),),
+                                  Text(snapshot.data!.data[0].sommaires[index].titre, style: GoogleFonts.ibarraRealNova(textStyle: const TextStyle(fontSize: 20)),textAlign: TextAlign.left,),
                                   Card(
                                     child:Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -156,8 +155,9 @@ class _ArticleListState extends State<ArticleList> {
                                                           shrinkWrap: true,
                                                           children: [
                                                             Row(
-                                                            children: <Widget>[
+                                                              children: [
                                                               Expanded(
+                                                                flex: 4,
                                                                 child: InkWell(
                                                                   onTap: () async{
                                                                     showDialog(context: context, builder: (context){
@@ -171,19 +171,50 @@ class _ArticleListState extends State<ArticleList> {
                                                                       context,
                                                                       MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
                                                                     );
+                                                                    // Navigator.of(context).pop();
                                                                   },
                                                                   child: Text(snapshot1.data!.data[index1].titre, textAlign: TextAlign.left,
-                                                                  style: const TextStyle(color:Color(0xff2796bd)),
-                                                                ),
-                                                                ),
+                                                                    style: const TextStyle(color:Color(0xff2796bd)),
+                                                                    ),
+                                                                  ),
                                                               ),
                                                               Expanded(
                                                                 child: Text(snapshot1.data!.data[index1].nbrePage, textAlign: TextAlign.right),
                                                               ),
-                                                              
                                                             ],
                                                           ),
-                                                          Expanded(
+                                                          const Padding(
+                                                            padding: EdgeInsets.only(bottom: 10),
+                                                          ),
+                                                          Align(
+                                                            child: FutureBuilder<Article>(
+                                                                  future: getArticles(widget.idFascicule,snapshot.data!.data[0].sommaires[index].idSommaire),
+                                                                  builder: (context,snapshot2){
+                                                                    if (snapshot2.hasData) {
+                                                                      return ListView.builder(
+                                                                        shrinkWrap: true,
+                                                                        itemCount: snapshot1.data!.data[index1].auteurs.length,
+                                                                        itemBuilder: (context,index2){
+                                                                          return Text(snapshot2.data!.data[index1].auteurs[index2].prenom+' '+snapshot2.data!.data[index1].auteurs[index2].nom+' '+snapshot2.data!.data[index1].auteurs[index2].stat.toString());                                            
+                                                                        }
+                                                                        );
+                                                                    } else if(snapshot.hasError){
+                                                                      return Text(serverError+"\n"+snapshot.error.toString());
+                                                                  }
+                                                                  return SizedBox(
+                                                                    height: MediaQuery.of(context).size.height / 1.3,
+                                                                    child: const Center(
+                                                                      child: CircularProgressIndicator(),
+                                                                    ),
+                                                                  );
+                                                                  }
+                                                                  ),
+                                                            ),
+                                                          const Padding(
+                                                            padding: EdgeInsets.only(bottom: 15),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment.centerLeft,
                                                             child: Text('Date de publication: '+snapshot1.data!.data[index1].datePublication, textAlign: TextAlign.left,)
                                                           ),
                                                           ],
@@ -226,8 +257,6 @@ class _ArticleListState extends State<ArticleList> {
               ),
             ],
           )
-      
-      ),
     );
   }
   void _onItemTapped(int index) {

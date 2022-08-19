@@ -5,19 +5,18 @@ import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/archive_list.dart';
-import 'package:hesperis_tamuda/views/pages/article_list.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 
-class Archive20102019 extends StatefulWidget {
-  const Archive20102019({ Key? key }) : super(key: key);
+class RecentArchives extends StatefulWidget {
+  const RecentArchives({ Key? key }) : super(key: key);
 
   @override
-  State<Archive20102019> createState() => _Archive20102019State();
+  State<RecentArchives> createState() => _RecentArchivesState();
 }
 
-class _Archive20102019State extends State<Archive20102019> {
+class _RecentArchivesState extends State<RecentArchives> {
   int _selectedIndex = 0;
 
   @override
@@ -25,7 +24,7 @@ class _Archive20102019State extends State<Archive20102019> {
     return Scaffold(
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
-        title: const Text("Hespéris Tamuda (2010-2019)"),
+        title: const Text("Hespéris Tamuda"),
         centerTitle: true,
         backgroundColor: const Color(0xff3b5998),
         actions: const [LanguagePickerWidget()],
@@ -42,7 +41,7 @@ class _Archive20102019State extends State<Archive20102019> {
         onTap: _onItemTapped,
         ),
       body: FutureBuilder<Volume>(
-            future: getArchives(2010,2019),
+            future: fetchVolume(),
             builder: (context,snapshot){
               if(snapshot.hasData){
               return GridView.builder(
@@ -51,25 +50,14 @@ class _Archive20102019State extends State<Archive20102019> {
                   return Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(border: Border.all(),),
-                    child: ListView(
+                    child: Column(
                       children: [
                         InkWell(
                           onTap: (){
-                            if (int.parse(snapshot.data!.data[index1].anne)<2016) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => ArticleList(
-                                      idFascicule: snapshot.data!.data[index1].fascicules![0].idFascicule, 
-                                      titreFascicule: snapshot.data!.data[index1].fascicules![0].nom+' '+snapshot.data!.data[index1].fascicules![0].numero+' ('+snapshot.data!.data[index1].fascicules![0].anne+')',
-                                      )),
-                                  );
-                              
-                            } else {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => ArchiveListe(idVolume: snapshot.data!.data[index1].idVolume, volNom: snapshot.data!.data[index1].titre+' '+snapshot.data!.data[index1].nomVolume,)),
                               );
-                            }
                             },
                             child: Column(children:[
                                Text(snapshot.data!.data[index1].titre, textAlign: TextAlign.center,),

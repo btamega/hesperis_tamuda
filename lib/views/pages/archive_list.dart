@@ -59,7 +59,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                 child: Container(
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(border: Border.all(),),
-                                  child: Column(
+                                  child: ListView(
                                     children: [
                                       InkWell(
                                         onTap: (){
