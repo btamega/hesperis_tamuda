@@ -14,7 +14,6 @@ class _SearchPageState extends State<SearchPage> {
   int _selectedIndex = 0;
   Icon customIcon = const Icon(Icons.search);
   late Widget customSearchBar=const Text("SEARCH"); 
-  // Future<List<Article>> articles = getArticles();
   @override
   void initState() {
     customSearchBar = const Text("SEARCH");
@@ -77,103 +76,8 @@ class _SearchPageState extends State<SearchPage> {
         ],
         onTap: _onItemTapped,
         ),
-      body: FutureBuilder<List<Article>>(
-          // future: getArticles(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GridView.builder(
-                itemCount: snapshot.data!.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: MediaQuery.of(context).size.height / 450,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 1,
-              ),
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(8),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context,index) {
-                return Card(
-                  child:Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 50,
-                        color: const Color.fromRGBO(222,226,230,0.5),
-                        child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: const <Widget>[
-                            // Row(
-                            //   children: <Widget>[
-                            //     Expanded(
-                            //       child: Text(snapshot.data![index].titre, textAlign: TextAlign.left,
-                            //       style: const TextStyle(color:Color(0xff2796bd)),),
-                            //     ),
-                            //     Expanded(
-                            //       child: Text(snapshot.data![index].nbrePage, textAlign: TextAlign.right),
-                            //     ),
-                            //   ],
-                            // ),
-                            // Expanded(
-                            //   child: ListTile(
-                            //     title: Text(snapshot.data![index].idFascicule.toString()+"\n\n", textAlign: TextAlign.left,),
-                            //     )
-                            // ),
-                            // Expanded(
-                            //   child: Text('Date de publication: '+snapshot.data![index].datePublication, textAlign: TextAlign.left,)
-                            // ),
-                          ],
-                        )
-                        
-                      ),
-                      ),
-                  );
-                },
-              );
-              } else if (snapshot.hasError) {
-                debugPrint("has no data");
-                return SizedBox(
-                height: MediaQuery.of(context).size.height / 1.3,
-                child:  Center(
-                  child: Text('${snapshot.error}'),
-                ),
-              );
-              }
-              return SizedBox(
-                height: MediaQuery.of(context).size.height / 1.3,
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-          }
-          ),
     );
   }
-// Future<List<Article>> getArticles()async{
-//     const url ='https://b366-105-67-7-186.eu.ngrok.io/fascicule/2022001/article/list';
-//     final response = await http.get(Uri.parse(url));
-//     final body = jsonDecode(response.body);
-    
-//       if (body!=null) {
-//         List<Article> articles = [];
-//         for (var item in body) {
-//         Article article = Article(
-//           idArticle: item['id_articles'], 
-//           idFascicule: item['id_fascicule'], 
-//           idSommaire: item['id_sommaire'],
-//           titre: item['Titre'], 
-//           nbrePage:item['Nbre_Page'], 
-//           lienTelechargement: item['Lien_Telechargement'], 
-//           datePublication: item['Date_Publication'], 
-//           auteurs: []
-//         );
-//         articles.add(article);
-//       }
-//       return articles;
-//       }else {
-//         throw Exception('Failed to load Fascicule');
-//       }
-
-//     }
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;

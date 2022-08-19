@@ -39,7 +39,6 @@ class ArticleList extends StatefulWidget {
 
 class _ArticleListState extends State<ArticleList> {
   int _selectedIndex = 0;
-  
   final List<Widget> imageSliders = imgList
     .map((item) => Container(
       margin: const EdgeInsets.all(5.0),
@@ -105,23 +104,19 @@ class _ArticleListState extends State<ArticleList> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: [
-              ListView(
-                shrinkWrap: true,
-                // crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                    //  CarouselSlider(
-                    //   options: CarouselOptions(
-                    //     height: 120,
-                    //     aspectRatio: 2.0,
-                    //     enlargeCenterPage: true,
-                    //     enableInfiniteScroll: false,
-                    //     initialPage: 2,
-                    //     autoPlay: true,
-                    //   ),
-                    //     items: imageSliders,
-                    //   ),
-                      Text("Sommaire-Contents-Sumario", style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 25.0,)), textAlign: TextAlign.center,),
-                      FutureBuilder<Fascicule>(
+              CarouselSlider(
+               options: CarouselOptions(
+                 height: 120,
+                 aspectRatio: 2.0,
+                 enlargeCenterPage: true,
+                 enableInfiniteScroll: false,
+                 initialPage: 2,
+                 autoPlay: true,
+               ),
+                 items: imageSliders,
+               ),
+               Text("Sommaire-Contents-Sumario", style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 25.0,)), textAlign: TextAlign.center,),
+                FutureBuilder<Fascicule>(
                         future: getSommaires(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
@@ -159,19 +154,28 @@ class _ArticleListState extends State<ArticleList> {
                                                               Expanded(
                                                                 flex: 4,
                                                                 child: InkWell(
-                                                                  onTap: () async{
+                                                                  onTap: () async{ 
                                                                     showDialog(context: context, builder: (context){
-                                                                    return const Center(
-                                                                      child:CircularProgressIndicator() ,
-                                                                    );
-                                                                  });
-                                                                    final url=rootURL+'/Downloads/'+snapshot1.data!.data[index1].lienTelechargement;
-                                                                    final file = await PDFApi.loadNetwork(url);
-                                                                    Navigator.push(
-                                                                      context,
-                                                                      MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
-                                                                    );
-                                                                    // Navigator.of(context).pop();
+                                                                        return Center(
+                                                                          child:Column(
+                                                                            mainAxisSize: MainAxisSize.max,
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: const[
+                                                                              CircularProgressIndicator(),
+                                                                              Text("Un instant, nous chargeons le fichier", textAlign: TextAlign.center,
+                                                                                  style: TextStyle(color: Color.fromARGB(255, 35, 218, 193), fontSize: 20),),
+                                                                            
+                                                                            ],
+                                                                          ) ,
+                                                                        );
+                                                                      });
+                                                                      final url=rootURL+'/Downloads/'+snapshot1.data!.data[index1].lienTelechargement;
+                                                                      final file = await PDFApi.loadNetwork(url);
+                                                                      Navigator.push(
+                                                                        context,
+                                                                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                                                                      );
+                                                                    //  Navigator.of(context).pop();
                                                                   },
                                                                   child: Text(snapshot1.data!.data[index1].titre, textAlign: TextAlign.left,
                                                                     style: const TextStyle(color:Color(0xff2796bd)),
@@ -253,8 +257,6 @@ class _ArticleListState extends State<ArticleList> {
                             );
                         }
                         ),
-                ],
-              ),
             ],
           )
     );

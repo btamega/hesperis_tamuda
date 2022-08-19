@@ -5,6 +5,7 @@ import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../menu/language.dart';
 import 'package:expandable/expandable.dart';
 class ContactPage extends StatefulWidget {
@@ -15,6 +16,7 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
+  
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -37,41 +39,6 @@ class _ContactPageState extends State<ContactPage> {
         ],
         onTap: _onItemTapped,
         ),
-        // body: Stack(
-        // children: [
-        //   SingleChildScrollView(
-        //     child: Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         const SizedBox(
-        //           height: 10.0,
-        //         ),
-        //         Padding(
-        //           padding: const EdgeInsets.symmetric(vertical: 50.0),
-        //           child: Column(
-        //             children: [
-        //               Text(
-        //                 "Khalid Ben Srhir Coordinateur Scientifique",
-        //                 style: GoogleFonts.ibarraRealNova(
-        //                   textStyle:const TextStyle(
-        //                    fontSize: 20.0,
-        //                    fontWeight: FontWeight.bold,
-        //                   //  color: Color(0xff3b5998),
-        //                 ),
-        //                 ),
-        //                 textAlign: TextAlign.center,
-        //               ),
-        //               const SizedBox(
-        //                 height: 10.0,
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ],
-        // ),
         body: ExpandableTheme(
         data: const ExpandableThemeData(
           iconColor: Colors.blue,
@@ -145,15 +112,23 @@ class Card1 extends StatelessWidget {
                       // style: Theme.of(context).textTheme.body2,
                     )),
                 collapsed:  Column(
-                 children: const[
+                 children: [
                   ListTile(
-                  leading: Icon(Icons.email,color: Colors.red,),
-                  title: Text("khalidbensrhir@gmail.com", style: TextStyle(color: Colors.blue),),
-                  onTap: null,
+                  leading:const Icon(Icons.email,color: Colors.red,),
+                  title: const Text("khalidbensrhir@gmail.com", style: TextStyle(color: Colors.blue),),
+                  onTap:() {
+                      final Uri params = Uri(
+                      scheme: 'mailto',
+                      path: 'khalidbensrhir@gmail.com',
+                    );
+                    final url = params.toString();
+                    // ignore: deprecated_member_use
+                      launch(url);
+                    }, 
                 ),
-                ListTile(
-                  leading: Icon(Icons.gps_fixed,color: Colors.blue,),
-                  title: Text("Faculté de Lettre et des Sciences Humaines BP 1040 Rabat Maroc",),
+                 const ListTile(
+                  leading:  Icon(Icons.gps_fixed,color: Colors.blue,),
+                  title:  Text("Faculté de Lettre et des Sciences Humaines BP 1040 Rabat Maroc",),
                   onTap: null,
                 ),
                  ],
@@ -175,11 +150,7 @@ class Card1 extends StatelessWidget {
                                   keyboardType:TextInputType.emailAddress ,
                                   validator: (value){
                                     if(value!.isEmpty){
-                                      return "Username can not be empty";
-                                    }else if(value.length <= 5){
-                                      return "Username should be greater than 5";
-                                    }else {
-                                      return null;
+                                      return "Email field can not be empty";
                                     }
                                   },
                                   ),
@@ -193,16 +164,17 @@ class Card1 extends StatelessWidget {
                                   validator: (value){
                                     if(value!.isEmpty){
                                       return "Username can not be empty";
-                                    }else if(value.length <= 5){
-                                      return "Username should be greater than 5";
-                                    }else {
-                                      return null;
                                     }
                                   },
                                   ),
-                                  const TextField(
+                                  TextFormField(
+                                    validator: (value){
+                                    if(value!.isEmpty){
+                                      return "Body can not be empty";
+                                    }
+                                  },
                                   enableSuggestions: true,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     hintText: "Message",
                                     // border: InputBorder.none
                                   ),
@@ -212,7 +184,9 @@ class Card1 extends StatelessWidget {
                                   
                                   ),
                                   TextButton(
-                                    onPressed: (){}, 
+                                    onPressed: (){
+                                      
+                                    }, 
                                     style: TextButton.styleFrom(backgroundColor: Colors.red, primary: Colors.white),
                                     child: const Text("Envoyer"),
                                     ),
