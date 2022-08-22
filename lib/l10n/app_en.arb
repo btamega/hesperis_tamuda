@@ -38,6 +38,7 @@
     "remember": "Remember me",
     "forgotPassword": "Forgot Your Password ?",
     "name": "Name",
+    "messageSent": "Your message have been sent successfully",
     "confirmPassword": "Confirm Password",
     "resentEmail": "A fresh verification link has been sent to your email address.",
     "emailNotReceive": "If you did not receive the email",
