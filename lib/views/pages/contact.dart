@@ -184,7 +184,7 @@ class _Card1State extends State<Card1> {
                                   validator: (value){
                                     if(value == null ||value.isEmpty){
                                       return "Username can not be empty";
-                                    }else if(!RegExp(r"^[a-z A-Z]+$").hasMatch(value)){
+                                    }else if(!RegExp(r"^[a-z A-Z]+[À-Ý à-ÿ]+$").hasMatch(value)){
                                       return "Incorrect username";
                                     }
                                     else{

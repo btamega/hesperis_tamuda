@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';

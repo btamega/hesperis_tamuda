@@ -55,6 +55,7 @@ dependencies:
   sn_progress_dialog: ^1.0.8
   carousel_slider: ^4.1.1
   awesome_dialog: ^2.2.1
+  flutter_pw_validator: ^1.4.2
   
 
 dev_dependencies:

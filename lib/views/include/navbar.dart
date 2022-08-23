@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../pages/about.dart';
 import '../pages/archives.dart';
 import '../pages/contact.dart';
@@ -69,6 +70,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildMenuItem(
               text: '#hesperistamuda',
               icon: Icons.facebook,
+              onClicked: ()=>launchUrl(Uri.parse('https://web.facebook.com/hesperistamudaOfficiel')),
             ),
             
           ],
