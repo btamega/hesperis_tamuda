@@ -21,38 +21,40 @@ class _ContactPageState extends State<ContactPage> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      drawer: const NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.contact, style: GoogleFonts.ibarraRealNova(),),
-        centerTitle: true,
-        backgroundColor: const Color(0xff3b5998),
-        actions: const [LanguagePickerWidget()],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ],
-        onTap: _onItemTapped,
+   return SafeArea(
+     child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.contact, style: GoogleFonts.ibarraRealNova(),),
+          centerTitle: true,
+          backgroundColor: const Color(0xff3b5998),
+          actions: const [LanguagePickerWidget()],
         ),
-        body: ExpandableTheme(
-        data: const ExpandableThemeData(
-          iconColor: Colors.blue,
-          useInkWell: true,
-        ),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: const <Widget>[
-            Card1(),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          currentIndex: _selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
           ],
-        ),
-        ),
-    );
+          onTap: _onItemTapped,
+          ),
+          body: ExpandableTheme(
+          data: const ExpandableThemeData(
+            iconColor: Colors.blue,
+            useInkWell: true,
+          ),
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: const <Widget>[
+              Card1(),
+            ],
+          ),
+          ),
+      ),
+   );
   }
   void _onItemTapped(int index) {
     setState(() {

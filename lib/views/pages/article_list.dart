@@ -81,184 +81,194 @@ class _ArticleListState extends State<ArticleList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: const NavigationDrawerWidget(),
-        appBar: AppBar(
-          title: Text(widget.titreFascicule, style: GoogleFonts.ibarraRealNova(),),
-          centerTitle: true,
-          backgroundColor: const Color(0xff3b5998),
-          actions: const [LanguagePickerWidget()],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black,
-          currentIndex: _selectedIndex,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-          ],
-          onTap: _onItemTapped,
+    return SafeArea(
+      child: Scaffold(
+          drawer: const NavigationDrawerWidget(),
+          appBar: AppBar(
+            title: Text(widget.titreFascicule, style: GoogleFonts.ibarraRealNova(),),
+            centerTitle: true,
+            backgroundColor: const Color(0xff3b5998),
+            actions: const [LanguagePickerWidget()],
           ),
-          body: ListView(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            children: [
-              CarouselSlider(
-               options: CarouselOptions(
-                 height: 120,
-                 aspectRatio: 2.0,
-                 enlargeCenterPage: true,
-                 enableInfiniteScroll: false,
-                 initialPage: 2,
-                 autoPlay: true,
-               ),
-                 items: imageSliders,
-               ),
-               Text("Sommaire-Contents-Sumario", style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 25.0,)), textAlign: TextAlign.center,),
-                FutureBuilder<Fascicule>(
-                        future: getSommaires(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ListView.builder(
-                              itemCount: snapshot.data!.data[0].sommaires.length,
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.all(8),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context,index) {
-                              return ListView(
-                                shrinkWrap: true,
-                                children: [
-                                  Text(snapshot.data!.data[0].sommaires[index].titre, style: GoogleFonts.ibarraRealNova(textStyle: const TextStyle(fontSize: 20)),textAlign: TextAlign.left,),
-                                  Card(
-                                    child:Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ListView(
-                                        shrinkWrap: true,
-                                          children: <Widget>[
-                                            FutureBuilder<Article>(
-                                              future: getArticles(widget.idFascicule,snapshot.data!.data[0].sommaires[index].idSommaire),
-                                              builder: (context,snapshot1){
-                                                if (snapshot1.hasData) {
-                                                  return ListView.builder(
-                                                    shrinkWrap: true,
-                                                    itemCount: snapshot1.data!.data.length,
-                                                    itemBuilder: (context,index1){
-                                                      return Card(
-                                                        color: const Color.fromARGB(248, 238, 241, 245),
-                                                        child: ListView(
-                                                          shrinkWrap: true,
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                              Expanded(
-                                                                flex: 4,
-                                                                child: InkWell(
-                                                                  onTap: () async{ 
-                                                                    showDialog(context: context, builder: (context){
-                                                                        return Center(
-                                                                          child:Column(
-                                                                            mainAxisSize: MainAxisSize.max,
-                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                            children: const[
-                                                                              CircularProgressIndicator(),
-                                                                              Text("Un instant, nous chargeons le fichier", textAlign: TextAlign.center,
-                                                                                  style: TextStyle(color: Color.fromARGB(255, 35, 218, 193), fontSize: 20),),
-                                                                            
-                                                                            ],
-                                                                          ) ,
-                                                                        );
-                                                                      });
-                                                                      final url=rootURL+'/Downloads/'+snapshot1.data!.data[index1].lienTelechargement;
-                                                                      final file = await PDFApi.loadNetwork(url);
-                                                                      Navigator.push(
-                                                                        context,
-                                                                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
-                                                                      );
-                                                                    //  Navigator.of(context).pop();
-                                                                  },
-                                                                  child: Text(snapshot1.data!.data[index1].titre, textAlign: TextAlign.left,
-                                                                    style: const TextStyle(color:Color(0xff2796bd)),
-                                                                    ),
-                                                                  ),
-                                                              ),
-                                                              Expanded(
-                                                                child: Text(snapshot1.data!.data[index1].nbrePage, textAlign: TextAlign.right),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          const Padding(
-                                                            padding: EdgeInsets.only(bottom: 10),
-                                                          ),
-                                                          Align(
-                                                            child: FutureBuilder<Article>(
-                                                                  future: getArticles(widget.idFascicule,snapshot.data!.data[0].sommaires[index].idSommaire),
-                                                                  builder: (context,snapshot2){
-                                                                    if (snapshot2.hasData) {
-                                                                      return ListView.builder(
-                                                                        shrinkWrap: true,
-                                                                        itemCount: snapshot1.data!.data[index1].auteurs.length,
-                                                                        itemBuilder: (context,index2){
-                                                                          return Text(snapshot2.data!.data[index1].auteurs[index2].prenom+' '+snapshot2.data!.data[index1].auteurs[index2].nom+' '+snapshot2.data!.data[index1].auteurs[index2].stat.toString());                                            
-                                                                        }
-                                                                        );
-                                                                    } else if(snapshot.hasError){
-                                                                      return Text(serverError+"\n"+snapshot.error.toString());
-                                                                  }
-                                                                  return SizedBox(
-                                                                    height: MediaQuery.of(context).size.height / 1.3,
-                                                                    child: const Center(
-                                                                      child: CircularProgressIndicator(),
-                                                                    ),
-                                                                  );
-                                                                  }
-                                                                  ),
-                                                            ),
-                                                          const Padding(
-                                                            padding: EdgeInsets.only(bottom: 15),
-                                                          ),
-                                                          Align(
-                                                            alignment: Alignment.centerLeft,
-                                                            child: Text('Date de publication: '+snapshot1.data!.data[index1].datePublication, textAlign: TextAlign.left,)
-                                                          ),
-                                                          ],
-                                                        ),
-                                                      );
-                                                    }
-                                                    );
-                                                }else if(snapshot.hasError){
-                                                  return Center(child:Text(serverError+"\n"+snapshot.error.toString()));
-                                                }
-                                                return SizedBox(
-                                                  height: MediaQuery.of(context).size.height / 1.3,
-                                                  child: const Center(
-                                                    child: CircularProgressIndicator(),
-                                                  ),
-                                                );
-                                              }
-                                              ),
-    
-                                          ],
-                                        ),
-                                        ),
-                                    ),
-                                ],
-                              );
-                              },
-                            );
-                            } else if(snapshot.hasError){
-                              return Center(child:Text(serverError+"\n"+snapshot.error.toString()));
-                            }
-                            return SizedBox(
-                              height: MediaQuery.of(context).size.height / 1.3,
-                              child: const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                        }
-                        ),
+          bottomNavigationBar: BottomNavigationBar(
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.black,
+            currentIndex: _selectedIndex,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+              BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+              BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
             ],
-          )
+            onTap: _onItemTapped,
+            ),
+            body: Column(
+              // scrollDirection: Axis.vertical,
+              // shrinkWrap: true,
+              children: [
+                CarouselSlider(
+                 options: CarouselOptions(
+                   height: 120,
+                   aspectRatio: 2.0,
+                   enlargeCenterPage: true,
+                   enableInfiniteScroll: false,
+                   initialPage: 2,
+                   autoPlay: true,
+                 ),
+                   items: imageSliders,
+                 ),
+                 Text("Sommaire-Contents-Sumario", style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 25.0,)), textAlign: TextAlign.center,),
+                  Expanded(
+                    child: FutureBuilder<Fascicule>(
+                            future: getSommaires(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return ListView.builder(
+                                  itemCount: snapshot.data!.data[0].sommaires.length,
+                                  physics: const ClampingScrollPhysics(),
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.all(8),
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context,index) {
+                                  return ListView(
+                                    shrinkWrap: true,
+                                    physics: const ClampingScrollPhysics(),
+                                    children: [
+                                      Text(snapshot.data!.data[0].sommaires[index].titre, style: GoogleFonts.ibarraRealNova(textStyle: const TextStyle(fontSize: 20)),textAlign: TextAlign.left,),
+                                      Card(
+                                        child:Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ListView(
+                                              physics: const ClampingScrollPhysics(),
+                                            shrinkWrap: true,
+                                              children: <Widget>[
+                                                FutureBuilder<Article>(
+                                                  future: getArticles(widget.idFascicule,snapshot.data!.data[0].sommaires[index].idSommaire),
+                                                  builder: (context,snapshot1){
+                                                    if (snapshot1.hasData) {
+                                                      return ListView.builder(
+                                                        shrinkWrap: true,
+                                                        physics: const ClampingScrollPhysics(),
+                                                        itemCount: snapshot1.data!.data.length,
+                                                        itemBuilder: (context,index1){
+                                                          return Card(
+                                                            color: const Color.fromARGB(248, 238, 241, 245),
+                                                            child: ListView(
+                                                              shrinkWrap: true,
+                                                              physics: const ClampingScrollPhysics(),
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                  Expanded(
+                                                                    flex: 4,
+                                                                    child: InkWell(
+                                                                      onTap: () async{ 
+                                                                        showDialog(context: context, builder: (context){
+                                                                            return Center(
+                                                                              child:Column(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: const[
+                                                                                  CircularProgressIndicator(),
+                                                                                  Text("Un instant, nous chargeons le fichier", textAlign: TextAlign.center,
+                                                                                      style: TextStyle(color: Color.fromARGB(255, 35, 218, 193), fontSize: 20),),
+                                                                                
+                                                                                ],
+                                                                              ) ,
+                                                                            );
+                                                                          });
+                                                                          final url=rootURL+'/Downloads/'+snapshot1.data!.data[index1].lienTelechargement;
+                                                                          final file = await PDFApi.loadNetwork(url);
+                                                                          Navigator.push(
+                                                                            context,
+                                                                            MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                                                                          );
+                                                                        //  Navigator.of(context).pop();
+                                                                      },
+                                                                      child: Text(snapshot1.data!.data[index1].titre, textAlign: TextAlign.left,
+                                                                        style: const TextStyle(color:Color(0xff2796bd)),
+                                                                        ),
+                                                                      ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Text(snapshot1.data!.data[index1].nbrePage, textAlign: TextAlign.right),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              const Padding(
+                                                                padding: EdgeInsets.only(bottom: 10),
+                                                              ),
+                                                              Align(
+                                                                child: FutureBuilder<Article>(
+                                                                      future: getArticles(widget.idFascicule,snapshot.data!.data[0].sommaires[index].idSommaire),
+                                                                      builder: (context,snapshot2){
+                                                                        if (snapshot2.hasData) {
+                                                                          return ListView.builder(
+                                                                            shrinkWrap: true,
+                                                                            physics: const ClampingScrollPhysics(),
+                                                                            itemCount: snapshot1.data!.data[index1].auteurs.length,
+                                                                            itemBuilder: (context,index2){
+                                                                              return Text(snapshot2.data!.data[index1].auteurs[index2].prenom+' '+snapshot2.data!.data[index1].auteurs[index2].nom+' '+snapshot2.data!.data[index1].auteurs[index2].stat.toString());                                            
+                                                                            }
+                                                                            );
+                                                                        } else if(snapshot.hasError){
+                                                                          return Text(serverError+"\n"+snapshot.error.toString());
+                                                                      }
+                                                                      return SizedBox(
+                                                                        height: MediaQuery.of(context).size.height / 1.3,
+                                                                        child: const Center(
+                                                                          child: CircularProgressIndicator(),
+                                                                        ),
+                                                                      );
+                                                                      }
+                                                                      ),
+                                                                ),
+                                                              const Padding(
+                                                                padding: EdgeInsets.only(bottom: 15),
+                                                              ),
+                                                              Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Text('Date de publication: '+snapshot1.data!.data[index1].datePublication, textAlign: TextAlign.left,)
+                                                              ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        }
+                                                        );
+                                                    }else if(snapshot.hasError){
+                                                      return Center(child:Text(serverError+"\n"+snapshot.error.toString()));
+                                                    }
+                                                    return SizedBox(
+                                                      height: MediaQuery.of(context).size.height / 1.3,
+                                                      child: const Center(
+                                                        child: CircularProgressIndicator(),
+                                                      ),
+                                                    );
+                                                  }
+                                                  ),
+                        
+                                              ],
+                                            ),
+                                            ),
+                                        ),
+                                    ],
+                                  );
+                                  },
+                                );
+                                } else if(snapshot.hasError){
+                                  return Center(child:Text(serverError+"\n"+snapshot.error.toString()));
+                                }
+                                return SizedBox(
+                                  height: MediaQuery.of(context).size.height / 1.3,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                            }
+                            ),
+                  ),
+              ],
+            )
+      ),
     );
   }
   void _onItemTapped(int index) {

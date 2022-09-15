@@ -35,281 +35,283 @@ class _ArchivePageState extends State<ArchivePage> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      drawer: const NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.archive, style: GoogleFonts.ibarraRealNova(),),
-        centerTitle: true,
-        backgroundColor: const Color(0xff3b5998),
-        actions: const [LanguagePickerWidget()],
-      ),
-      resizeToAvoidBottomInset: false,
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ],
-        onTap: _onItemTapped,
+   return SafeArea(
+     child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.archive, style: GoogleFonts.ibarraRealNova(),),
+          centerTitle: true,
+          backgroundColor: const Color(0xff3b5998),
+          actions: const [LanguagePickerWidget()],
         ),
-        body: GridView.count(
-        primary: false,
-        padding: const EdgeInsets.all(19),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-        childAspectRatio: (200 / 350),
-        children: <Widget>[
-            Container(
+        resizeToAvoidBottomInset: false,
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          currentIndex: _selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+          ],
+          onTap: _onItemTapped,
+          ),
+          body: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(19),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+          childAspectRatio: (200 / 350),
+          children: <Widget>[
+              Container(
+              padding: const EdgeInsets.all(19),
+              decoration: BoxDecoration(border: Border.all(),),
+              child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RecentArchives()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/cover2020.gif"),),
+                        Text("(2020-2021)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            decoration: BoxDecoration(border: Border.all(),),
+            padding: const EdgeInsets.all(19),
+            // color: Colors.teal[100],
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive20102019()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris-Tamuda ", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/2001-2.png"),),
+                        Text("(2010-2019)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(19),
+            // color: Colors.teal[300],
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive20002009()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/2001-2.png"),),
+                        Text("(2000-2009)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
             padding: const EdgeInsets.all(19),
             decoration: BoxDecoration(border: Border.all(),),
             child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const RecentArchives()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/cover2020.gif"),),
-                      Text("(2020-2021)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          decoration: BoxDecoration(border: Border.all(),),
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[100],
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive20102019()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda ", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/2001-2.png"),),
-                      Text("(2010-2019)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[300],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive20002009()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/2001-2.png"),),
-                      Text("(2000-2009)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19901999()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1991.jpg"),),
-                      Text("(1990-1999)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[400],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19801989()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1980-81.png"),),
-                      Text("(1980-1989)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[400],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19701979()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1972.png"),),
-                      Text("(1970-1979)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[300],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19601969()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1966.png"),),
-                      Text("(1960-1969)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19501959()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1952ht.png"),),
-                      Text("(1950-1959)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19401949()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1943ht.jpg"),fit: BoxFit.fill,),
-                      Text("(1940-1949)\n", textAlign: TextAlign.center,),
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(21),
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19301939()),
-                    );
-                    },
-                    child: Column(children: const[
-                      Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image: AssetImage("assets/images/1931ht.jpg"),),
-                      Text("(1930-1939)\n", textAlign: TextAlign.center,),
-
-                    ]),
-                ),
-              ],
-            ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(19),
-          // color: Colors.teal[400],
-          decoration: BoxDecoration(border: Border.all(),),
-          child: ListView(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Archive19201929()),
-                    );
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children:const [
-                      Text("Hespéris", textAlign: TextAlign.center,),
-                      Image(image:  AssetImage("assets/images/1921ht.jpg"),),
-                      Text("(1921-1929)", textAlign: TextAlign.center,),
-
-                    ],
-                    
-                    ),
-                ),
-              ],
-            ),
-        ),
-      ],
-    ),
-    );
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19901999()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/1991.jpg"),),
+                        Text("(1990-1999)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(19),
+            // color: Colors.teal[400],
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19801989()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/1980-81.png"),),
+                        Text("(1980-1989)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(19),
+            // color: Colors.teal[400],
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19701979()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/1972.png"),),
+                        Text("(1970-1979)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(19),
+            // color: Colors.teal[300],
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19601969()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris-Tamuda", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/1966.png"),),
+                        Text("(1960-1969)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+   
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(19),
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19501959()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/1952ht.png"),),
+                        Text("(1950-1959)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(19),
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19401949()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/1943ht.jpg"),fit: BoxFit.fill,),
+                        Text("(1940-1949)\n", textAlign: TextAlign.center,),
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(21),
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19301939()),
+                      );
+                      },
+                      child: Column(children: const[
+                        Text("Hespéris", textAlign: TextAlign.center,),
+                        Image(image: AssetImage("assets/images/1931ht.jpg"),),
+                        Text("(1930-1939)\n", textAlign: TextAlign.center,),
+   
+                      ]),
+                  ),
+                ],
+              ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(19),
+            // color: Colors.teal[400],
+            decoration: BoxDecoration(border: Border.all(),),
+            child: ListView(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Archive19201929()),
+                      );
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children:const [
+                        Text("Hespéris", textAlign: TextAlign.center,),
+                        Image(image:  AssetImage("assets/images/1921ht.jpg"),),
+                        Text("(1921-1929)", textAlign: TextAlign.center,),
+   
+                      ],
+                      
+                      ),
+                  ),
+                ],
+              ),
+          ),
+        ],
+      ),
+      ),
+   );
   }
   void _onItemTapped(int index) {
     setState(() {

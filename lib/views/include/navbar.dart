@@ -15,65 +15,67 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Container(
-        color:const Color(0xff3b5998),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget> [
-           const Image(image: AssetImage('assets/images/logo-hespéris.png')),
-             const SizedBox(
-              height: 48,
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.accueil,
-              icon: Icons.home,
-              onClicked: ()=>selectedItem(context, 0),
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.a_propos,
-              icon: Icons.more_horiz,
-              onClicked: ()=>selectedItem(context, 1),
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.comiteEditorial,
-              icon: Icons.people,
-              onClicked: ()=>selectedItem(context, 2),
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.recommandation,
-              icon: Icons.info,
-              onClicked: ()=>selectedItem(context, 3),
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.titreEthique,
-              icon: Icons.publish,
-              onClicked: ()=>selectedItem(context, 4),
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.archive,
-              icon: Icons.archive,
-              onClicked: ()=>selectedItem(context, 5),
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.derniersVolumes,
-              icon: Icons.archive,
-              onClicked: ()=>selectedItem(context, 6),
-            ),
-            buildMenuItem(
-              text: AppLocalizations.of(context)!.contact,
-              icon: Icons.contacts,
-              onClicked: ()=>selectedItem(context, 7),
-            ),
-            const SizedBox(height: 24,),
-            const Divider(color: Colors.white,),
-            buildMenuItem(
-              text: '#hesperistamuda',
-              icon: Icons.facebook,
-              onClicked: ()=>launchUrl(Uri.parse('https://web.facebook.com/hesperistamudaOfficiel')),
-            ),
-            
-          ],
+    return SafeArea(
+      child: Drawer(
+        child: Container(
+          color:const Color(0xff3b5998),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget> [
+             const Image(image: AssetImage('assets/images/logo-hespéris.png')),
+               const SizedBox(
+                height: 48,
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.accueil,
+                icon: Icons.home,
+                onClicked: ()=>selectedItem(context, 0),
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.a_propos,
+                icon: Icons.more_horiz,
+                onClicked: ()=>selectedItem(context, 1),
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.comiteEditorial,
+                icon: Icons.people,
+                onClicked: ()=>selectedItem(context, 2),
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.recommandation,
+                icon: Icons.info,
+                onClicked: ()=>selectedItem(context, 3),
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.titreEthique,
+                icon: Icons.publish,
+                onClicked: ()=>selectedItem(context, 4),
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.archive,
+                icon: Icons.archive,
+                onClicked: ()=>selectedItem(context, 5),
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.derniersVolumes,
+                icon: Icons.archive,
+                onClicked: ()=>selectedItem(context, 6),
+              ),
+              buildMenuItem(
+                text: AppLocalizations.of(context)!.contact,
+                icon: Icons.contacts,
+                onClicked: ()=>selectedItem(context, 7),
+              ),
+              const SizedBox(height: 24,),
+              const Divider(color: Colors.white,),
+              buildMenuItem(
+                text: '#hesperistamuda',
+                icon: Icons.facebook,
+                onClicked: ()=>launchUrl(Uri.parse('https://web.facebook.com/hesperistamudaOfficiel')),
+              ),
+              
+            ],
+          ),
         ),
       ),
     );

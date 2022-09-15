@@ -29,112 +29,116 @@ class _ArchiveListeState extends State<ArchiveListe> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: Text(widget.volNom, style: GoogleFonts.ibarraRealNova(),),
-        centerTitle: true,
-        backgroundColor: const Color(0xff3b5998),
-        actions: const [LanguagePickerWidget()],
-      ),
-      resizeToAvoidBottomInset: false,
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ],
-        onTap: _onItemTapped,
+    return SafeArea(
+      child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: Text(widget.volNom, style: GoogleFonts.ibarraRealNova(),),
+          centerTitle: true,
+          backgroundColor: const Color(0xff3b5998),
+          actions: const [LanguagePickerWidget()],
         ),
-        body:FutureBuilder<Fascicule>(
-                future: getFascicules(widget.idVolume),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return GridView.builder(
-                      itemBuilder: (context, index) {
-                            return GestureDetector(
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(border: Border.all(),),
-                                  child: ListView(
-                                    children: [
-                                      InkWell(
-                                        onTap: (){
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => ArticleList(
-                                              idFascicule: snapshot.data!.data[index].idFascicule, 
-                                              titreFascicule: snapshot.data!.data[index].nom+' '+snapshot.data!.data[index].numero+' ('+snapshot.data!.data[index].anne+')',)),
-                                          );
-                                          },
-                                          onDoubleTap: (){
-                                          selectedItem(context, 0);
-                                          },
-                                          child: Column(
-                                            children:[
-                                            Text(snapshot.data!.data[index].nom+' '+snapshot.data!.data[index].numero, 
-                                            textAlign: TextAlign.center),
-                                            FutureBuilder<Fascicule>(
-                                              future: getFascicules(widget.idVolume),
-                                              builder: (context,snapshot1){
-                                                if (snapshot1.hasData) {
-                                                  return ListView.builder(
-                                                    shrinkWrap: true,
-                                                    itemCount: 1,
-                                                    itemBuilder: (context,index1){
-                                                      return snapshot.data!.data[index].vignettes[index1].type=='jaune' ?
-                                                      Image.network(
-                                                        rootURL+'/'+snapshot.data!.data[index].vignettes[index1].path,
-                                                        width: 300,
-                                                        height:250
-                                                      ): Container();
-                                                    }
-                                                    );
-                                                } else if(snapshot.hasError){
-                                                  return Text(serverError+"\n"+snapshot.error.toString());
-                                              }
-                                              return SizedBox(
-                                                height: MediaQuery.of(context).size.height / 1.3,
-                                                child: const Center(
-                                                  child: CircularProgressIndicator(),
+        resizeToAvoidBottomInset: false,
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          currentIndex: _selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+          ],
+          onTap: _onItemTapped,
+          ),
+          body:FutureBuilder<Fascicule>(
+                  future: getFascicules(widget.idVolume),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return GridView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                              return GestureDetector(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(border: Border.all(),),
+                                    child: ListView(
+                                      children: [
+                                        InkWell(
+                                          onTap: (){
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => ArticleList(
+                                                idFascicule: snapshot.data!.data[index].idFascicule, 
+                                                titreFascicule: snapshot.data!.data[index].nom+' '+snapshot.data!.data[index].numero+' ('+snapshot.data!.data[index].anne+')',)),
+                                            );
+                                            },
+                                            onDoubleTap: (){
+                                            selectedItem(context, 0);
+                                            },
+                                            child: Column(
+                                              children:[
+                                              Text(snapshot.data!.data[index].nom+' '+snapshot.data!.data[index].numero, 
+                                              textAlign: TextAlign.center),
+                                              FutureBuilder<Fascicule>(
+                                                future: getFascicules(widget.idVolume),
+                                                builder: (context,snapshot1){
+                                                  if (snapshot1.hasData) {
+                                                    return ListView.builder(
+                                                      shrinkWrap: true,
+                                                      physics: const ClampingScrollPhysics(),
+                                                      itemCount: 1,
+                                                      itemBuilder: (context,index1){
+                                                        return snapshot.data!.data[index].vignettes[index1].type=='jaune' ?
+                                                        Image.network(
+                                                          rootURL+'/'+snapshot.data!.data[index].vignettes[index1].path,
+                                                          width: 300,
+                                                          height:250
+                                                        ): Container();
+                                                      }
+                                                      );
+                                                  } else if(snapshot.hasError){
+                                                    return Text(serverError+"\n"+snapshot.error.toString());
+                                                }
+                                                return SizedBox(
+                                                  height: MediaQuery.of(context).size.height / 1.3,
+                                                  child: const Center(
+                                                    child: CircularProgressIndicator(),
+                                                  ),
+                                                );
+                                                }
                                                 ),
-                                              );
-                                              }
-                                              ),
-                                            Text(snapshot.data!.data[index].anne, textAlign: TextAlign.center,),
-                                          ]),
-                                      ),
-                                    ],
-                                  ),
-                              ),
-                        );
-                      },
-                      itemCount: snapshot.data!.data.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: (200 / 350),
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        crossAxisCount: 2,
+                                              Text(snapshot.data!.data[index].anne, textAlign: TextAlign.center,),
+                                            ]),
+                                        ),
+                                      ],
+                                    ),
+                                ),
+                          );
+                        },
+                        itemCount: snapshot.data!.data.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: (200 / 350),
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 2,
+                        ),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(20),
+                        scrollDirection: Axis.vertical,
+                      );
+                    } else if(snapshot.hasError){
+                      return Text(serverError+"\n"+snapshot.error.toString());
+                    }
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.3,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
                       ),
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(20),
-                      scrollDirection: Axis.vertical,
                     );
-                  } else if(snapshot.hasError){
-                    return Text(serverError+"\n"+snapshot.error.toString());
-                  }
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.3,
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                },
-              ),
-        );
+                  },
+                ),
+          ),
+    );
   }
   Future<Fascicule> getFascicules(var idVolume) async{
     final response = await http.get(Uri.parse(rootURL+'/api/archive/$idVolume'));

@@ -41,71 +41,73 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   @override
   Widget build(BuildContext context) {
     final text = '${indexPage + 1} of $pages';
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff3b5998),
-        title: Text(widget.file.path.split('/').last),
-        actions: pages >= 2
-            ? [
-                Center(
-                  child:Row(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await _downloadAndSaveFileToStorage(widget.fileUrl, widget.file.path.split('/').last);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Téléchargemnt terminé, votre fichier se trouve dans Téléchargements ',
-                                style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xff3b5998),
+          title: Text(widget.file.path.split('/').last),
+          actions: pages >= 2
+              ? [
+                  Center(
+                    child:Row(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await _downloadAndSaveFileToStorage(widget.fileUrl, widget.file.path.split('/').last);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Téléchargemnt terminé, votre fichier se trouve dans Téléchargements ',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
-                            ),
-                          );
-                        }, 
-                        icon: const Icon(Icons.download)),
-                      InkWell(
-                        child: Text(text, textDirection: TextDirection.ltr,),
-                        onTap: () async{
-                          final pageNumber = await search();
-                          if (pageNumber==null||pageNumber.isNegative) {
-                            return;
-                          } else {
-                            controller.setPage(pageNumber);
-                          }
-                        },
-                      ),
-                    ],
+                            );
+                          }, 
+                          icon: const Icon(Icons.download)),
+                        InkWell(
+                          child: Text(text, textDirection: TextDirection.ltr,),
+                          onTap: () async{
+                            final pageNumber = await search();
+                            if (pageNumber==null||pageNumber.isNegative) {
+                              return;
+                            } else {
+                              controller.setPage(pageNumber);
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    
+                    ),
+                  IconButton(
+                    icon: const Icon(Icons.chevron_left, size: 32),
+                    onPressed: () {
+                      final page = indexPage == 0 ? pages : indexPage - 1;
+                      controller.setPage(page);
+                    },
                   ),
-                  
+                  IconButton(
+                    icon: const Icon(Icons.chevron_right, size: 32),
+                    onPressed: () {
+                      final page = indexPage == pages - 1 ? 0 : indexPage + 1;
+                      controller.setPage(page);
+                    },
                   ),
-                IconButton(
-                  icon: const Icon(Icons.chevron_left, size: 32),
-                  onPressed: () {
-                    final page = indexPage == 0 ? pages : indexPage - 1;
-                    controller.setPage(page);
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.chevron_right, size: 32),
-                  onPressed: () {
-                    final page = indexPage == pages - 1 ? 0 : indexPage + 1;
-                    controller.setPage(page);
-                  },
-                ),
-              ]
-            : null,
-      ),
-      body: PDFView(
-        filePath: widget.file.path,
-        // autoSpacing: false,
-        // swipeHorizontal: true,
-        // pageSnap: false,
-        // pageFling: false,
-        onRender: (pages) => setState(() => this.pages = pages!),
-        onViewCreated: (controller) =>
-            setState(() => this.controller = controller),
-        onPageChanged: (indexPage, _) =>
-            setState(() => this.indexPage = indexPage!),
+                ]
+              : null,
+        ),
+        body: PDFView(
+          filePath: widget.file.path,
+          // autoSpacing: false,
+          // swipeHorizontal: true,
+          // pageSnap: false,
+          // pageFling: false,
+          onRender: (pages) => setState(() => this.pages = pages!),
+          onViewCreated: (controller) =>
+              setState(() => this.controller = controller),
+          onPageChanged: (indexPage, _) =>
+              setState(() => this.indexPage = indexPage!),
+        ),
       ),
     );
   }

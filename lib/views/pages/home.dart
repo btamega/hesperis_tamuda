@@ -20,88 +20,90 @@ class _HomePageState extends State<HomePage> {
  
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      drawer: const NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.accueil, style: GoogleFonts.ibarraRealNova(),),
-        centerTitle: true,
-        backgroundColor: const Color(0xff3b5998),
-        actions: const [LanguagePickerWidget()],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items:  const[
-           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-           BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-           BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ],
-        onTap: _onItemTapped,
+   return SafeArea(
+     child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.accueil, style: GoogleFonts.ibarraRealNova(),),
+          centerTitle: true,
+          backgroundColor: const Color(0xff3b5998),
+          actions: const [LanguagePickerWidget()],
         ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.titreHome1,
-                        style: GoogleFonts.ibarraRealNova(
-                          textStyle:const TextStyle(
-                           fontSize: 28.0,
-                           fontWeight: FontWeight.bold,
-                           color: Color(0xff3b5998),
-                        ),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                        children: <Widget> [
-                           DropCapText(
-                            AppLocalizations.of(context)!.paragraphe1 +"\n", 
-                            textDirection:setDirection() ,
-                            dropCap: DropCap(
-                            width: 100,
-                            height: 200,
-                            child: const Image(image: AssetImage('assets/images/accueil.jpeg'),),
-                            ),
-                            style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
-                        ),
-                        Text(AppLocalizations.of(context)!.paragraphe2 +"\n", 
-                            style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
-                          ),
-                        Text(AppLocalizations.of(context)!.paragraphe3 +"\n", 
-                            style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
-                          ),
-                        Text(AppLocalizations.of(context)!.paragraphe4 +"\n", 
-                            style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
-                          ),
-                        ]
-                        )
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          currentIndex: _selectedIndex,
+          items:  const[
+             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+             BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+             BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+          ],
+          onTap: _onItemTapped,
           ),
-        ],
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 50.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.titreHome1,
+                          style: GoogleFonts.ibarraRealNova(
+                            textStyle:const TextStyle(
+                             fontSize: 28.0,
+                             fontWeight: FontWeight.bold,
+                             color: Color(0xff3b5998),
+                          ),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                          children: <Widget> [
+                             DropCapText(
+                              AppLocalizations.of(context)!.paragraphe1 +"\n", 
+                              textDirection:setDirection() ,
+                              dropCap: DropCap(
+                              width: 100,
+                              height: 200,
+                              child: const Image(image: AssetImage('assets/images/accueil.jpeg'),),
+                              ),
+                              style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
+                          ),
+                          Text(AppLocalizations.of(context)!.paragraphe2 +"\n", 
+                              style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
+                            ),
+                          Text(AppLocalizations.of(context)!.paragraphe3 +"\n", 
+                              style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
+                            ),
+                          Text(AppLocalizations.of(context)!.paragraphe4 +"\n", 
+                              style: GoogleFonts.ibarraRealNova(textStyle:const TextStyle(fontSize: 20.0,),color: const Color(0xff000000)), textAlign:TextAlign.justify
+                            ),
+                          ]
+                          )
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      
       ),
-    
-    );
+   );
   }
   void _onItemTapped(int index) {
     setState(() {

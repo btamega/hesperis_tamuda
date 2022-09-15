@@ -20,62 +20,64 @@ class _SearchPageState extends State<SearchPage> {
   }
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      drawer: const NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: customSearchBar,
-        centerTitle: true,
-        backgroundColor: const Color(0xff3b5998),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-          onPressed: () {
-            setState(() {
-              if (customIcon.icon == Icons.search) {
-              customIcon = const Icon(Icons.cancel);
-              customSearchBar = const ListTile(
-              leading: Icon(
-                Icons.search,
-                color: Colors.white,
-                size: 28,
-              ),
-              title: TextField(
-                decoration: InputDecoration(
-                hintText: 'Tapez votre recherche...',
-                hintStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontStyle: FontStyle.italic,
+   return SafeArea(
+     child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: customSearchBar,
+          centerTitle: true,
+          backgroundColor: const Color(0xff3b5998),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+            onPressed: () {
+              setState(() {
+                if (customIcon.icon == Icons.search) {
+                customIcon = const Icon(Icons.cancel);
+                customSearchBar = const ListTile(
+                leading: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 28,
                 ),
-                border: InputBorder.none,
+                title: TextField(
+                  decoration: InputDecoration(
+                  hintText: 'Tapez votre recherche...',
+                  hintStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontStyle: FontStyle.italic,
+                  ),
+                  border: InputBorder.none,
+                  ),
+                  style: TextStyle(
+                  color: Colors.white,
+                  ),
                 ),
-                style: TextStyle(
-                color: Colors.white,
-                ),
-              ),
-              );
-              } else {
-              customIcon = const Icon(Icons.search);
-              customSearchBar = const Text('SEARCH');
-              }
-              });
-          },
-          icon: customIcon,
-          )
-          ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ],
-        onTap: _onItemTapped,
+                );
+                } else {
+                customIcon = const Icon(Icons.search);
+                customSearchBar = const Text('SEARCH');
+                }
+                });
+            },
+            icon: customIcon,
+            )
+            ],
         ),
-    );
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          currentIndex: _selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+          ],
+          onTap: _onItemTapped,
+          ),
+      ),
+   );
   }
   void _onItemTapped(int index) {
     setState(() {

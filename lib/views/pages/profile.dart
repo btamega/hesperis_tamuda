@@ -7,9 +7,12 @@ import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
+import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
+
+import 'user/dashboard.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({ Key? key }) : super(key: key);
 
@@ -25,266 +28,268 @@ class _ProfilePageState extends State<ProfilePage> {
     
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      drawer: const NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: Text('PROFILE', style: GoogleFonts.ibarraRealNova(),),
-        centerTitle: true,
-        backgroundColor: const Color(0xff3b5998),
-        actions: const [LanguagePickerWidget()],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ],
-        onTap: _onItemTapped,
+   return SafeArea(
+     child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: Text('PROFILE', style: GoogleFonts.ibarraRealNova(),),
+          centerTitle: true,
+          backgroundColor: const Color(0xff3b5998),
+          actions: const [LanguagePickerWidget()],
         ),
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: double.infinity,
-            child: Stack(
-              children: [
-                const Positioned(
-                  top: 200,
-                  left: -100,
-                  child: SizedBox(
-                    width: 300,
-                    height: 200,
-                  ),
-                ),
-                const Positioned(
-                  bottom: 10,
-                  right: -10,
-                  child: SizedBox(
-                    width: 200,
-                    height: 100,
-                  ),
-                ),
-                Positioned(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 80,
-                      sigmaY: 80,
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          currentIndex: _selectedIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+          ],
+          onTap: _onItemTapped,
+          ),
+          body: SingleChildScrollView(
+            child: SizedBox(
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  const Positioned(
+                    top: 200,
+                    left: -100,
+                    child: SizedBox(
+                      width: 300,
+                      height: 200,
                     ),
-                    child: Container(),
                   ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        _logo(),
-                        _loginLabel(context),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Email",
-                              style: GoogleFonts.ibarraRealNova(
-                                textStyle: const TextStyle(
-                                  color: Color(0xff8fa1b6),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                            TextFormField(
-                              controller: _emailController,
-                              cursorColor: Colors.red,
-                              validator: (value){
-                                if(value == null || value.isEmpty){
-                                  return "Email field can not be empty";
-                                }else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
-                                  return "Your email doesn't match the email standart";
-                                }
-                                else{
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "yourname@example.com",
-                                hintStyle: GoogleFonts.ibarraRealNova(
-                                  textStyle: const TextStyle(
-                                    color: Color(0xffc5d2e1),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xffdfe8f3)),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Text(
-                              "Password",
-                              style: GoogleFonts.ibarraRealNova(
-                                textStyle: const TextStyle(
-                                  color: Color(0xff8fa1b6),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                            TextFormField(
-                              controller: _passwordController,
-                              obscureText: true,
-                              cursorColor: Colors.red,
-                              validator: (value){
-                                if(value!.isEmpty){
-                                  return "Password field can not be empty";
-                                }else{
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "yourpassword",
-                                hintStyle: GoogleFonts.ibarraRealNova(
-                                  textStyle: const TextStyle(
-                                    color: Color(0xffc5d2e1),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xffdfe8f3)),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
+                  const Positioned(
+                    bottom: 10,
+                    right: -10,
+                    child: SizedBox(
+                      width: 200,
+                      height: 100,
+                    ),
+                  ),
+                  Positioned(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 80,
+                        sigmaY: 80,
+                      ),
+                      child: Container(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 50,
                           ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: const BoxDecoration(
-                          color:  Color(0xff3b5998),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: TextButton(
-                          onPressed: () async {
-
-                          if (_formKey.currentState!.validate()) {
-                            Statut statut;
-                            try {
-                              statut=await authenticate(
-                              _emailController.text,
-                              _passwordController.text
-                            );
-                            if (statut.error != null && statut.error!.isNotEmpty) {
-                            AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.ERROR,
-                            animType: AnimType.RIGHSLIDE,
-                            headerAnimationLoop: true,
-                            title: 'Error',
-                            desc:statut.error,
-                            btnOkOnPress: () {},
-                            btnOkColor: Colors.red,
-                            ).show();
-                          } else if(statut.error == null && statut.success!.isNotEmpty) {
-                            AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.SUCCES,
-                            headerAnimationLoop: true,
-                            animType: AnimType.BOTTOMSLIDE,
-                            title: 'SUCCESS',
-                            desc:statut.success,
-                            btnOkOnPress: () {
-                              Navigator.of(context).pop();
-                            },
-                            ).show();
-                          }
-                          const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                            } catch (e) {
+                          _logo(),
+                          _loginLabel(context),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Email",
+                                style: GoogleFonts.ibarraRealNova(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xff8fa1b6),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              TextFormField(
+                                controller: _emailController,
+                                cursorColor: Colors.red,
+                                validator: (value){
+                                  if(value == null || value.isEmpty){
+                                    return "Email field can not be empty";
+                                  }else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
+                                    return "Your email doesn't match the email standart";
+                                  }
+                                  else{
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "yourname@example.com",
+                                  hintStyle: GoogleFonts.ibarraRealNova(
+                                    textStyle: const TextStyle(
+                                      color: Color(0xffc5d2e1),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  enabledBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xffdfe8f3)),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                "Password",
+                                style: GoogleFonts.ibarraRealNova(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xff8fa1b6),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              TextFormField(
+                                controller: _passwordController,
+                                obscureText: true,
+                                cursorColor: Colors.red,
+                                validator: (value){
+                                  if(value!.isEmpty){
+                                    return "Password field can not be empty";
+                                  }else{
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "yourpassword",
+                                  hintStyle: GoogleFonts.ibarraRealNova(
+                                    textStyle: const TextStyle(
+                                      color: Color(0xffc5d2e1),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  enabledBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xffdfe8f3)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                            ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: const BoxDecoration(
+                            color:  Color(0xff3b5998),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          child: TextButton(
+                            onPressed: () async {
+   
+                            if (_formKey.currentState!.validate()) {
+                              Statut statut;
+                              try {
+                                statut=await authenticate(
+                                _emailController.text,
+                                _passwordController.text
+                              );
+                              if (statut.error != null && statut.error!.isNotEmpty) {
                               AwesomeDialog(
                               context: context,
                               dialogType: DialogType.ERROR,
                               animType: AnimType.RIGHSLIDE,
                               headerAnimationLoop: true,
                               title: 'Error',
-                              desc:e.toString(),
+                              desc:statut.error,
+                              btnOkOnPress: () {},
+                              btnOkColor: Colors.red,
+                              ).show();
+                            } else if(statut.error == null && statut.success!.isNotEmpty) {
+                              AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.SUCCES,
+                              headerAnimationLoop: true,
+                              animType: AnimType.BOTTOMSLIDE,
+                              title: 'SUCCESS',
+                              desc:statut.success,
+                              btnOkOnPress: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDashboard(user: statut.user as User,),));
+                              },
+                              ).show();
+                            }
+                            const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                              } catch (e) {
+                                AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.ERROR,
+                                animType: AnimType.RIGHSLIDE,
+                                headerAnimationLoop: true,
+                                title: 'Error',
+                                desc:e.toString(),
+                                btnOkOnPress: () {},
+                                btnOkColor: Colors.red,
+                              ).show();
+                              }
+                              
+                            } else {
+                              AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.ERROR,
+                              animType: AnimType.RIGHSLIDE,
+                              headerAnimationLoop: true,
+                              title: 'Error',
+                              desc:
+                                  'Try again !',
                               btnOkOnPress: () {},
                               btnOkColor: Colors.red,
                             ).show();
                             }
-                            
-                          } else {
-                            AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.ERROR,
-                            animType: AnimType.RIGHSLIDE,
-                            headerAnimationLoop: true,
-                            title: 'Error',
-                            desc:
-                                'Try again !',
-                            btnOkOnPress: () {},
-                            btnOkColor: Colors.red,
-                          ).show();
-                          }
-                          },
-                          child: Text(
-                            AppLocalizations.of(context)!.login,
-                            style: GoogleFonts.ibarraRealNova(
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 24,
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.login,
+                              style: GoogleFonts.ibarraRealNova(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 24,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                         Text(AppLocalizations.of(context)!.anyAccount, 
-                          style: GoogleFonts.ibarraRealNova(
-                            textStyle: const TextStyle(
-                              color: Color(0xff909090),
-                              fontWeight: FontWeight.w800,
-                              fontSize: 18,
-                            ),
-                            ),
+                          const SizedBox(
+                            height: 50,
                           ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        _signUpLabel(context, const Color(0xff164276)),
-                        const SizedBox(
-                          height: 35,
-                        ),
-                      ],
+                           Text(AppLocalizations.of(context)!.anyAccount, 
+                            style: GoogleFonts.ibarraRealNova(
+                              textStyle: const TextStyle(
+                                color: Color(0xff909090),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 18,
+                              ),
+                              ),
+                            ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          _signUpLabel(context, const Color(0xff164276)),
+                          const SizedBox(
+                            height: 35,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-    );
+      ),
+   );
   }
   void _onItemTapped(int index) {
     setState(() {
@@ -552,66 +557,7 @@ Widget _signUpLabel(BuildContext context, Color textColor) {
 
 
 
-Widget _loginBtn(BuildContext context) {
-  return Container(
-    width: double.infinity,
-    height: 60,
-    decoration: const BoxDecoration(
-      color:  Color(0xff3b5998),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-    ),
-    child: TextButton(
-      onPressed: () => {
-      
-      },
-      child: Text(
-        AppLocalizations.of(context)!.login,
-        style: GoogleFonts.ibarraRealNova(
-          textStyle: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w800,
-            fontSize: 24,
-          ),
-        ),
-      ),
-    ),
-  );
-}
 
-Widget _labelTextInput(String label, String hintText, bool isPassword) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        label,
-        style: GoogleFonts.ibarraRealNova(
-          textStyle: const TextStyle(
-            color: Color(0xff8fa1b6),
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-          ),
-        ),
-      ),
-      TextField(
-        obscureText: isPassword,
-        cursorColor: Colors.red,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: GoogleFonts.ibarraRealNova(
-            textStyle: const TextStyle(
-              color: Color(0xffc5d2e1),
-              fontWeight: FontWeight.w400,
-              fontSize: 20,
-            ),
-          ),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffdfe8f3)),
-          ),
-        ),
-      ),
-    ],
-  );
-}
 
 Widget _loginLabel(BuildContext context) {
   return Center(
