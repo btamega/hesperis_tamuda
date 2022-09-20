@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
+import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/user/profil.dart';
@@ -14,6 +15,7 @@ import '../ElevatedCardExample.dart';
 
 class UserDashboard extends StatefulWidget {
   final User user;
+  
   const UserDashboard({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -25,8 +27,9 @@ class _UserDashboardState extends State<UserDashboard> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: const Color(0xff3b5998),
           title: Text(
             widget.user.name,
                  style: TextStyle(color: Color.fromARGB(255, 255, 254, 254).withOpacity(1.0)),
@@ -53,24 +56,25 @@ class _UserDashboardState extends State<UserDashboard> {
                   ).show();
                 },
                 icon: Icons.logout,
-                color: Colors.blue,
+                color: Colors.red,
+
                 iconSize: 24,
                 size: 40,
               ),
             )
           ],
-          leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: CircleGradientIcon(
-                onTap: () {
+          // leading: Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: CircleGradientIcon(
+          //       onTap: () {
               
-                },
-                icon: Icons.menu,
-                color: Colors.blue,
-                iconSize: 24,
-                size: 40,
-              ),
-          ),
+          //       },
+          //       icon: Icons.menu,
+          //       color: Colors.blue,
+          //       iconSize: 24,
+          //       size: 40,
+          //     ),
+          // ),
         ),
         extendBody: true,
       body: Padding(
