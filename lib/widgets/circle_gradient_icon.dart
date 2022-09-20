@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/core/res/color.dart';
-import 'package:hesperis_tamuda/views/include/navbar.dart';
 
 class CircleGradientIcon extends StatelessWidget {
   final VoidCallback onTap;
@@ -13,7 +12,7 @@ class CircleGradientIcon extends StatelessWidget {
     required this.icon,
     required this.color,
     this.iconSize,
-    this.size, required NavigationDrawerWidget drawer,
+    this.size,
   }) : super(key: key);
 
   @override

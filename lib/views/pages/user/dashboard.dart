@@ -62,9 +62,9 @@ class _UserDashboardState extends State<UserDashboard> {
           leading: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: CircleGradientIcon(
-                // onTap: () {
+                onTap: () {
               
-                // },
+                },
                 icon: Icons.menu,
                 color: Colors.blue,
                 iconSize: 24,
