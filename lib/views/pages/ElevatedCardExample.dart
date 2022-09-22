@@ -7,31 +7,31 @@ class ElevatedCardExample extends StatelessWidget {
       title: "My profile",
       subtitle: "Check your profile now!",
       // event: "3 Events");
-      // icon: Icon(Icons.portrait),
+      icon: Icons.portrait,
   );
 
   Items item2 = new Items(
     title: "Download history",
     subtitle: "Download your history now!",
     // event: "4 Items",
-    // icon: Icon(Icons.download),
+    icon: Icons.download,
   );
   Items item3 = new Items(
     title:  "Navigation history",
     subtitle: "Check your navigation!",
     // event: "",
-  //   icon: Icon(Icons.pages),
+    icon: Icons.pages,
   );
   Items item4 = new Items(
     title: "My messages",
     subtitle: "Check your messages!",
-    // icon: Icon(Icons.message),
+    icon: Icons.message,
   );
   Items item5 = new Items(
     title: "Settings",
     subtitle: "",
     // event: "4 Items",
-  //  icon: Icon(Icons.message),
+   icon: Icons.settings,
   );
   
   @override
@@ -57,12 +57,13 @@ class ElevatedCardExample extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // Image.asset(data.icon, width: 42),
-                    SizedBox(height: 14),
+                    Icon(data.icon, size: 30, color: Colors.white),
+                    // IconData.(Icon(data.icon)),
+                    const SizedBox(height: 14),
                     Text(
                       data.title,
                       style: GoogleFonts.openSans(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -80,17 +81,6 @@ class ElevatedCardExample extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // SizedBox(height: 14),
-                    // // Text(
-                    // //   data.event,
-                    // //   style: GoogleFonts.openSans(
-                    // //     textStyle: TextStyle(
-                    // //       color: Colors.white70,
-                    // //       fontSize: 11,
-                    // //       fontWeight: FontWeight.w600,
-                    // //     ),
-                    // //   ),
-                    // // ),
                   ],
                 ),
               );
@@ -106,8 +96,8 @@ class Items {
   String title;
   String subtitle;
   // String event;
-  // String icon;
-  Items({required this.title, required this.subtitle});
+  IconData icon;
+  Items({required this.title, required this.subtitle,required this.icon});
 }
 
 
