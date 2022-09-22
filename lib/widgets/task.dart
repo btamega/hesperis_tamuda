@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/core/res/color.dart';
 
 class TaskWidget extends StatelessWidget {
-
   const TaskWidget({
     Key? key,
   }) : super(key: key);
@@ -43,9 +42,9 @@ class TaskWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "taskModel.taskName",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

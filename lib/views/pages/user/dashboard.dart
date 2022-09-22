@@ -46,7 +46,9 @@ class _UserDashboardState extends State<UserDashboard> {
                     showCloseIcon: true,
                     btnCancelOnPress: () {},
                     btnOkOnPress: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage(),));
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ));
                     },
                   ).show();
                 },
@@ -123,8 +125,7 @@ class _UserDashboardState extends State<UserDashboard> {
           bottom: 30,
           // left: 100.w / 2 - (70 / 2),
           right: 30,
-          child: 
-          CircleGradientIcon(
+          child: CircleGradientIcon(
             color: Colors.pink,
             onTap: () {},
             size: 60,
@@ -135,7 +136,6 @@ class _UserDashboardState extends State<UserDashboard> {
       ],
     );
   }
-
 
   Row _taskHeader() {
     return Row(
@@ -162,13 +162,17 @@ class _UserDashboardState extends State<UserDashboard> {
       crossAxisCount: 2,
       mainAxisSpacing: 15,
       crossAxisSpacing: 15,
-      children:  [
+      children: [
         StaggeredGridTile.count(
           crossAxisCellCount: 1,
           mainAxisCellCount: 1.3,
           child: InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfil(user: widget.user,),));
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => UserProfil(
+                  user: widget.user,
+                ),
+              ));
             },
             child: const TaskGroupContainer(
               color: Colors.pink,
@@ -182,9 +186,7 @@ class _UserDashboardState extends State<UserDashboard> {
           crossAxisCellCount: 1,
           mainAxisCellCount: 1,
           child: InkWell(
-            onTap: () {
-              
-            },
+            onTap: () {},
             child: const TaskGroupContainer(
               color: Colors.orange,
               isSmall: true,
@@ -199,7 +201,9 @@ class _UserDashboardState extends State<UserDashboard> {
           mainAxisCellCount: 1.3,
           child: InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => NavigationHistory(),));
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const NavigationHistory(),
+              ));
             },
             child: const TaskGroupContainer(
               color: Colors.green,
@@ -213,19 +217,16 @@ class _UserDashboardState extends State<UserDashboard> {
           crossAxisCellCount: 1,
           mainAxisCellCount: 1,
           child: InkWell(
-            onTap: () {
-              
-            },
+            onTap: () {},
             child: const TaskGroupContainer(
-            color: Colors.blue,
-            isSmall: true,
-            icon: Icons.message,
-            taskCount: 9,
-            taskGroup: "My messages",
+              color: Colors.blue,
+              isSmall: true,
+              icon: Icons.message,
+              taskCount: 9,
+              taskGroup: "My messages",
+            ),
           ),
         ),
-          ),
-          
       ],
     );
   }

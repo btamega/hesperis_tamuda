@@ -19,9 +19,16 @@ class Archive20102019 extends StatefulWidget {
 
 class _Archive20102019State extends State<Archive20102019> {
   int _selectedIndex = 0;
-
+  late Orientation orientation;
+  late Size size;
+  late double height;
+  late double width;
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return SafeArea(
       child: Scaffold(
         drawer: const NavigationDrawerWidget(),
@@ -46,91 +53,197 @@ class _Archive20102019State extends State<Archive20102019> {
             future: getArchives(2010, 2019),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return GridView.builder(
-                  itemCount: snapshot.data!.data.length,
-                  itemBuilder: (context, index1) {
-                    return Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
-                      child: ListView(
-                        physics: const ClampingScrollPhysics(),
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              if (int.parse(snapshot.data!.data[index1].anne) <
-                                  2016) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ArticleList(
-                                            idFascicule: snapshot
-                                                .data!
-                                                .data[index1]
-                                                .fascicules![0]
-                                                .idFascicule,
-                                            titreFascicule: snapshot
-                                                    .data!
-                                                    .data[index1]
-                                                    .fascicules![0]
-                                                    .nom +
-                                                ' ' +
-                                                snapshot.data!.data[index1]
-                                                    .fascicules![0].numero +
-                                                ' (' +
-                                                snapshot.data!.data[index1]
-                                                    .fascicules![0].anne +
-                                                ')',
-                                          )),
-                                );
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ArchiveListe(
-                                            idVolume: snapshot
-                                                .data!.data[index1].idVolume,
-                                            volNom: snapshot
-                                                    .data!.data[index1].titre +
-                                                ' ' +
-                                                snapshot.data!.data[index1]
-                                                    .nomVolume,
-                                          )),
-                                );
-                              }
-                            },
-                            child: Column(children: [
-                              Text(
-                                snapshot.data!.data[index1].titre,
-                                textAlign: TextAlign.center,
-                              ),
-                              Image.network(
-                                  rootURL +
-                                      '/' +
-                                      snapshot.data!.data[index1].cover,
-                                  width: 300,
-                                  height: 250),
-                              Text(
-                                snapshot.data!.data[index1].anne,
-                                textAlign: TextAlign.center,
-                              ),
-                            ]),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: (200 / 350),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                  ),
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(20),
-                  scrollDirection: Axis.vertical,
-                );
+                return orientation == Orientation.portrait
+                    ? GridView.builder(
+                        itemCount: snapshot.data!.data.length,
+                        itemBuilder: (context, index1) {
+                          return Container(
+                            height: height,
+                            // padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                            ),
+                            child: ListView(
+                              physics: const ClampingScrollPhysics(),
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    if (int.parse(
+                                            snapshot.data!.data[index1].anne) <
+                                        2016) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ArticleList(
+                                                  idFascicule: snapshot
+                                                      .data!
+                                                      .data[index1]
+                                                      .fascicules![0]
+                                                      .idFascicule,
+                                                  titreFascicule: snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .fascicules![0]
+                                                          .nom +
+                                                      ' ' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .fascicules![0]
+                                                          .numero +
+                                                      ' (' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .fascicules![0]
+                                                          .anne +
+                                                      ')',
+                                                )),
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ArchiveListe(
+                                                  idVolume: snapshot.data!
+                                                      .data[index1].idVolume,
+                                                  volNom: snapshot.data!
+                                                          .data[index1].titre +
+                                                      ' ' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .nomVolume,
+                                                )),
+                                      );
+                                    }
+                                  },
+                                  child: Column(children: [
+                                    Text(
+                                      snapshot.data!.data[index1].titre,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Image.network(
+                                        rootURL +
+                                            '/' +
+                                            snapshot.data!.data[index1].cover,
+                                        // width: 300,
+                                        height: 300),
+                                    Text(
+                                      snapshot.data!.data[index1].anne,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ]),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: width / (height),
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 2,
+                        ),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(20),
+                        scrollDirection: Axis.vertical,
+                      )
+                    : GridView.builder(
+                        itemCount: snapshot.data!.data.length,
+                        itemBuilder: (context, index1) {
+                          return Container(
+                            padding: const EdgeInsets.all(19),
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                            ),
+                            child: ListView(
+                              physics: const ClampingScrollPhysics(),
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    if (int.parse(
+                                            snapshot.data!.data[index1].anne) <
+                                        2016) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ArticleList(
+                                                  idFascicule: snapshot
+                                                      .data!
+                                                      .data[index1]
+                                                      .fascicules![0]
+                                                      .idFascicule,
+                                                  titreFascicule: snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .fascicules![0]
+                                                          .nom +
+                                                      ' ' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .fascicules![0]
+                                                          .numero +
+                                                      ' (' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .fascicules![0]
+                                                          .anne +
+                                                      ')',
+                                                )),
+                                      );
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ArchiveListe(
+                                                  idVolume: snapshot.data!
+                                                      .data[index1].idVolume,
+                                                  volNom: snapshot.data!
+                                                          .data[index1].titre +
+                                                      ' ' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .nomVolume,
+                                                )),
+                                      );
+                                    }
+                                  },
+                                  child: Column(children: [
+                                    Text(
+                                      snapshot.data!.data[index1].titre,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Image.network(
+                                      rootURL +
+                                          '/' +
+                                          snapshot.data!.data[index1].cover,
+                                      // width: 300,
+                                      // height: 250
+                                    ),
+                                    Text(
+                                      snapshot.data!.data[index1].anne,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ]),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: width / (height / 0.32),
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 3,
+                        ),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(20),
+                        scrollDirection: Axis.vertical,
+                      );
               } else if (snapshot.hasError) {
                 return Center(
                     child:
