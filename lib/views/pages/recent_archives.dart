@@ -48,142 +48,153 @@ class _RecentArchivesState extends State<RecentArchives> {
           ],
           onTap: _onItemTapped,
         ),
-        body: FutureBuilder<Volume>(
-            future: fetchVolume(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return orientation == Orientation.portrait
-                    ? GridView.builder(
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: snapshot.data!.data.length,
-                        itemBuilder: (context, index1) {
-                          return Container(
-                            height: height,
-                            // padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                            ),
-                            child: ListView(
-                              physics: const ClampingScrollPhysics(),
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ArchiveListe(
-                                                idVolume: snapshot.data!
-                                                    .data[index1].idVolume,
-                                                volNom: snapshot.data!
-                                                        .data[index1].titre +
-                                                    ' ' +
-                                                    snapshot.data!.data[index1]
-                                                        .nomVolume,
-                                              )),
-                                    );
-                                  },
-                                  child: Column(children: [
-                                    Text(
-                                      snapshot.data!.data[index1].titre,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Image.network(
-                                      rootURL +
-                                          '/' +
-                                          snapshot.data!.data[index1].cover,
-                                      // width: 300,
-                                      height: 300,
-                                    ),
-                                    Text(
-                                      snapshot.data!.data[index1].anne,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ]),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: width / (height),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          crossAxisCount: 2,
-                        ),
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(20),
-                        scrollDirection: Axis.vertical,
-                      )
-                    : GridView.builder(
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: snapshot.data!.data.length,
-                        itemBuilder: (context, index1) {
-                          return Container(
-                            padding: const EdgeInsets.all(19),
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                            ),
-                            child: ListView(
-                              physics: const ClampingScrollPhysics(),
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ArchiveListe(
-                                                idVolume: snapshot.data!
-                                                    .data[index1].idVolume,
-                                                volNom: snapshot.data!
-                                                        .data[index1].titre +
-                                                    ' ' +
-                                                    snapshot.data!.data[index1]
-                                                        .nomVolume,
-                                              )),
-                                    );
-                                  },
-                                  child: Column(children: [
-                                    Text(
-                                      snapshot.data!.data[index1].titre,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Image.network(
-                                      rootURL +
-                                          '/' +
-                                          snapshot.data!.data[index1].cover,
-                                      // // width: 300,
-                                      // height: height / 2.7,
-                                    ),
-                                    Text(
-                                      snapshot.data!.data[index1].anne,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ]),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: width / (height / 0.32),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          crossAxisCount: 3,
-                        ),
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(20),
-                        scrollDirection: Axis.vertical,
-                      );
-              } else if (snapshot.hasError) {
-                return Center(
-                    child:
-                        Text(serverError + "\n" + snapshot.error.toString()));
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await fetchVolume();
+          },
+          child: FutureBuilder<Volume>(
+              future: fetchVolume(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return orientation == Orientation.portrait
+                      ? GridView.builder(
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: snapshot.data!.data.length,
+                          itemBuilder: (context, index1) {
+                            return Container(
+                              height: height,
+                              // padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                              ),
+                              child: ListView(
+                                physics: const ClampingScrollPhysics(),
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ArchiveListe(
+                                                  idVolume: snapshot.data!
+                                                      .data[index1].idVolume,
+                                                  volNom: snapshot.data!
+                                                          .data[index1].titre +
+                                                      ' ' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .nomVolume,
+                                                )),
+                                      );
+                                    },
+                                    child: Column(children: [
+                                      Text(
+                                        snapshot.data!.data[index1].titre,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Image.network(
+                                        rootURL +
+                                            '/' +
+                                            snapshot.data!.data[index1].cover,
+                                        // width: 300,
+                                        height: 300,
+                                      ),
+                                      Text(
+                                        snapshot.data!.data[index1].anne,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ]),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: width / (height),
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            crossAxisCount: 2,
+                          ),
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(20),
+                          scrollDirection: Axis.vertical,
+                        )
+                      : GridView.builder(
+                          physics: const ClampingScrollPhysics(),
+                          itemCount: snapshot.data!.data.length,
+                          itemBuilder: (context, index1) {
+                            return Container(
+                              padding: const EdgeInsets.all(19),
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                              ),
+                              child: ListView(
+                                physics: const ClampingScrollPhysics(),
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ArchiveListe(
+                                                  idVolume: snapshot.data!
+                                                      .data[index1].idVolume,
+                                                  volNom: snapshot.data!
+                                                          .data[index1].titre +
+                                                      ' ' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index1]
+                                                          .nomVolume,
+                                                )),
+                                      );
+                                    },
+                                    child: Column(children: [
+                                      Text(
+                                        snapshot.data!.data[index1].titre,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Image.network(
+                                        rootURL +
+                                            '/' +
+                                            snapshot.data!.data[index1].cover,
+                                        // // width: 300,
+                                        // height: height / 2.7,
+                                      ),
+                                      Text(
+                                        snapshot.data!.data[index1].anne,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ]),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: width / (height / 0.32),
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            crossAxisCount: 3,
+                          ),
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(20),
+                          scrollDirection: Axis.vertical,
+                        );
+                } else if (snapshot.hasError) {
+                  return Center(
+                      child:
+                          Text(serverError + "\n" + snapshot.error.toString()));
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
+        ),
       ),
     );
   }
