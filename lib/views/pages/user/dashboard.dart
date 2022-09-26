@@ -1,15 +1,11 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
-import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
-import 'package:hesperis_tamuda/views/pages/user/profil.dart';
 import 'package:hesperis_tamuda/widgets/circle_gradient_icon.dart';
-import 'package:hesperis_tamuda/widgets/task_group.dart';
 
-import '../ElevatedCardExample.dart';
+import '../elevatedCardExample.dart';
 
 
 
@@ -32,7 +28,7 @@ class _UserDashboardState extends State<UserDashboard> {
           backgroundColor: const Color(0xff3b5998),
           title: Text(
             widget.user.name,
-                 style: TextStyle(color: Color.fromARGB(255, 255, 254, 254).withOpacity(1.0)),
+                 style: TextStyle(color: const Color.fromARGB(255, 255, 254, 254).withOpacity(1.0)),
           ),
           elevation: 0,
           actions: [
@@ -80,7 +76,7 @@ class _UserDashboardState extends State<UserDashboard> {
       body: Padding(
       padding: const EdgeInsets.only(top: 60.0),
             // Spacer(),
-            child:ElevatedCardExample(),
+            child:elevatedCardExample(user: widget.user,),
              
   ),
       ),

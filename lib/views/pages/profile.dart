@@ -7,7 +7,6 @@ import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';

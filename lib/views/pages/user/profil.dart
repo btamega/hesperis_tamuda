@@ -1,14 +1,13 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserProfil extends StatefulWidget {
   final User user;
-  const UserProfil({ Key? key, required this.user }) : super(key: key);
+  const UserProfil( { Key? key, required this.user }) : super(key: key);
 
   @override
   State<UserProfil> createState() => _UserProfilState();

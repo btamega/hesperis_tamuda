@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 
 class NavigationHistory extends StatefulWidget {
+  const NavigationHistory({Key? key}) : super(key: key);
+
   @override
   _NavigationHistoryState createState() => _NavigationHistoryState();
 }
@@ -14,9 +18,9 @@ class _NavigationHistoryState extends State<NavigationHistory> {
     return Scaffold(
         body: ListView(
       children: <Widget>[
-        Tile(text: Text("a")),
-        Tile(text: Text("b")),
-        Tile(text: Text("c")),
+        const Tile(text: Text("a")),
+        const Tile(text: Text("b")),
+        const Tile(text: Text("c")),
       ],
     ));
   }
@@ -34,7 +38,7 @@ class History {
 
 class Tile extends StatefulWidget {
   final Text text;
-  Tile({required this.text});
+  const Tile({Key? key, required this.text}) : super(key: key);
 
   @override
   TileState createState() => TileState();
@@ -52,7 +56,7 @@ class TileState extends State<Tile> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HistoryPage(),
+              builder: (context) => const HistoryPage(),
             ));
       },
     );
@@ -72,7 +76,7 @@ class HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               })),

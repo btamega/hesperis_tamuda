@@ -258,7 +258,7 @@ class _Card1State extends State<Card1> {
                                       ).show();
                                       }
                                     },
-                                    style: TextButton.styleFrom(backgroundColor: Colors.red, primary: Colors.white),
+                                    style: TextButton.styleFrom(foregroundColor: Colors.white, backgroundColor: Colors.red),
                                     child: const Text("Envoyer"),
                                     ),
                               ],

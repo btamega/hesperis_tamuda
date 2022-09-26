@@ -1,50 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hesperis_tamuda/views/pages/about.dart';
+import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
+import 'package:hesperis_tamuda/views/pages/profile.dart';
+import 'package:hesperis_tamuda/views/pages/user/profil.dart';
+import 'package:hesperis_tamuda/models/statut.dart';
 
 
-class ElevatedCardExample extends StatelessWidget {
-  Items item1 = new Items(
+
+
+
+
+class elevatedCardExample extends StatefulWidget {
+final User user;
+   
+  const elevatedCardExample({Key? key, required this.user}) : super(key: key);
+
+  @override
+  State<elevatedCardExample> createState() => _elevatedCardExampleState();
+}
+  @override
+  class _elevatedCardExampleState extends State<elevatedCardExample> {
+  @override
+  Widget build(BuildContext context) {
+    Items item1 = Items(
       title: "My profile",
       subtitle: "Check your profile now!",
-      // event: "3 Events");
       icon: Icons.portrait,
+      page:  UserProfil(user: widget.user ),
+      
   );
 
-  Items item2 = new Items(
+  Items item2 =  Items(
     title: "Download history",
     subtitle: "Download your history now!",
-    // event: "4 Items",
     icon: Icons.download,
+    page: const ProfilePage(),
+    
   );
-  Items item3 = new Items(
+  Items item3 = Items(
     title:  "Navigation history",
     subtitle: "Check your navigation!",
-    // event: "",
     icon: Icons.pages,
+    page: const NavigationHistory(),
+    
   );
-  Items item4 = new Items(
+  Items item4 = Items(
     title: "My messages",
     subtitle: "Check your messages!",
     icon: Icons.message,
+    page: const AboutPage(),
+    
   );
-  Items item5 = new Items(
+  Items item5 =  Items(
     title: "Settings",
     subtitle: "",
-    // event: "4 Items",
    icon: Icons.settings,
-  );
+   page: const ProfilePage(),
   
-  @override
-  Widget build(BuildContext context) {
+  );
     List<Items> myList = [item1, item2, item3, item4, item5];
     var color = 0xff3b5998;
     return Flex(
       direction: Axis.vertical,
       children: [
-        Flexible(
+        Flexible( 
           child: GridView.count(
             childAspectRatio: 1.0,
-            padding: EdgeInsets.only(left: 16, right: 16),
+            padding: const EdgeInsets.only(left: 16, right: 16),
             crossAxisCount: 2,
             crossAxisSpacing: 18,
             mainAxisSpacing: 18,
@@ -57,8 +80,10 @@ class ElevatedCardExample extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(data.icon, size: 30, color: Colors.white),
-                    // IconData.(Icon(data.icon)),
+                   OutlinedButton(
+                   onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) =>   data.page,));},
+                   child: Icon(data.icon, size: 30, color: Colors.white),
+                    ),
                     const SizedBox(height: 14),
                     Text(
                       data.title,
@@ -70,17 +95,18 @@ class ElevatedCardExample extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       data.subtitle,
                       style: GoogleFonts.openSans(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           color: Color.fromARGB(255, 142, 236, 236),
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
+                  
                   ],
                 ),
               );
@@ -92,12 +118,15 @@ class ElevatedCardExample extends StatelessWidget {
   }
 }
 
+
 class Items {
   String title;
   String subtitle;
-  // String event;
   IconData icon;
-  Items({required this.title, required this.subtitle,required this.icon});
+  Widget page;
+  // String title2;
+  Items({required this.title, required this.subtitle,required this.icon,required this.page});
 }
+
 
 
