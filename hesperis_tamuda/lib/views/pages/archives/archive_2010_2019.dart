@@ -62,7 +62,7 @@ class _Archive20102019State extends State<Archive20102019> {
                           itemCount: snapshot.data!.data.length,
                           itemBuilder: (context, index1) {
                             return Container(
-                              height: height,
+                              height: height / 2.5,
                               // padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 border: Border.all(),
@@ -135,7 +135,7 @@ class _Archive20102019State extends State<Archive20102019> {
                                               '/' +
                                               snapshot.data!.data[index1].cover,
                                           // width: 300,
-                                          height: 300),
+                                          height: height / 2.8),
                                       Text(
                                         snapshot.data!.data[index1].anne,
                                         textAlign: TextAlign.center,

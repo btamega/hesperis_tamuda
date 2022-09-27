@@ -77,7 +77,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             child: Container(
-                              height: height,
+                              height: height / 2.5,
                               // padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 border: Border.all(),
@@ -143,7 +143,8 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                                                         index1]
                                                                     .path,
                                                             // width: 300,
-                                                            height: 300)
+                                                            height:
+                                                                height / 2.8)
                                                         : Container();
                                                   });
                                             } else if (snapshot.hasError) {
