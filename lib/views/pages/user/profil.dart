@@ -25,8 +25,8 @@ class _UserProfilState extends State<UserProfil> {
         body: Center(
           child: Padding(padding:const EdgeInsets.all(10),
           child: Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 50,),
               const Text(

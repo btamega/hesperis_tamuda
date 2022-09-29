@@ -21,8 +21,16 @@ final User user;
 }
   @override
   class _elevatedCardExampleState extends State<elevatedCardExample> {
+  late Orientation orientation;
+  late Size size;
+  late double height;
+  late double width;
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     Items item1 = Items(
       title: "My profile",
       subtitle: "Check your profile now!",
@@ -65,7 +73,7 @@ final User user;
       direction: Axis.vertical,
       children: [
         Flexible( 
-          child: GridView.count(
+          child: orientation==Orientation.portrait?GridView.count(
             childAspectRatio: 1.0,
             padding: const EdgeInsets.only(left: 16, right: 16),
             crossAxisCount: 2,
@@ -77,37 +85,83 @@ final User user;
                   color: Color(color),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                   OutlinedButton(
-                   onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) =>   data.page,));},
-                   child: Icon(data.icon, size: 30, color: Colors.white),
-                    ),
-                    const SizedBox(height: 14),
-                    Text(
-                      data.title,
-                      style: GoogleFonts.openSans(
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                child: InkWell(
+                  onTap:() {Navigator.of(context).push(MaterialPageRoute(builder: (context) =>   data.page,));},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                     Icon(data.icon, size: 30, color: Colors.white),
+                      const SizedBox(height: 14),
+                      Text(
+                        data.title,
+                        style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      data.subtitle,
-                      style: GoogleFonts.openSans(
-                        textStyle: const TextStyle(
-                          color: Color.fromARGB(255, 142, 236, 236),
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
+                      const SizedBox(height: 8),
+                      Text(
+                        data.subtitle,
+                        style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                            color: Color.fromARGB(255, 142, 236, 236),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                  
-                  ],
+                    
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ):GridView.count(
+            childAspectRatio: 1.0,
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            crossAxisCount: 4,
+            crossAxisSpacing: 18,
+            mainAxisSpacing: 18,
+            children: myList.map((data) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Color(color),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap:() {Navigator.of(context).push(MaterialPageRoute(builder: (context) =>   data.page,));},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                     Icon(data.icon, size: 30, color: Colors.white),
+                      const SizedBox(height: 14),
+                      Text(
+                        data.title,
+                        style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        data.subtitle,
+                        style: GoogleFonts.openSans(
+                          textStyle: const TextStyle(
+                            color: Color.fromARGB(255, 142, 236, 236),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    
+                    ],
+                  ),
                 ),
               );
             }).toList(),
