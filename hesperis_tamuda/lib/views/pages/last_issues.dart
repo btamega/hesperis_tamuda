@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
+import 'package:hesperis_tamuda/services/exceptions.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
@@ -139,7 +142,22 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
                   scrollDirection: Axis.vertical,
                 );
               } else if (snapshot.hasError) {
-                return Text(serverError + "\n" + snapshot.error.toString());
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/animation_500_l8rqndep.gif",
+                    ),
+                    Center(
+                      child: Text(
+                        snapshot.error.toString(),
+                        style: GoogleFonts.ibarraRealNova(
+                            textStyle: const TextStyle(fontSize: 25)),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                );
               }
               return SizedBox(
                 height: MediaQuery.of(context).size.height / 1.3,
@@ -155,12 +173,27 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
   }
 
   Future<Fascicule> getLastIssues() async {
-    final response = await http.get(Uri.parse(rootURL + '/api/lastIssues/'));
-    final fascicule = fasciculeFromJson(response.body.toString());
-    if (response.statusCode == 200) {
-      return fascicule;
-    } else {
-      return fascicule;
+    try {
+      final response = await http.get(Uri.parse(rootURL + '/api/lastIssues/'));
+      switch (response.statusCode) {
+        case 200:
+          final fascicule = fasciculeFromJson(response.body.toString());
+          return fascicule;
+        case 400: //Bad request
+          throw BadRequestException(jsonDecode(response.body)['message']);
+        case 401: //Unauthorized
+          throw UnAuthorizedException(jsonDecode(response.body)['message']);
+        case 403: //Forbidden
+          throw UnAuthorizedException(jsonDecode(response.body)['message']);
+        case 404: //Resource Not Found
+          throw NotFoundException(jsonDecode(response.body)['message']);
+        case 500: //Internal Server Error
+        default:
+          throw FetchDataException(
+              'Something went wrong! ${response.statusCode}');
+      }
+    } catch (e) {
+      throw ExceptionHandlers().getExceptionString(e, context);
     }
   }
 
