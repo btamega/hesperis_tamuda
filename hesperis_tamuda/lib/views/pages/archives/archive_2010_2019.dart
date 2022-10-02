@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/constant.dart';
-import 'package:hesperis_tamuda/models/volume.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
@@ -51,10 +51,10 @@ class _Archive20102019State extends State<Archive20102019> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            await getArchives(2010, 2019);
+            await getArchives(2010, 2019, context);
           },
-          child: FutureBuilder<Volume>(
-              future: getArchives(2010, 2019),
+          child: FutureBuilder<dynamic>(
+              future: getArchives(2010, 2019, context),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return orientation == Orientation.portrait
@@ -257,9 +257,22 @@ class _Archive20102019State extends State<Archive20102019> {
                           scrollDirection: Axis.vertical,
                         );
                 } else if (snapshot.hasError) {
-                  return Center(
-                      child:
-                          Text(serverError + "\n" + snapshot.error.toString()));
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/images/animation_500_l8rqndep.gif",
+                      ),
+                      Center(
+                        child: Text(
+                          snapshot.error.toString(),
+                          style: GoogleFonts.ibarraRealNova(
+                              textStyle: const TextStyle(fontSize: 25)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  );
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(),

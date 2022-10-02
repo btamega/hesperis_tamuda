@@ -5,8 +5,12 @@ import 'views/pages/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   runApp(const MyApp());
 }
 
@@ -50,10 +54,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
       drawer: NavigationDrawerWidget(),
       body: HomePage(),
     );
+  }
+
+  void initialization() async {
+    await Future.delayed(const Duration(seconds: 3));
+    FlutterNativeSplash.remove();
   }
 }

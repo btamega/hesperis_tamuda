@@ -186,8 +186,10 @@ class _RecentArchivesState extends State<RecentArchives> {
                         );
                 } else if (snapshot.hasError) {
                   return Center(
-                      child:
-                          Text(serverError + "\n" + snapshot.error.toString()));
+                      child: Text(
+                    serverError + "\n" + snapshot.error.toString(),
+                    textAlign: TextAlign.center,
+                  ));
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(),

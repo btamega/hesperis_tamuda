@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:hesperis_tamuda/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
+import 'package:hesperis_tamuda/services/exceptions.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/archives.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
@@ -65,10 +67,10 @@ class _ArchiveListeState extends State<ArchiveListe> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            await getFascicules(widget.idVolume);
+            await getFascicules(widget.idVolume, context);
           },
-          child: FutureBuilder<Fascicule>(
-            future: getFascicules(widget.idVolume),
+          child: FutureBuilder<dynamic>(
+            future: getFascicules(widget.idVolume, context),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return orientation == Orientation.portrait
@@ -114,9 +116,9 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                               ' ' +
                                               snapshot.data!.data[index].numero,
                                           textAlign: TextAlign.center),
-                                      FutureBuilder<Fascicule>(
-                                          future:
-                                              getFascicules(widget.idVolume),
+                                      FutureBuilder<dynamic>(
+                                          future: getFascicules(
+                                              widget.idVolume, context),
                                           builder: (context, snapshot1) {
                                             if (snapshot1.hasData) {
                                               return ListView.builder(
@@ -147,10 +149,29 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                                                 height / 2.8)
                                                         : Container();
                                                   });
-                                            } else if (snapshot.hasError) {
-                                              return Text(serverError +
-                                                  "\n" +
-                                                  snapshot.error.toString());
+                                            } else if (snapshot1.hasError) {
+                                              return Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/animation_500_l8rqndep.gif",
+                                                  ),
+                                                  Center(
+                                                    child: Text(
+                                                      snapshot1.error
+                                                          .toString(),
+                                                      style: GoogleFonts
+                                                          .ibarraRealNova(
+                                                              textStyle:
+                                                                  const TextStyle(
+                                                                      fontSize:
+                                                                          25)),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
                                             }
                                             return SizedBox(
                                               height: MediaQuery.of(context)
@@ -226,9 +247,9 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                               ' ' +
                                               snapshot.data!.data[index].numero,
                                           textAlign: TextAlign.center),
-                                      FutureBuilder<Fascicule>(
-                                          future:
-                                              getFascicules(widget.idVolume),
+                                      FutureBuilder<dynamic>(
+                                          future: getFascicules(
+                                              widget.idVolume, context),
                                           builder: (context, snapshot1) {
                                             if (snapshot1.hasData) {
                                               return ListView.builder(
@@ -259,10 +280,29 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                                           )
                                                         : Container();
                                                   });
-                                            } else if (snapshot.hasError) {
-                                              return Text(serverError +
-                                                  "\n" +
-                                                  snapshot.error.toString());
+                                            } else if (snapshot1.hasError) {
+                                              return Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/animation_500_l8rqndep.gif",
+                                                  ),
+                                                  Center(
+                                                    child: Text(
+                                                      snapshot1.error
+                                                          .toString(),
+                                                      style: GoogleFonts
+                                                          .ibarraRealNova(
+                                                              textStyle:
+                                                                  const TextStyle(
+                                                                      fontSize:
+                                                                          25)),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
                                             }
                                             return SizedBox(
                                               height: MediaQuery.of(context)
@@ -299,7 +339,22 @@ class _ArchiveListeState extends State<ArchiveListe> {
                         scrollDirection: Axis.vertical,
                       );
               } else if (snapshot.hasError) {
-                return Text(serverError + "\n" + snapshot.error.toString());
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/animation_500_l8rqndep.gif",
+                    ),
+                    Center(
+                      child: Text(
+                        snapshot.error.toString(),
+                        style: GoogleFonts.ibarraRealNova(
+                            textStyle: const TextStyle(fontSize: 25)),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                );
               }
               return SizedBox(
                 height: MediaQuery.of(context).size.height / 1.3,
@@ -314,14 +369,29 @@ class _ArchiveListeState extends State<ArchiveListe> {
     );
   }
 
-  Future<Fascicule> getFascicules(var idVolume) async {
-    final response =
-        await http.get(Uri.parse(rootURL + '/api/archive/$idVolume'));
-    final fascicule = fasciculeFromJson(response.body.toString());
-    if (response.statusCode == 200) {
-      return fascicule;
-    } else {
-      return fascicule;
+  Future<dynamic> getFascicules(var idVolume, BuildContext context) async {
+    try {
+      final response =
+          await http.get(Uri.parse(rootURL + '/api/archive/$idVolume'));
+      switch (response.statusCode) {
+        case 200:
+          final fascicule = fasciculeFromJson(response.body.toString());
+          return fascicule;
+        case 400: //Bad request
+          throw BadRequestException(jsonDecode(response.body)['message']);
+        case 401: //Unauthorized
+          throw UnAuthorizedException(jsonDecode(response.body)['message']);
+        case 403: //Forbidden
+          throw UnAuthorizedException(jsonDecode(response.body)['message']);
+        case 404: //Resource Not Found
+          throw NotFoundException(jsonDecode(response.body)['message']);
+        case 500: //Internal Server Error
+        default:
+          throw FetchDataException(
+              'Something went wrong! ${response.statusCode}');
+      }
+    } catch (e) {
+      throw ExceptionHandlers().getExceptionString(e, context);
     }
   }
 

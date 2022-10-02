@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/api_response.dart';
 import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
+import 'package:hesperis_tamuda/services/exceptions.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
@@ -69,7 +72,7 @@ class _ArticleListState extends State<ArticleList> {
   late double width;
   late Fascicule fascicule;
   void setVignette() async {
-    fascicule = await getSommaires();
+    fascicule = await getSommaires(context);
     for (int i = 0; i < fascicule.data[0].vignettes.length; i++) {
       imgList.add(rootURL + '/' + fascicule.data[0].vignettes[i].path);
     }
@@ -116,7 +119,7 @@ class _ArticleListState extends State<ArticleList> {
           ),
           body: RefreshIndicator(
             onRefresh: () async {
-              await getSommaires();
+              await getSommaires(context);
             },
             child: ListView(
               physics: const ClampingScrollPhysics(),
@@ -164,8 +167,8 @@ class _ArticleListState extends State<ArticleList> {
                 Row(
                   children: [
                     Expanded(
-                      child: FutureBuilder<Fascicule>(
-                          future: getSommaires(),
+                      child: FutureBuilder<dynamic>(
+                          future: getSommaires(context),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return ListView.builder(
@@ -305,11 +308,23 @@ class _ArticleListState extends State<ArticleList> {
                                                                                 itemBuilder: (context, index2) {
                                                                                   return Text(snapshot2.data!.data[index1].auteurs[index2].prenom + ' ' + snapshot2.data!.data[index1].auteurs[index2].nom + ' ' + snapshot2.data!.data[index1].auteurs[index2].stat.toString());
                                                                                 });
-                                                                          } else if (snapshot
+                                                                          } else if (snapshot2
                                                                               .hasError) {
-                                                                            return Text(serverError +
-                                                                                "\n" +
-                                                                                snapshot.error.toString());
+                                                                            return Stack(
+                                                                              alignment: Alignment.center,
+                                                                              children: [
+                                                                                Image.asset(
+                                                                                  "assets/images/animation_500_l8rqndep.gif",
+                                                                                ),
+                                                                                Center(
+                                                                                  child: Text(
+                                                                                    snapshot2.error.toString(),
+                                                                                    style: GoogleFonts.ibarraRealNova(textStyle: const TextStyle(fontSize: 25)),
+                                                                                    textAlign: TextAlign.center,
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            );
                                                                           }
                                                                           return SizedBox(
                                                                             height:
@@ -341,13 +356,31 @@ class _ArticleListState extends State<ArticleList> {
                                                               ),
                                                             );
                                                           });
-                                                    } else if (snapshot
+                                                    } else if (snapshot1
                                                         .hasError) {
-                                                      return Center(
-                                                          child: Text(serverError +
-                                                              "\n" +
-                                                              snapshot.error
-                                                                  .toString()));
+                                                      return Stack(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/images/animation_500_l8rqndep.gif",
+                                                          ),
+                                                          Center(
+                                                            child: Text(
+                                                              snapshot1.error
+                                                                  .toString(),
+                                                              style: GoogleFonts
+                                                                  .ibarraRealNova(
+                                                                      textStyle:
+                                                                          const TextStyle(
+                                                                              fontSize: 25)),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      );
                                                     }
                                                     return SizedBox(
                                                       height:
@@ -370,10 +403,23 @@ class _ArticleListState extends State<ArticleList> {
                                 },
                               );
                             } else if (snapshot.hasError) {
-                              return Center(
-                                  child: Text(serverError +
-                                      "\n" +
-                                      snapshot.error.toString()));
+                              return Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/animation_500_l8rqndep.gif",
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      snapshot.error.toString(),
+                                      style: GoogleFonts.ibarraRealNova(
+                                          textStyle:
+                                              const TextStyle(fontSize: 25)),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              );
                             }
                             return SizedBox(
                               height: MediaQuery.of(context).size.height / 1.3,
@@ -460,14 +506,29 @@ class _ArticleListState extends State<ArticleList> {
     }
   }
 
-  Future<Fascicule> getSommaires() async {
-    final response = await http.get(
-        Uri.parse(rootURL + '/api/fascicule/' + widget.idFascicule.toString()));
-    final fascicule = fasciculeFromJson(response.body.toString());
-    if (response.statusCode == 200) {
-      return fascicule;
-    } else {
-      return fascicule;
+  Future<dynamic> getSommaires(BuildContext context) async {
+    try {
+      final response = await http.get(Uri.parse(
+          rootURL + '/api/fascicule/' + widget.idFascicule.toString()));
+      switch (response.statusCode) {
+        case 200:
+          final fascicule = fasciculeFromJson(response.body.toString());
+          return fascicule;
+        case 400: //Bad request
+          throw BadRequestException(jsonDecode(response.body)['message']);
+        case 401: //Unauthorized
+          throw UnAuthorizedException(jsonDecode(response.body)['message']);
+        case 403: //Forbidden
+          throw UnAuthorizedException(jsonDecode(response.body)['message']);
+        case 404: //Resource Not Found
+          throw NotFoundException(jsonDecode(response.body)['message']);
+        case 500: //Internal Server Error
+        default:
+          throw FetchDataException(
+              'Something went wrong! ${response.statusCode}');
+      }
+    } catch (e) {
+      throw ExceptionHandlers().getExceptionString(e, context);
     }
   }
 
