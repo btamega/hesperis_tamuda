@@ -185,21 +185,28 @@ class _RecentArchivesState extends State<RecentArchives> {
                           scrollDirection: Axis.vertical,
                         );
                 } else if (snapshot.hasError) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/animation_500_l8rqndep.gif",
-                      ),
-                      Center(
-                        child: Text(
-                          snapshot.error.toString(),
-                          style: GoogleFonts.ibarraRealNova(
-                              textStyle: const TextStyle(fontSize: 25)),
-                          textAlign: TextAlign.center,
+                  double _width = width * .25;
+                  if (orientation == Orientation.portrait) {
+                    _width = width * .50;
+                  }
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/animation_500_l8rqndep.gif",
+                          width: _width,
                         ),
-                      ),
-                    ],
+                        Center(
+                          child: Text(
+                            snapshot.error.toString(),
+                            style: GoogleFonts.ibarraRealNova(
+                                textStyle: const TextStyle(fontSize: 25)),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 } else {
                   return const Center(
