@@ -71,84 +71,200 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
             future: getLastIssues(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return GridView.builder(
-                  // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-                  itemBuilder: (BuildContext, index) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.data.length,
-                      itemBuilder: (context, index1) {
-                        return GestureDetector(
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border.all(),
-                            ),
-                            child: Column(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ArticleList(
-                                                idFascicule: snapshot.data!
-                                                    .data[index].idFascicule,
-                                                titreFascicule: snapshot
-                                                        .data!.data[index].nom +
-                                                    ' ' +
-                                                    snapshot.data!.data[index]
-                                                        .numero +
-                                                    ' (' +
-                                                    snapshot.data!.data[index]
-                                                        .anne +
-                                                    ')',
-                                              )),
-                                    );
-                                  },
-                                  onDoubleTap: () {
-                                    selectedItem(context, 0);
-                                  },
-                                  child: Column(children: [
-                                    Text(
-                                        snapshot.data!.data[index].nom +
-                                            ' ' +
-                                            snapshot.data!.data[index].numero,
-                                        textAlign: TextAlign.center),
-                                    snapshot.data!.data[index].vignettes[index1]
-                                                .type ==
-                                            'jaune'
-                                        ? Image.network(
-                                            rootURL +
-                                                '/' +
-                                                snapshot.data!.data[index]
-                                                    .vignettes[index1].path,
-                                            width: 300,
-                                            height: 250)
-                                        : Container(),
-                                    Text(
-                                      snapshot.data!.data[index].anne,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ]),
+                return orientation == Orientation.portrait
+                    ? GridView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
+                        itemBuilder: (BuildContext, index) {
+                          return ListView.builder(
+                            physics: const ClampingScrollPhysics(),
+                            itemCount: snapshot.data!.data.length,
+                            itemBuilder: (context, index1) {
+                              return GestureDetector(
+                                child: Container(
+                                  height: height / 2.5,
+                                  // padding: const EdgeInsets.all(19),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                  ),
+                                  child: ListView(
+                                    physics: const ClampingScrollPhysics(),
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ArticleList(
+                                                      idFascicule: snapshot
+                                                          .data!
+                                                          .data[index]
+                                                          .idFascicule,
+                                                      titreFascicule: snapshot
+                                                              .data!
+                                                              .data[index]
+                                                              .nom +
+                                                          ' ' +
+                                                          snapshot
+                                                              .data!
+                                                              .data[index]
+                                                              .numero +
+                                                          ' (' +
+                                                          snapshot
+                                                              .data!
+                                                              .data[index]
+                                                              .anne +
+                                                          ')',
+                                                    )),
+                                          );
+                                        },
+                                        onDoubleTap: () {
+                                          selectedItem(context, 0);
+                                        },
+                                        child: Column(children: [
+                                          Text(
+                                              snapshot.data!.data[index].nom +
+                                                  ' ' +
+                                                  snapshot
+                                                      .data!.data[index].numero,
+                                              textAlign: TextAlign.center),
+                                          snapshot.data!.data[index]
+                                                      .vignettes[index1].type ==
+                                                  'jaune'
+                                              ? Image.network(
+                                                  rootURL +
+                                                      '/' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index]
+                                                          .vignettes[index1]
+                                                          .path,
+                                                  // width: 300,
+                                                  height: height / 2.8,
+                                                )
+                                              : Container(),
+                                          Text(
+                                            snapshot.data!.data[index].anne,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ]),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  itemCount: snapshot.data!.data.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: (200 / 350),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                  ),
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(20),
-                  scrollDirection: Axis.vertical,
-                );
+                              );
+                            },
+                          );
+                        },
+                        itemCount: snapshot.data!.data.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: width / (height),
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 2,
+                        ),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(20),
+                        scrollDirection: Axis.vertical,
+                      )
+                    : GridView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
+                        itemBuilder: (BuildContext, index) {
+                          return ListView.builder(
+                            physics: const ClampingScrollPhysics(),
+                            itemCount: snapshot.data!.data.length,
+                            itemBuilder: (context, index1) {
+                              return GestureDetector(
+                                child: Container(
+                                  height: height,
+                                  // padding: const EdgeInsets.all(19),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                  ),
+                                  child: ListView(
+                                    physics: const ClampingScrollPhysics(),
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ArticleList(
+                                                      idFascicule: snapshot
+                                                          .data!
+                                                          .data[index]
+                                                          .idFascicule,
+                                                      titreFascicule: snapshot
+                                                              .data!
+                                                              .data[index]
+                                                              .nom +
+                                                          ' ' +
+                                                          snapshot
+                                                              .data!
+                                                              .data[index]
+                                                              .numero +
+                                                          ' (' +
+                                                          snapshot
+                                                              .data!
+                                                              .data[index]
+                                                              .anne +
+                                                          ')',
+                                                    )),
+                                          );
+                                        },
+                                        onDoubleTap: () {
+                                          selectedItem(context, 0);
+                                        },
+                                        child: Column(children: [
+                                          Text(
+                                              snapshot.data!.data[index].nom +
+                                                  ' ' +
+                                                  snapshot
+                                                      .data!.data[index].numero,
+                                              textAlign: TextAlign.center),
+                                          snapshot.data!.data[index]
+                                                      .vignettes[index1].type ==
+                                                  'jaune'
+                                              ? Image.network(
+                                                  rootURL +
+                                                      '/' +
+                                                      snapshot
+                                                          .data!
+                                                          .data[index]
+                                                          .vignettes[index1]
+                                                          .path,
+                                                  // width: 300,
+                                                  // height: height / 2.8,
+                                                )
+                                              : Container(),
+                                          Text(
+                                            snapshot.data!.data[index].anne,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ]),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        itemCount: snapshot.data!.data.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: (200 / 350),
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 3,
+                        ),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(20),
+                        scrollDirection: Axis.vertical,
+                      );
               } else if (snapshot.hasError) {
                 double _width = width * .25;
                 if (orientation == Orientation.portrait) {
