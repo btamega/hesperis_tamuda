@@ -10,6 +10,7 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'user/dashboard.dart';
 class ProfilePage extends StatefulWidget {
@@ -186,7 +187,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           child: TextButton(
                             onPressed: () async {
-   
+                            
                             if (_formKey.currentState!.validate()) {
                               Statut statut;
                               try {
@@ -194,6 +195,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 _emailController.text,
                                 _passwordController.text
                               );
+                              
                               if (statut.error != null && statut.error!.isNotEmpty) {
                               AwesomeDialog(
                               context: context,
@@ -213,7 +215,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               animType: AnimType.BOTTOMSLIDE,
                               title: 'SUCCESS',
                               desc:statut.success,
-                              btnOkOnPress: () {
+                              btnOkOnPress: () async {
+                            final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                            sharedPreferences.setString('email', _emailController.text);
+                            sharedPreferences.setString('password', _passwordController.text);
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDashboard(user: statut.user as User,),));
                               },
                               ).show();
