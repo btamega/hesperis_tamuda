@@ -73,6 +73,12 @@ class NavigationDrawerWidget extends StatelessWidget {
                 icon: Icons.facebook,
                 onClicked: ()=>launchUrl(Uri.parse('https://web.facebook.com/hesperistamudaOfficiel')),
               ),
+              buildMenuItem(
+                text: '#hesperistamuda',
+                icon: Icons.facebook,
+                onClicked: ()=>launchUrl(Uri.parse('https://web.facebook.com/hesperistamudaOfficiel')),
+              ),
+              
               
             ],
           ),

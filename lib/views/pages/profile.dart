@@ -22,10 +22,19 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   int _selectedIndex = 0;
+  late final SharedPreferences sharedPreferences; 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-    
+    void sessionKeep() async {
+    sharedPreferences  = await SharedPreferences.getInstance();
+    }
+
+    @override
+    void initState() {
+    sessionKeep();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
    return SafeArea(
@@ -216,9 +225,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               title: 'SUCCESS',
                               desc:statut.success,
                               btnOkOnPress: () async {
-                            final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-                            sharedPreferences.setString('email', _emailController.text);
-                            sharedPreferences.setString('password', _passwordController.text);
+                            
+                            
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDashboard(user: statut.user as User,),));
                               },
                               ).show();
@@ -298,6 +306,8 @@ class _ProfilePageState extends State<ProfilePage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      sharedPreferences.setString('email', _emailController.text);
+      sharedPreferences.setString('password', _passwordController.text);
     });
     if (_selectedIndex==0) {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
