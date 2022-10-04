@@ -2,11 +2,13 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
+import 'package:hesperis_tamuda/views/pages/loginScreen.dart';
 import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
 import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/user/profil.dart';
 import 'package:hesperis_tamuda/widgets/circle_gradient_icon.dart';
 import 'package:hesperis_tamuda/widgets/task_group.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDashboard extends StatefulWidget {
   final User user;
@@ -17,6 +19,13 @@ class UserDashboard extends StatefulWidget {
 }
 
 class _UserDashboardState extends State<UserDashboard> {
+  late final SharedPreferences prefs;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,9 +54,11 @@ class _UserDashboardState extends State<UserDashboard> {
                     buttonsTextStyle: const TextStyle(color: Colors.black),
                     showCloseIcon: true,
                     btnCancelOnPress: () {},
-                    btnOkOnPress: () {
+                    btnOkOnPress: () async {
+                      prefs = await SharedPreferences.getInstance();
+                      prefs.remove('email');
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ProfilePage(),
+                        builder: (context) => const LoginScreen(),
                       ));
                     },
                   ).show();

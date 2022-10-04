@@ -10,6 +10,7 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'user/dashboard.dart';
 
@@ -219,7 +220,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                       animType: AnimType.BOTTOMSLIDE,
                                       title: 'SUCCESS',
                                       desc: statut.success,
-                                      btnOkOnPress: () {
+                                      btnOkOnPress: () async {
+                                        SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        prefs.setString(
+                                            'email', statut.user!.email);
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
                                           builder: (context) => UserDashboard(
@@ -589,7 +595,7 @@ Widget _loginLabel(BuildContext context) {
 Widget _logo() {
   return Center(
     child: SizedBox(
-      child: Image.network("https://uilogos.co/img/logomark/kyan.png"),
+      child: Image.asset("assets/images/hesperis.png"),
       height: 80,
     ),
   );
