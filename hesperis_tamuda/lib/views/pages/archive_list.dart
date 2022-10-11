@@ -1,23 +1,30 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:hesperis_tamuda/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
+import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/services/exceptions.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/archives.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../menu/language.dart';
 import 'about.dart';
 import 'article_list.dart';
 import 'contact.dart';
 import 'editorial.dart';
+import 'errorPage.dart';
 import 'ethic.dart';
 import 'last_issues.dart';
 import 'package:http/http.dart' as http;
+import 'loginScreen.dart';
+import 'recent_archives.dart';
 import 'recommandation.dart';
+import 'user/dashboard.dart';
 
 class ArchiveListe extends StatefulWidget {
   final int idVolume;
@@ -35,6 +42,21 @@ class _ArchiveListeState extends State<ArchiveListe> {
   late Size size;
   late double height;
   late double width;
+  final User user = User(
+      id: 1,
+      name: "KANNOUFA",
+      email: "fkannoufa@gmail.com",
+      emailVerifiedAt: "emailVerifiedAt",
+      createdAt: DateTime.now());
+  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    foregroundColor: Colors.black87,
+    backgroundColor: Colors.grey[300],
+    minimumSize: const Size(88, 36),
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(2)),
+    ),
+  );
   @override
   Widget build(BuildContext context) {
     orientation = MediaQuery.of(context).orientation;
@@ -178,6 +200,36 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                                             TextAlign.center,
                                                       ),
                                                     ),
+                                                    Center(
+                                                        child: ElevatedButton(
+                                                      style: raisedButtonStyle,
+                                                      onPressed: () async {
+                                                        try {
+                                                          bool result =
+                                                              await InternetConnectionChecker()
+                                                                  .hasConnection;
+
+                                                          if (result == true) {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .push(
+                                                                    MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const RecentArchives(),
+                                                            ));
+                                                          }
+                                                        } on SocketException catch (_) {
+                                                          Navigator.of(context)
+                                                              .push(
+                                                                  MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const ErrorPage(),
+                                                          ));
+                                                        }
+                                                      },
+                                                      child: const Text(
+                                                          'Actualiser'),
+                                                    )),
                                                   ],
                                                 ),
                                               );
@@ -318,6 +370,36 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                                             TextAlign.center,
                                                       ),
                                                     ),
+                                                    Center(
+                                                        child: ElevatedButton(
+                                                      style: raisedButtonStyle,
+                                                      onPressed: () async {
+                                                        try {
+                                                          bool result =
+                                                              await InternetConnectionChecker()
+                                                                  .hasConnection;
+
+                                                          if (result == true) {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .push(
+                                                                    MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const RecentArchives(),
+                                                            ));
+                                                          }
+                                                        } on SocketException catch (_) {
+                                                          Navigator.of(context)
+                                                              .push(
+                                                                  MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const ErrorPage(),
+                                                          ));
+                                                        }
+                                                      },
+                                                      child: const Text(
+                                                          'Actualiser'),
+                                                    )),
                                                   ],
                                                 ),
                                               );
@@ -377,6 +459,27 @@ class _ArchiveListeState extends State<ArchiveListe> {
                           textAlign: TextAlign.center,
                         ),
                       ),
+                      Center(
+                          child: ElevatedButton(
+                        style: raisedButtonStyle,
+                        onPressed: () async {
+                          try {
+                            bool result =
+                                await InternetConnectionChecker().hasConnection;
+
+                            if (result == true) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const RecentArchives(),
+                              ));
+                            }
+                          } on SocketException catch (_) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const ErrorPage(),
+                            ));
+                          }
+                        },
+                        child: const Text('Actualiser'),
+                      )),
                     ],
                   ),
                 );
@@ -420,22 +523,55 @@ class _ArchiveListeState extends State<ArchiveListe> {
     }
   }
 
-  void _onItemTapped(int index) {
+  Future<void> _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
     if (_selectedIndex == 0) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else if (_selectedIndex == 1) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const SearchPage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const SearchPage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const ProfilePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          String? email = prefs.getString("email");
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => email == null
+                ? const LoginScreen()
+                : UserDashboard(
+                    user: user,
+                  ),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     }
   }
 

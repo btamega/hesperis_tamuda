@@ -1,15 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/models/api_response.dart';
+import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
+import 'package:hesperis_tamuda/views/pages/errorPage.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
+import 'package:hesperis_tamuda/views/pages/loginScreen.dart';
 import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
-import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
+import 'package:hesperis_tamuda/views/pages/user/dashboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Archive19601969 extends StatefulWidget {
-  const Archive19601969({ Key? key }) : super(key: key);
+  const Archive19601969({Key? key}) : super(key: key);
 
   @override
   State<Archive19601969> createState() => _Archive19601969State();
@@ -17,13 +23,22 @@ class Archive19601969 extends StatefulWidget {
 
 class _Archive19601969State extends State<Archive19601969> {
   int _selectedIndex = 0;
+  final User user = User(
+      id: 1,
+      name: "KANNOUFA",
+      email: "fkannoufa@gmail.com",
+      emailVerifiedAt: "emailVerifiedAt",
+      createdAt: DateTime.now());
   @override
   Widget build(BuildContext context) {
-   return SafeArea(
-     child: Scaffold(
+    return SafeArea(
+      child: Scaffold(
         drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
-          title: Text("Hespéris Tamuda (1960-1969)", style: GoogleFonts.ibarraRealNova(),),
+          title: Text(
+            "Hespéris Tamuda (1960-1969)",
+            style: GoogleFonts.ibarraRealNova(),
+          ),
           centerTitle: true,
           backgroundColor: const Color(0xff3b5998),
           actions: const [LanguagePickerWidget()],
@@ -35,12 +50,12 @@ class _Archive19601969State extends State<Archive19601969> {
           currentIndex: _selectedIndex,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           ],
           onTap: _onItemTapped,
-          ),
-          body: GridView.count(
+        ),
+        body: GridView.count(
           primary: false,
           padding: const EdgeInsets.all(22),
           crossAxisSpacing: 10,
@@ -50,301 +65,490 @@ class _Archive19601969State extends State<Archive19601969> {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(border: Border.all(),),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
               child: Column(
                 children: [
                   InkWell(
                     onTap: () async {
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1960.pdf';
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1960.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1962.png"),),
-                        Text("1960\n", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1962.png"),
+                      ),
+                      Text(
+                        "1960\n",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
+            ),
             Container(
               padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(border: Border.all(),),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
               child: Column(
                 children: [
                   InkWell(
                     onTap: () async {
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1961.pdf';
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1961.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1961.jpg"),),
-                        Text("1961\n", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1961.jpg"),
+                      ),
+                      Text(
+                        "1961\n",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-          Container(
-            decoration: BoxDecoration(border: Border.all(),),
-            padding: const EdgeInsets.all(13),
-            child: Column(
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              padding: const EdgeInsets.all(13),
+              child: Column(
                 children: [
                   InkWell(
                     onTap: () async {
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1962.pdf';
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1962.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1962.png"),),
-                        Text("1962\n", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1962.png"),
+                      ),
+                      Text(
+                        "1962\n",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(13),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
+            ),
+            Container(
+              padding: const EdgeInsets.all(13),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Column(
                 children: [
                   InkWell(
                     onTap: () async {
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1963.pdf';
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1963.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1962.png"),),
-                        Text("1963\n", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1962.png"),
+                      ),
+                      Text(
+                        "1963\n",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
+            ),
+            Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Column(
                 children: [
                   InkWell(
-                    onTap: () async{
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1964.pdf';
+                    onTap: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1964.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1964.png"),),
-                        Text("1964\n", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1964.png"),
+                      ),
+                      Text(
+                        "1964\n",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(19),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
+            ),
+            Container(
+              padding: const EdgeInsets.all(19),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Column(
                 children: [
                   InkWell(
-                    onTap: () async{
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1965.pdf';
+                    onTap: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1965.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1965.png"),),
-                        Text("1965", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1965.png"),
+                      ),
+                      Text(
+                        "1965",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(19),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
+            ),
+            Container(
+              padding: const EdgeInsets.all(19),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Column(
                 children: [
                   InkWell(
-                    onTap: () async{
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1966.pdf';
+                    onTap: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hespéris-Tamuda 1966.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1966.png"),),
-                        Text("1966", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1966.png"),
+                      ),
+                      Text(
+                        "1966",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(19),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
+            ),
+            Container(
+              padding: const EdgeInsets.all(19),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Column(
                 children: [
                   InkWell(
-                    onTap: () async{
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hesperis-Tamuda 1967.pdf';
+                    onTap: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hesperis-Tamuda 1967.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1967.png"),),
-                        Text("1967", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1967.png"),
+                      ),
+                      Text(
+                        "1967",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
-   
                 ],
               ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(19),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
+            ),
+            Container(
+              padding: const EdgeInsets.all(19),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Column(
                 children: [
                   InkWell(
-                    onTap: () async{
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hesperis-Tamuda 1968.pdf';
+                    onTap: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hesperis-Tamuda 1968.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1968.png"),),
-                        Text("1968", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1968.png"),
+                      ),
+                      Text(
+                        "1968",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(19),
-            decoration: BoxDecoration(border: Border.all(),),
-            child: Column(
+            ),
+            Container(
+              padding: const EdgeInsets.all(19),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Column(
                 children: [
                   InkWell(
-                    onTap: () async{
-                      showDialog(context: context, builder: (context){
-                        return const Center(
-                          child:CircularProgressIndicator() ,
-                        );
-                      });
-                      const url = 'https://hesperis-tamuda.com/Downloads/1960-1969/Hesperis-Tamuda 1969.pdf';
+                    onTap: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                      const url =
+                          'https://hesperis-tamuda.com/Downloads/1960-1969/Hesperis-Tamuda 1969.pdf';
                       final file = await PDFApi.loadNetwork(url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file, fileUrl: url)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PDFViewerPage(file: file, fileUrl: url)),
                       );
-                      },
-                      child: Column(children: const[
-                        Text("Hespéris Tamuda", textAlign: TextAlign.center,),
-                        Image(image: AssetImage("assets/images/1969.png"),fit: BoxFit.fill,),
-                        Text("1969", textAlign: TextAlign.center,),
-                      ]),
+                    },
+                    child: Column(children: const [
+                      Text(
+                        "Hespéris Tamuda",
+                        textAlign: TextAlign.center,
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/1969.png"),
+                        fit: BoxFit.fill,
+                      ),
+                      Text(
+                        "1969",
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
                 ],
               ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
-      ),
-   );
+    );
   }
-  void _onItemTapped(int index) {
+
+  Future<void> _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
-    if (_selectedIndex==0) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(),));
-    } else if(_selectedIndex==1){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchPage(),));
-    }else{
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage(),));
+    if (_selectedIndex == 0) {
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
+    } else if (_selectedIndex == 1) {
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const SearchPage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
+    } else {
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          String? email = prefs.getString("email");
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => email == null
+                ? const LoginScreen()
+                : UserDashboard(
+                    user: user,
+                  ),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     }
   }
 }
-

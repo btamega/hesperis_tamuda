@@ -1,15 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../menu/language.dart';
 import 'package:expandable/expandable.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+
+import 'errorPage.dart';
+import 'loginScreen.dart';
+import 'user/dashboard.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({Key? key}) : super(key: key);
@@ -20,6 +27,12 @@ class ContactPage extends StatefulWidget {
 
 class _ContactPageState extends State<ContactPage> {
   int _selectedIndex = 0;
+  final User user = User(
+      id: 1,
+      name: "KANNOUFA",
+      email: "fkannoufa@gmail.com",
+      emailVerifiedAt: "emailVerifiedAt",
+      createdAt: DateTime.now());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -61,22 +74,55 @@ class _ContactPageState extends State<ContactPage> {
     );
   }
 
-  void _onItemTapped(int index) {
+  Future<void> _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
     if (_selectedIndex == 0) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else if (_selectedIndex == 1) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const SearchPage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const SearchPage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const ProfilePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          String? email = prefs.getString("email");
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => email == null
+                ? const LoginScreen()
+                : UserDashboard(
+                    user: user,
+                  ),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     }
   }
 }

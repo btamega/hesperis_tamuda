@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,22 +7,27 @@ import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/api_response.dart';
 import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
+import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/services/exceptions.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
 import 'package:http/http.dart' as http;
 import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'about.dart';
 import 'archives.dart';
 import 'contact.dart';
 import 'editorial.dart';
+import 'errorPage.dart';
 import 'ethic.dart';
 import 'last_issues.dart';
+import 'loginScreen.dart';
 import 'recommandation.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
+import 'user/dashboard.dart';
 
 final List<String> imgList = [];
 
@@ -71,6 +77,12 @@ class _ArticleListState extends State<ArticleList> {
   late double height;
   late double width;
   late Fascicule fascicule;
+  final User user = User(
+      id: 1,
+      name: "KANNOUFA",
+      email: "fkannoufa@gmail.com",
+      emailVerifiedAt: "emailVerifiedAt",
+      createdAt: DateTime.now());
   void setVignette() async {
     fascicule = await getSommaires(context);
     for (int i = 0; i < fascicule.data[0].vignettes.length; i++) {
@@ -464,22 +476,55 @@ class _ArticleListState extends State<ArticleList> {
     );
   }
 
-  void _onItemTapped(int index) {
+  Future<void> _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
     if (_selectedIndex == 0) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else if (_selectedIndex == 1) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const SearchPage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const SearchPage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const ProfilePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          String? email = prefs.getString("email");
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => email == null
+                ? const LoginScreen()
+                : UserDashboard(
+                    user: user,
+                  ),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     }
   }
 

@@ -4,7 +4,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/views/pages/loginScreen.dart';
 import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
-import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/user/profil.dart';
 import 'package:hesperis_tamuda/widgets/circle_gradient_icon.dart';
 import 'package:hesperis_tamuda/widgets/task_group.dart';
@@ -22,7 +21,6 @@ class _UserDashboardState extends State<UserDashboard> {
   late final SharedPreferences prefs;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

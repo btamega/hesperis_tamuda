@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1921_1929.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1930_1939.dart';
@@ -10,18 +13,21 @@ import 'package:hesperis_tamuda/views/pages/archives/archive_1980_1989.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_1990_1999.dart';
 import 'package:hesperis_tamuda/views/pages/archives/archive_2000_2009.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/profile.dart';
 import 'package:hesperis_tamuda/views/pages/recent_archives.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hesperis_tamuda/views/pages/user/dashboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../menu/language.dart';
 import 'about.dart';
 import 'archives/archive_2010_2019.dart';
 import 'contact.dart';
 import 'editorial.dart';
+import 'errorPage.dart';
 import 'ethic.dart';
 import 'last_issues.dart';
+import 'loginScreen.dart';
 import 'recommandation.dart';
 
 class ArchivePage extends StatefulWidget {
@@ -37,6 +43,12 @@ class _ArchivePageState extends State<ArchivePage> {
   late Size size;
   late double height;
   late double width;
+  final User user = User(
+      id: 1,
+      name: "KANNOUFA",
+      email: "fkannoufa@gmail.com",
+      emailVerifiedAt: "emailVerifiedAt",
+      createdAt: DateTime.now());
   @override
   Widget build(BuildContext context) {
     orientation = MediaQuery.of(context).orientation;
@@ -103,7 +115,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image:
                                     AssetImage("assets/images/cover2020.gif"),
                               ),
@@ -117,7 +129,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
@@ -141,7 +153,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/2001-2.png"),
                               ),
                               Text(
@@ -154,7 +166,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[300],
                       decoration: BoxDecoration(
@@ -178,7 +190,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/2001-2.png"),
                               ),
                               Text(
@@ -191,7 +203,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       decoration: BoxDecoration(
                         border: Border.all(),
@@ -214,7 +226,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/1991.jpg"),
                               ),
                               Text(
@@ -227,7 +239,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[400],
                       decoration: BoxDecoration(
@@ -251,7 +263,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/1980-81.png"),
                               ),
                               Text(
@@ -264,7 +276,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[400],
                       decoration: BoxDecoration(
@@ -288,7 +300,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/1972.png"),
                               ),
                               Text(
@@ -301,7 +313,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[300],
                       decoration: BoxDecoration(
@@ -325,7 +337,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/1966.png"),
                               ),
                               Text(
@@ -338,7 +350,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       decoration: BoxDecoration(
                         border: Border.all(),
@@ -361,7 +373,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/1952ht.png"),
                               ),
                               Text(
@@ -374,7 +386,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       decoration: BoxDecoration(
                         border: Border.all(),
@@ -397,7 +409,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/1943ht.jpg"),
                                 fit: BoxFit.fill,
                               ),
@@ -411,8 +423,8 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
-                      // padding: const EdgeInsets.all(21),
+                      height: height / 2.5,
+                      // padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
@@ -434,7 +446,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: 275,
+                                // height: 275,
                                 image: AssetImage("assets/images/1931ht.jpg"),
                               ),
                               Text(
@@ -447,7 +459,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      height: height,
+                      height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[400],
                       decoration: BoxDecoration(
@@ -517,16 +529,17 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const RecentArchives()),
                               );
                             },
-                            child: Column(children: const [
-                              Text(
+                            child: Column(children: [
+                              const Text(
                                 "Hespéris-Tamuda",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                image:
-                                    AssetImage("assets/images/cover2020.gif"),
+                                height: height,
+                                image: const AssetImage(
+                                    "assets/images/cover2020.gif"),
                               ),
-                              Text(
+                              const Text(
                                 "(2020-2021)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -830,7 +843,8 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(21),
+                      // height: height * .1,
+                      padding: const EdgeInsets.all(19),
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
@@ -912,22 +926,55 @@ class _ArchivePageState extends State<ArchivePage> {
     );
   }
 
-  void _onItemTapped(int index) {
+  Future<void> _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
     if (_selectedIndex == 0) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else if (_selectedIndex == 1) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const SearchPage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const SearchPage(),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     } else {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const ProfilePage(),
-      ));
+      try {
+        final result = await InternetAddress.lookup('www.google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          String? email = prefs.getString("email");
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => email == null
+                ? const LoginScreen()
+                : UserDashboard(
+                    user: user,
+                  ),
+          ));
+        }
+      } on SocketException catch (_) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ErrorPage(),
+        ));
+      }
     }
   }
 
