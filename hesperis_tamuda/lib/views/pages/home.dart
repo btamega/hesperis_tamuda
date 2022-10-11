@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:ui' as ui;
 import 'package:hesperis_tamuda/views/pages/user/dashboard.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'errorPage.dart';
@@ -153,6 +154,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+
     if (_selectedIndex == 0) {
       try {
         final result = await InternetAddress.lookup('www.google.com');

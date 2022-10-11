@@ -529,8 +529,8 @@ class _ArchiveListeState extends State<ArchiveListe> {
     });
     if (_selectedIndex == 0) {
       try {
-        final result = await InternetAddress.lookup('www.google.com');
-        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        bool result = await InternetConnectionChecker().hasConnection;
+        if (result == true) {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const HomePage(),
           ));

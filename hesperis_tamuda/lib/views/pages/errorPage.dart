@@ -58,7 +58,23 @@ class ErrorPage extends StatelessWidget {
                     Center(
                         child: ElevatedButton(
                       style: raisedButtonStyle,
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          final result =
+                              await InternetAddress.lookup('www.google.com');
+                          if (result.isNotEmpty &&
+                              result[0].rawAddress.isNotEmpty) {
+                            debugPrint("Connecté");
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ));
+                          }
+                        } on SocketException catch (_) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const ErrorPage(),
+                          ));
+                        }
+                      },
                       child: const Text('Actualiser'),
                     )),
                   ],
@@ -89,6 +105,7 @@ class ErrorPage extends StatelessWidget {
                               await InternetAddress.lookup('www.google.com');
                           if (result.isNotEmpty &&
                               result[0].rawAddress.isNotEmpty) {
+                            debugPrint("Connecté");
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const HomePage(),
                             ));

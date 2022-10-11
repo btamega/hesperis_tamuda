@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
+import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/loginScreen.dart';
 import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
 import 'package:hesperis_tamuda/views/pages/user/profil.dart';
@@ -28,6 +29,7 @@ class _UserDashboardState extends State<UserDashboard> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
           title: Text(
             widget.user.name,
@@ -68,26 +70,26 @@ class _UserDashboardState extends State<UserDashboard> {
               ),
             )
           ],
-          leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: const BoxDecoration(
-                color: Colors.purple,
-                shape: BoxShape.circle,
-              ),
-              child: InkWell(
-                onTap: () {},
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: const Icon(
-                  Icons.menu_rounded,
-                ),
-              ),
-            ),
-          ),
+          // leading: Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: Container(
+          //     width: 50,
+          //     height: 50,
+          //     decoration: const BoxDecoration(
+          //       color: Colors.purple,
+          //       shape: BoxShape.circle,
+          //     ),
+          //     child: InkWell(
+          //       onTap: () {},
+          //       customBorder: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(100),
+          //       ),
+          //       child: const Icon(
+          //         Icons.menu_rounded,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ),
         extendBody: true,
         body: _buildBody(),

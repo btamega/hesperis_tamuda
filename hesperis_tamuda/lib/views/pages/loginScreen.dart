@@ -20,6 +20,7 @@ const users = {
 
 class LoginScreen extends StatelessWidget {
   final int _selectedIndex = 0;
+
   const LoginScreen({Key? key}) : super(key: key);
 
   Duration get loginTime => const Duration(milliseconds: 2250);
@@ -43,6 +44,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
+    Size size = MediaQuery.of(context).size;
+    double height = size.height;
+    double width = size.width;
     Future<String?> _authUser(LoginData data) async {
       Statut statut;
       try {
@@ -93,16 +98,6 @@ class LoginScreen extends StatelessWidget {
         ).show();
       }
       return null;
-      // debugPrint('Name: ${data.name}, Password: ${data.password}');
-      // return Future.delayed(loginTime).then((_) {
-      //   if (!users.containsKey(data.name)) {
-      //     return 'User not exists';
-      //   }
-      //   if (users[data.name] != data.password) {
-      //     return 'Password does not match';
-      //   }
-      //   return null;
-      // });
     }
 
     return SafeArea(
@@ -117,41 +112,56 @@ class LoginScreen extends StatelessWidget {
           backgroundColor: const Color(0xff3b5998),
           actions: const [LanguagePickerWidget()],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black,
-          currentIndex: _selectedIndex,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          ],
-          // onTap: _onItemTapped,
-        ),
-        body: FlutterLogin(
-          theme: LoginTheme(
-            buttonTheme: const LoginButtonTheme(
-                backgroundColor: Color.fromARGB(255, 221, 143, 231)),
-            inputTheme: const InputDecorationTheme(
-                fillColor: Colors.white,
-                labelStyle: TextStyle(color: Colors.white)),
-            textFieldStyle: const TextStyle(color: Colors.white),
-            cardTheme: const CardTheme(
-              color: Color(0xff3b5998),
-            ),
-            primaryColor: Colors.white,
-          ),
-          title: AppLocalizations.of(context)!.login,
-          logo: const AssetImage('assets/images/hesperis.png'),
-          onLogin: _authUser,
-          onSignup: _signupUser,
-          onSubmitAnimationCompleted: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => const HomePage(),
-            ));
-          },
-          onRecoverPassword: _recoverPassword,
-        ),
+        body: orientation == Orientation.portrait
+            ? FlutterLogin(
+                theme: LoginTheme(
+                  buttonTheme: const LoginButtonTheme(
+                      backgroundColor: Color.fromARGB(255, 221, 143, 231)),
+                  inputTheme: const InputDecorationTheme(
+                      fillColor: Colors.white,
+                      labelStyle: TextStyle(color: Colors.white)),
+                  textFieldStyle: const TextStyle(color: Colors.white),
+                  cardTheme: const CardTheme(
+                    color: Color(0xff3b5998),
+                  ),
+                  primaryColor: Colors.white,
+                ),
+                title: AppLocalizations.of(context)!.login,
+                logo: const AssetImage('assets/images/hesperis.png'),
+                onLogin: _authUser,
+                onSignup: _signupUser,
+                onSubmitAnimationCompleted: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ));
+                },
+                onRecoverPassword: _recoverPassword,
+              )
+            : FlutterLogin(
+                disableCustomPageTransformer: false,
+                theme: LoginTheme(
+                  buttonTheme: const LoginButtonTheme(
+                      backgroundColor: Color.fromARGB(255, 221, 143, 231)),
+                  inputTheme: const InputDecorationTheme(
+                      fillColor: Colors.white,
+                      labelStyle: TextStyle(color: Colors.white)),
+                  textFieldStyle: const TextStyle(color: Colors.white),
+                  cardTheme: const CardTheme(
+                    color: Color(0xff3b5998),
+                  ),
+                  primaryColor: Colors.white,
+                ),
+                title: AppLocalizations.of(context)!.login,
+                logo: const AssetImage('assets/images/hesperis.png'),
+                onLogin: _authUser,
+                onSignup: _signupUser,
+                onSubmitAnimationCompleted: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ));
+                },
+                onRecoverPassword: _recoverPassword,
+              ),
       ),
     );
   }

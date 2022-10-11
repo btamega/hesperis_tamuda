@@ -15,6 +15,7 @@ import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
 import 'package:http/http.dart' as http;
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'about.dart';
 import 'archives.dart';
@@ -28,8 +29,6 @@ import 'recommandation.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'user/dashboard.dart';
-
-final List<String> imgList = [];
 
 // ignore: must_be_immutable
 class ImageDialog extends StatelessWidget {
@@ -72,6 +71,7 @@ class ArticleList extends StatefulWidget {
 }
 
 class _ArticleListState extends State<ArticleList> {
+  late List<String> imgList;
   late Orientation orientation;
   late Size size;
   late double height;
@@ -86,12 +86,14 @@ class _ArticleListState extends State<ArticleList> {
   void setVignette() async {
     fascicule = await getSommaires(context);
     for (int i = 0; i < fascicule.data[0].vignettes.length; i++) {
+      debugPrint(fascicule.data[0].vignettes[i].path);
       imgList.add(rootURL + '/' + fascicule.data[0].vignettes[i].path);
     }
   }
 
   @override
   void initState() {
+    imgList = [];
     super.initState();
     setVignette();
   }
@@ -104,6 +106,15 @@ class _ArticleListState extends State<ArticleList> {
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
+    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+      foregroundColor: Colors.black87,
+      backgroundColor: Colors.grey[300],
+      minimumSize: const Size(88, 36),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(2)),
+      ),
+    );
     return SafeArea(
       child: Scaffold(
           drawer: const NavigationDrawerWidget(),
@@ -132,6 +143,12 @@ class _ArticleListState extends State<ArticleList> {
           body: RefreshIndicator(
             onRefresh: () async {
               await getSommaires(context);
+              setState(() {
+                setVignette();
+              });
+              for (int i = 0; i < imgList.length; i++) {
+                debugPrint("Le contenu de la variable " + imgList[i]);
+              }
             },
             child: ListView(
               physics: const ClampingScrollPhysics(),
@@ -344,6 +361,24 @@ class _ArticleListState extends State<ArticleList> {
                                                                                       textAlign: TextAlign.center,
                                                                                     ),
                                                                                   ),
+                                                                                  Center(
+                                                                                      child: ElevatedButton(
+                                                                                    style: raisedButtonStyle,
+                                                                                    onPressed: () async {
+                                                                                      try {
+                                                                                        bool result = await InternetConnectionChecker().hasConnection;
+
+                                                                                        if (result == true) {
+                                                                                          await getSommaires(context);
+                                                                                        }
+                                                                                      } on SocketException catch (_) {
+                                                                                        Navigator.of(context).push(MaterialPageRoute(
+                                                                                          builder: (context) => const ErrorPage(),
+                                                                                        ));
+                                                                                      }
+                                                                                    },
+                                                                                    child: const Text('Actualiser'),
+                                                                                  )),
                                                                                 ],
                                                                               ),
                                                                             );
@@ -410,6 +445,37 @@ class _ArticleListState extends State<ArticleList> {
                                                                         .center,
                                                               ),
                                                             ),
+                                                            Center(
+                                                                child:
+                                                                    ElevatedButton(
+                                                              style:
+                                                                  raisedButtonStyle,
+                                                              onPressed:
+                                                                  () async {
+                                                                try {
+                                                                  bool result =
+                                                                      await InternetConnectionChecker()
+                                                                          .hasConnection;
+
+                                                                  if (result ==
+                                                                      true) {
+                                                                    await getSommaires(
+                                                                        context);
+                                                                  }
+                                                                } on SocketException catch (_) {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(
+                                                                          MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            const ErrorPage(),
+                                                                  ));
+                                                                }
+                                                              },
+                                                              child: const Text(
+                                                                  'Actualiser'),
+                                                            )),
                                                           ],
                                                         ),
                                                       );
@@ -456,6 +522,28 @@ class _ArticleListState extends State<ArticleList> {
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
+                                    Center(
+                                        child: ElevatedButton(
+                                      style: raisedButtonStyle,
+                                      onPressed: () async {
+                                        try {
+                                          bool result =
+                                              await InternetConnectionChecker()
+                                                  .hasConnection;
+
+                                          if (result == true) {
+                                            setState(() {});
+                                          }
+                                        } on SocketException catch (_) {
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ErrorPage(),
+                                          ));
+                                        }
+                                      },
+                                      child: const Text('Actualiser'),
+                                    )),
                                   ],
                                 ),
                               );
