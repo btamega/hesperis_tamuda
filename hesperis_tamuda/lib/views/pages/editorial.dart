@@ -24,12 +24,7 @@ class EditorialCommitteePage extends StatefulWidget {
 
 class _EditorialCommitteePageState extends State<EditorialCommitteePage> {
   int _selectedIndex = 0;
-  final User user = User(
-      id: 1,
-      name: "KANNOUFA",
-      email: "fkannoufa@gmail.com",
-      emailVerifiedAt: "emailVerifiedAt",
-      createdAt: DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

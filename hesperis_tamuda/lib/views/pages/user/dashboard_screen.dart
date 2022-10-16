@@ -148,7 +148,9 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   Widget _buildHeader(ThemeData theme) {
     const accentColor = Color.fromARGB(255, 171, 111, 210);
-
+    final Orientation orientation = MediaQuery.of(context).orientation;
+    final Size size = MediaQuery.of(context).size;
+    final double width = size.width;
     return ScaleTransition(
       scale: _headerScaleAnimation,
       child: FadeIn(
@@ -156,34 +158,56 @@ class _DashboardScreenState extends State<DashboardScreen>
         curve: headerAniInterval,
         fadeDirection: FadeDirection.bottomToTop,
         offset: .5,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  '\$',
-                  style: theme.textTheme.headline3!.copyWith(
-                    fontWeight: FontWeight.w300,
-                    color: accentColor,
+        child: orientation == Orientation.portrait
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Welcome',
+                        style: theme.textTheme.headline3!.copyWith(
+                          fontWeight: FontWeight.w300,
+                          color: accentColor,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                    ],
                   ),
-                ),
-                const SizedBox(width: 5),
-                // AnimatedText(
-                //   initialValue: 14,
-                //   targetValue: 3467.87,
-                //   curve: const Interval(0, .5, curve: Curves.easeOut),
-                //   controller: _loadingController!,
-                //   style: theme.textTheme.headline3!.copyWith(
-                //     foreground: Paint()..shader = linearGradient,
-                //   ),
-                // ),
-              ],
-            ),
-            Text('Tableau de bord', style: theme.textTheme.caption),
-          ],
-        ),
+                  Text(
+                    'User dashboard',
+                    style: theme.textTheme.caption,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Welcome',
+                          style: theme.textTheme.headline4!.copyWith(
+                            fontWeight: FontWeight.w300,
+                            color: accentColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    'User dashboard',
+                    style: theme.textTheme.caption,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
       ),
     );
   }
@@ -237,71 +261,112 @@ class _DashboardScreenState extends State<DashboardScreen>
   Widget _buildDashboardGrid() {
     const step = 0.04;
     const aniInterval = 0.75;
-
-    return GridView.count(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 32.0,
-        vertical: 20,
-      ),
-      childAspectRatio: .9,
-      // crossAxisSpacing: 5,
-      crossAxisCount: 3,
-      children: [
-        _buildButton(
-          icon: const Icon(FontAwesomeIcons.user),
-          label: 'Profile',
-          interval: const Interval(0, aniInterval),
-        ),
-        _buildButton(
-          icon: Container(
-            // fix icon is not centered like others for some reasons
-            padding: const EdgeInsets.only(left: 16.0),
-            alignment: Alignment.centerLeft,
-            child: const Icon(
-              FontAwesomeIcons.moneyBill1,
-              size: 20,
+    final Orientation orientation = MediaQuery.of(context).orientation;
+    final Size size = MediaQuery.of(context).size;
+    final double width = size.width;
+    return orientation == Orientation.portrait
+        ? GridView.count(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 32.0,
+              vertical: 20,
             ),
-          ),
-          label: 'Fund Transfer',
-          interval: const Interval(step, aniInterval + step),
-        ),
-        _buildButton(
-          icon: const Icon(FontAwesomeIcons.handHoldingDollar),
-          label: 'Payment',
-          interval: const Interval(step * 2, aniInterval + step * 2),
-        ),
-        _buildButton(
-          icon: const Icon(FontAwesomeIcons.chartLine),
-          label: 'Report',
-          interval: const Interval(0, aniInterval),
-        ),
-        _buildButton(
-          icon: const Icon(Icons.vpn_key),
-          label: 'Register',
-          interval: const Interval(step, aniInterval + step),
-        ),
-        _buildButton(
-          icon: const Icon(FontAwesomeIcons.clockRotateLeft),
-          label: 'History',
-          interval: const Interval(step * 2, aniInterval + step * 2),
-        ),
-        _buildButton(
-          icon: const Icon(FontAwesomeIcons.ellipsis),
-          label: 'Other',
-          interval: const Interval(0, aniInterval),
-        ),
-        _buildButton(
-          icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
-          label: 'Search',
-          interval: const Interval(step, aniInterval + step),
-        ),
-        _buildButton(
-          icon: const Icon(FontAwesomeIcons.sliders, size: 20),
-          label: 'Settings',
-          interval: const Interval(step * 2, aniInterval + step * 2),
-        ),
-      ],
-    );
+            childAspectRatio: .9,
+            crossAxisCount: 3,
+            children: [
+              _buildButton(
+                icon: const Icon(FontAwesomeIcons.user),
+                label: 'Profile',
+                interval: const Interval(0, aniInterval),
+              ),
+              _buildButton(
+                icon: const Icon(FontAwesomeIcons.message),
+                label: 'Notifications',
+                interval: const Interval(step * 2, aniInterval + step * 2),
+              ),
+              _buildButton(
+                icon: const Icon(FontAwesomeIcons.download),
+                label: 'Downloads',
+                interval: const Interval(0, aniInterval),
+              ),
+              _buildButton(
+                icon: const Icon(Icons.newspaper),
+                label: 'Newsletter',
+                interval: const Interval(step, aniInterval + step),
+              ),
+              _buildButton(
+                icon: const Icon(FontAwesomeIcons.clockRotateLeft),
+                label: 'History',
+                interval: const Interval(step * 2, aniInterval + step * 2),
+              ),
+              _buildButton(
+                icon: const Icon(FontAwesomeIcons.ellipsis),
+                label: 'Other',
+                interval: const Interval(0, aniInterval),
+              ),
+              _buildButton(
+                icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+                label: 'Search',
+                interval: const Interval(step, aniInterval + step),
+              ),
+              _buildButton(
+                icon: const Icon(FontAwesomeIcons.sliders, size: 20),
+                label: 'Settings',
+                interval: const Interval(step * 2, aniInterval + step * 2),
+              ),
+            ],
+          )
+        : Center(
+            child: GridView.count(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 180.0,
+                vertical: 15,
+              ),
+              childAspectRatio: 1,
+              crossAxisCount: 4,
+              children: [
+                _buildButton(
+                  icon: const Icon(FontAwesomeIcons.user),
+                  label: 'Profile',
+                  interval: const Interval(0, aniInterval),
+                ),
+                _buildButton(
+                  icon: const Icon(FontAwesomeIcons.message),
+                  label: 'Notifications',
+                  interval: const Interval(step * 2, aniInterval + step * 2),
+                ),
+                _buildButton(
+                  icon: const Icon(FontAwesomeIcons.download),
+                  label: 'Downloads',
+                  interval: const Interval(0, aniInterval),
+                ),
+                _buildButton(
+                  icon: const Icon(Icons.newspaper),
+                  label: 'Newsletter',
+                  interval: const Interval(step, aniInterval + step),
+                ),
+                _buildButton(
+                  icon: const Icon(FontAwesomeIcons.clockRotateLeft),
+                  label: 'History',
+                  interval: const Interval(step * 2, aniInterval + step * 2),
+                ),
+                _buildButton(
+                  icon: const Icon(FontAwesomeIcons.ellipsis),
+                  label: 'Other',
+                  interval: const Interval(0, aniInterval),
+                ),
+                _buildButton(
+                  icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+                  label: 'Search',
+                  interval: const Interval(step, aniInterval + step),
+                ),
+                _buildButton(
+                  icon: const Icon(FontAwesomeIcons.sliders, size: 20),
+                  label: 'Settings',
+                  interval: const Interval(step * 2, aniInterval + step * 2),
+                ),
+              ],
+            ),
+          );
   }
 
   @override
@@ -313,44 +378,39 @@ class _DashboardScreenState extends State<DashboardScreen>
       child: SafeArea(
         child: Scaffold(
           drawer: const NavigationDrawerWidget(),
-          // appBar: AppBar(title: Text("Hesperis")),
           appBar: _buildAppBar(theme),
           body: Container(
             width: double.infinity,
             height: double.infinity,
-            color: theme.primaryColor.withOpacity(.1),
-            child: Stack(
+            color: const Color.fromARGB(255, 255, 241, 241),
+            child: Column(
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    const SizedBox(height: 40),
-                    Expanded(
-                      flex: 2,
-                      child: _buildHeader(theme),
-                    ),
-                    Expanded(
-                      flex: 8,
-                      child: ShaderMask(
-                        // blendMode: BlendMode.srcOver,
-                        shaderCallback: (Rect bounds) {
-                          return LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            tileMode: TileMode.clamp,
-                            colors: <Color>[
-                              Colors.deepPurpleAccent.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              // Colors.red,
-                              // Colors.yellow,
-                            ],
-                          ).createShader(bounds);
-                        },
-                        child: _buildDashboardGrid(),
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 30),
+                Expanded(
+                  flex: 2,
+                  child: _buildHeader(theme),
+                ),
+                Expanded(
+                  flex: 8,
+                  child: ShaderMask(
+                    // blendMode: BlendMode.srcOver,
+                    shaderCallback: (Rect bounds) {
+                      return LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        tileMode: TileMode.clamp,
+                        colors: <Color>[
+                          Colors.deepPurpleAccent.shade100,
+                          Colors.white,
+                          Colors.white,
+                          Colors.deepPurple.shade200,
+                          // Colors.red,
+                          // Colors.yellow,
+                        ],
+                      ).createShader(bounds);
+                    },
+                    child: _buildDashboardGrid(),
+                  ),
                 ),
               ],
             ),

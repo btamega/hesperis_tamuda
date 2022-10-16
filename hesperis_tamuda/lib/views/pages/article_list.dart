@@ -77,12 +77,7 @@ class _ArticleListState extends State<ArticleList> {
   late double height;
   late double width;
   late Fascicule fascicule;
-  final User user = User(
-      id: 1,
-      name: "KANNOUFA",
-      email: "fkannoufa@gmail.com",
-      emailVerifiedAt: "emailVerifiedAt",
-      createdAt: DateTime.now());
+
   void setVignette() async {
     fascicule = await getSommaires(context);
     for (int i = 0; i < fascicule.data[0].vignettes.length; i++) {

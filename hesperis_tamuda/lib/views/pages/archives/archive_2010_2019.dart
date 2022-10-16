@@ -30,12 +30,7 @@ class _Archive20102019State extends State<Archive20102019> {
   late Size size;
   late double height;
   late double width;
-  final User user = User(
-      id: 1,
-      name: "KANNOUFA",
-      email: "fkannoufa@gmail.com",
-      emailVerifiedAt: "emailVerifiedAt",
-      createdAt: DateTime.now());
+
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     foregroundColor: Colors.black87,
     backgroundColor: Colors.grey[300],

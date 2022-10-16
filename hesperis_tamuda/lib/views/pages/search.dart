@@ -20,12 +20,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   int _selectedIndex = 0;
   Icon customIcon = const Icon(Icons.search);
-  final User user = User(
-      id: 1,
-      name: "KANNOUFA",
-      email: "fkannoufa@gmail.com",
-      emailVerifiedAt: "emailVerifiedAt",
-      createdAt: DateTime.now());
+
   late Widget customSearchBar = const Text("SEARCH");
   @override
   void initState() {

@@ -15,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'errorPage.dart';
 import 'loginScreen.dart';
-import 'user/dashboard.dart';
 import 'user/dashboard_screen.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -30,12 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final User user = User(
-      id: 1,
-      name: "KANNOUFA",
-      email: "fkannoufa@gmail.com",
-      emailVerifiedAt: "emailVerifiedAt",
-      createdAt: DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -235,12 +229,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 .getInstance();
                                         prefs.setString(
                                             'email', statut.user!.email);
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                          builder: (context) => UserDashboard(
-                                            user: statut.user as User,
-                                          ),
-                                        ));
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const DashboardScreen()));
                                       },
                                     ).show();
                                   }

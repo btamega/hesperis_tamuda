@@ -23,12 +23,7 @@ class Archive19301939 extends StatefulWidget {
 
 class _Archive19301939State extends State<Archive19301939> {
   int _selectedIndex = 0;
-  final User user = User(
-      id: 1,
-      name: "KANNOUFA",
-      email: "fkannoufa@gmail.com",
-      emailVerifiedAt: "emailVerifiedAt",
-      createdAt: DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -43,12 +43,6 @@ class _ArchivePageState extends State<ArchivePage> {
   late Size size;
   late double height;
   late double width;
-  final User user = User(
-      id: 1,
-      name: "KANNOUFA",
-      email: "fkannoufa@gmail.com",
-      emailVerifiedAt: "emailVerifiedAt",
-      createdAt: DateTime.now());
   @override
   Widget build(BuildContext context) {
     orientation = MediaQuery.of(context).orientation;
