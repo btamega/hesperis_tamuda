@@ -16,7 +16,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'errorPage.dart';
 import 'loginScreen.dart';
-import 'user/dashboard.dart';
+import 'user/dashboard_screen.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({Key? key}) : super(key: key);
@@ -111,12 +111,9 @@ class _ContactPageState extends State<ContactPage> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(

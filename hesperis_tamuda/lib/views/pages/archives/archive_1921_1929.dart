@@ -11,9 +11,8 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/loginScreen.dart';
 import 'package:hesperis_tamuda/views/pages/pdf_reader.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
+import 'package:hesperis_tamuda/views/pages/user/dashboard_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../user/dashboard.dart';
 
 class Archive19201929 extends StatefulWidget {
   const Archive19201929({Key? key}) : super(key: key);
@@ -503,12 +502,9 @@ class _Archive19201929State extends State<Archive19201929> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(

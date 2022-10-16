@@ -28,7 +28,7 @@ import 'loginScreen.dart';
 import 'recommandation.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import 'user/dashboard.dart';
+import 'user/dashboard_screen.dart';
 
 // ignore: must_be_immutable
 class ImageDialog extends StatelessWidget {
@@ -601,12 +601,9 @@ class _ArticleListState extends State<ArticleList> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(

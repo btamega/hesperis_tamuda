@@ -9,8 +9,9 @@ import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/user/dashboard.dart';
+// import 'package:hesperis_tamuda/views/pages/user/dashboard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hesperis_tamuda/views/pages/user/dashboard_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const users = {
@@ -19,8 +20,6 @@ const users = {
 };
 
 class LoginScreen extends StatelessWidget {
-  final int _selectedIndex = 0;
-
   const LoginScreen({Key? key}) : super(key: key);
 
   Duration get loginTime => const Duration(milliseconds: 2250);
@@ -45,9 +44,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
-    Size size = MediaQuery.of(context).size;
-    double height = size.height;
-    double width = size.width;
     Future<String?> _authUser(LoginData data) async {
       Statut statut;
       try {
@@ -75,9 +71,7 @@ class LoginScreen extends StatelessWidget {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setString('email', statut.user!.email);
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => UserDashboard(
-                  user: statut.user as User,
-                ),
+                builder: (context) => const DashboardScreen(),
               ));
             },
           ).show();

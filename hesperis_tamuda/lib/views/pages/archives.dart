@@ -17,7 +17,6 @@ import 'package:hesperis_tamuda/views/pages/recent_archives.dart';
 import 'package:hesperis_tamuda/views/pages/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hesperis_tamuda/views/pages/user/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../menu/language.dart';
 import 'about.dart';
@@ -29,6 +28,7 @@ import 'ethic.dart';
 import 'last_issues.dart';
 import 'loginScreen.dart';
 import 'recommandation.dart';
+import 'user/dashboard_screen.dart';
 
 class ArchivePage extends StatefulWidget {
   const ArchivePage({Key? key}) : super(key: key);
@@ -963,12 +963,9 @@ class _ArchivePageState extends State<ArchivePage> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(

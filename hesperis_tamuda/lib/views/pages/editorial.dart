@@ -13,7 +13,7 @@ import 'errorPage.dart';
 import 'home.dart';
 import 'loginScreen.dart';
 import 'search.dart';
-import 'user/dashboard.dart';
+import 'user/dashboard_screen.dart';
 
 class EditorialCommitteePage extends StatefulWidget {
   const EditorialCommitteePage({Key? key}) : super(key: key);
@@ -750,12 +750,9 @@ class _EditorialCommitteePageState extends State<EditorialCommitteePage> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(

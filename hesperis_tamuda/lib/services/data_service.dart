@@ -150,3 +150,24 @@ Future<Statut> authenticate(String email, String password) async {
     throw Exception('Failed to log in.');
   }
 }
+
+Future<Statut> getUser(String email) async {
+  final response = await http.post(
+    Uri.parse(rootURL + '/api/getUserData'),
+    headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: jsonEncode(<String, String>{
+      'email': email,
+    }),
+  );
+  if (response.statusCode == 200) {
+    final statut = statutFromJson(response.body.toString());
+    return statut;
+  } else if (response.statusCode == 201) {
+    return statutFromJson(response.body.toString());
+  } else {
+    throw Exception('Failed to log in.');
+  }
+}

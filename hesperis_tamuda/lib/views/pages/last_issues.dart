@@ -24,7 +24,7 @@ import 'recommandation.dart';
 import '../menu/language.dart';
 import 'package:http/http.dart' as http;
 
-import 'user/dashboard.dart';
+import 'user/dashboard_screen.dart';
 
 class LastIssuesPage extends StatefulWidget {
   const LastIssuesPage({Key? key}) : super(key: key);
@@ -377,12 +377,9 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(

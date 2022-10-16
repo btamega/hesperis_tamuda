@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'errorPage.dart';
 import 'loginScreen.dart';
-import 'user/dashboard.dart';
+import 'user/dashboard_screen.dart';
 
 class PublicationEthicPage extends StatefulWidget {
   const PublicationEthicPage({Key? key}) : super(key: key);
@@ -811,12 +811,9 @@ class _PublicationEthicPageState extends State<PublicationEthicPage> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(

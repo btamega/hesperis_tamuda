@@ -24,7 +24,7 @@ import 'package:http/http.dart' as http;
 import 'loginScreen.dart';
 import 'recent_archives.dart';
 import 'recommandation.dart';
-import 'user/dashboard.dart';
+import 'user/dashboard_screen.dart';
 
 class ArchiveListe extends StatefulWidget {
   final int idVolume;
@@ -560,12 +560,9 @@ class _ArchiveListeState extends State<ArchiveListe> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String? email = prefs.getString("email");
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => email == null
-                ? const LoginScreen()
-                : UserDashboard(
-                    user: user,
-                  ),
-          ));
+              builder: (context) => email == null
+                  ? const LoginScreen()
+                  : const DashboardScreen()));
         }
       } on SocketException catch (_) {
         Navigator.of(context).push(MaterialPageRoute(
