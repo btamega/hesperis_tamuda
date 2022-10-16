@@ -149,8 +149,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   Widget _buildHeader(ThemeData theme) {
     const accentColor = Color.fromARGB(255, 171, 111, 210);
     final Orientation orientation = MediaQuery.of(context).orientation;
-    final Size size = MediaQuery.of(context).size;
-    final double width = size.width;
     return ScaleTransition(
       scale: _headerScaleAnimation,
       child: FadeIn(
@@ -262,8 +260,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     const step = 0.04;
     const aniInterval = 0.75;
     final Orientation orientation = MediaQuery.of(context).orientation;
-    final Size size = MediaQuery.of(context).size;
-    final double width = size.width;
     return orientation == Orientation.portrait
         ? GridView.count(
             padding: const EdgeInsets.symmetric(

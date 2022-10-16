@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:hesperis_tamuda/views/pages/errorPage.dart';
@@ -46,7 +45,7 @@ class _AboutPageState extends State<AboutPage> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Account"),
           ],
           onTap: _onItemTapped,
         ),

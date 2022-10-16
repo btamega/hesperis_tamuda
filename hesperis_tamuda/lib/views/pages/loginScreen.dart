@@ -99,7 +99,7 @@ class LoginScreen extends StatelessWidget {
         drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
           title: Text(
-            'PROFILE',
+            'AUTHENTIFICATION',
             style: GoogleFonts.ibarraRealNova(),
           ),
           centerTitle: true,

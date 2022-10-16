@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../include/navbar.dart';
 import '../menu/language.dart';
@@ -48,7 +47,7 @@ class _EditorialCommitteePageState extends State<EditorialCommitteePage> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.search), label: "Search"),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: "Profile"),
+                  icon: Icon(Icons.person), label: "Account"),
             ]),
         body: Stack(
           children: [

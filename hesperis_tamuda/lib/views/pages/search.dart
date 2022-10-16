@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -82,7 +81,7 @@ class _SearchPageState extends State<SearchPage> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Account"),
           ],
           onTap: _onItemTapped,
         ),

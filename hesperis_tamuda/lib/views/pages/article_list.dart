@@ -7,7 +7,6 @@ import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/api_response.dart';
 import 'package:hesperis_tamuda/models/article.dart';
 import 'package:hesperis_tamuda/models/fascicule.dart';
-import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/services/exceptions.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
@@ -131,7 +130,7 @@ class _ArticleListState extends State<ArticleList> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.search), label: "Search"),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: "Profile"),
+                  icon: Icon(Icons.person), label: "Account"),
             ],
             onTap: _onItemTapped,
           ),
@@ -141,9 +140,6 @@ class _ArticleListState extends State<ArticleList> {
               setState(() {
                 setVignette();
               });
-              for (int i = 0; i < imgList.length; i++) {
-                debugPrint("Le contenu de la variable " + imgList[i]);
-              }
             },
             child: ListView(
               physics: const ClampingScrollPhysics(),
