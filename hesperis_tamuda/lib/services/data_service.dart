@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:hesperis_tamuda/models/auth.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/models/volume.dart';
 import 'package:hesperis_tamuda/services/exceptions.dart';
@@ -93,14 +94,6 @@ Future createCommentaire(
   } catch (e) {
     throw ExceptionHandlers().getExceptionString(e, context);
   }
-
-  // if (response.statusCode == 201) {
-  //   return jsonDecode(response.body);
-  // } else if (response.statusCode == 200) {
-  //   return jsonDecode(response.body);
-  // } else {
-  //   throw Exception('Failed to create Commentaire.');
-  // }
 }
 
 Future<Statut> createUser(String name, String email, String password) async {
@@ -151,7 +144,7 @@ Future<Statut> authenticate(String email, String password) async {
   }
 }
 
-Future<Statut> getUser(String email) async {
+Future<Auth> getUser(String email) async {
   final response = await http.post(
     Uri.parse(rootURL + '/api/getUserData'),
     headers: <String, String>{
@@ -163,10 +156,10 @@ Future<Statut> getUser(String email) async {
     }),
   );
   if (response.statusCode == 200) {
-    final statut = statutFromJson(response.body.toString());
+    final statut = authFromJson(response.body.toString());
     return statut;
   } else if (response.statusCode == 201) {
-    return statutFromJson(response.body.toString());
+    return authFromJson(response.body.toString());
   } else {
     throw Exception('Failed to log in.');
   }

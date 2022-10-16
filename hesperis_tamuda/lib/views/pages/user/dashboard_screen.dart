@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart' as dialog;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_login/widgets.dart';
+import 'package:hesperis_tamuda/models/auth.dart';
 import 'package:hesperis_tamuda/models/statut.dart' as auth;
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
@@ -89,6 +90,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           btnOkOnPress: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
             prefs.remove("email");
+            prefs.remove("password");
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => const LoginScreen(),
             ));
@@ -198,30 +200,27 @@ class _DashboardScreenState extends State<DashboardScreen>
         curve: const ElasticOutCurve(0.42),
       ),
       onPressed: () async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String email = prefs.getString("email") as String;
+
         switch (label) {
           case "Profile":
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            String email = prefs.getString("email") as String;
-            final statut = await getUser(email);
-            print(statut.user!.name);
-            final name = statut.user!.name;
-            // final email = statut.user!.email;
-
-            // Check if user's email is verified
-            final emailVerified = statut.user!.emailVerifiedAt;
-            final uid = statut.user!.id;
-            final createdAt = statut.user!.createdAt;
-            // final auth.User authenticatedUser = auth.User(
-            //     id: uid,
-            //     name: name,
-            //     email: email,
-            //     emailVerifiedAt: emailVerified,
-            //     createdAt: createdAt);
-            // Navigator.of(context).push(MaterialPageRoute(
-            //   builder: (context) => UserProfil(
-            //     user: authenticatedUser,
-            //   ),
-            // ));
+            Auth statut = await getUser(email);
+            final name = statut.user.name;
+            final emailVerified = statut.user.emailVerifiedAt;
+            final uid = statut.user.id;
+            final createdAt = statut.user.createdAt;
+            final auth.User authenticatedUser = auth.User(
+                id: uid,
+                name: name,
+                email: email,
+                emailVerifiedAt: emailVerified,
+                createdAt: createdAt);
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => UserProfil(
+                user: authenticatedUser,
+              ),
+            ));
 
             break;
           case "History":
