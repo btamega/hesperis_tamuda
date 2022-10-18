@@ -9,7 +9,6 @@ import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-// import 'package:hesperis_tamuda/views/pages/user/dashboard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hesperis_tamuda/views/pages/user/dashboard_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,13 +23,6 @@ class LoginScreen extends StatelessWidget {
 
   Duration get loginTime => const Duration(milliseconds: 2250);
 
-  Future<String?> _signupUser(SignupData data) {
-    debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      return null;
-    });
-  }
-
   Future<String?> _recoverPassword(String name) {
     debugPrint('Name: $name');
     return Future.delayed(loginTime).then((_) {
@@ -44,6 +36,54 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
+    Future<String?> _signupUser(SignupData data) async {
+      Statut statut;
+      print(data.additionalSignupData!["displayName"]);
+      try {
+        statut = await createUser(
+          data.additionalSignupData!["displayName"] as String,
+          data.name as String,
+          data.password as String,
+        );
+        if (statut.error != null && statut.error!.isNotEmpty) {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            animType: AnimType.RIGHSLIDE,
+            headerAnimationLoop: true,
+            title: 'Error',
+            desc: statut.error,
+            btnOkOnPress: () {},
+            btnOkColor: Colors.red,
+          ).show();
+        } else if (statut.error == null && statut.success!.isNotEmpty) {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.SUCCES,
+            headerAnimationLoop: true,
+            animType: AnimType.BOTTOMSLIDE,
+            title: 'INFO',
+            desc: statut.success,
+            btnOkOnPress: () {
+              Navigator.of(context).pop();
+            },
+          ).show();
+        }
+      } catch (e) {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.ERROR,
+          animType: AnimType.RIGHSLIDE,
+          headerAnimationLoop: true,
+          title: 'Error',
+          desc: e.toString(),
+          btnOkOnPress: () {},
+          btnOkColor: Colors.red,
+        ).show();
+      }
+      return null;
+    }
+
     Future<String?> _authUser(LoginData data) async {
       Statut statut;
       try {
@@ -108,6 +148,26 @@ class LoginScreen extends StatelessWidget {
         ),
         body: orientation == Orientation.portrait
             ? FlutterLogin(
+                messages: LoginMessages(
+                  userHint: 'Email',
+                  passwordHint: 'Password',
+                  confirmPasswordHint: 'Confirm',
+                  loginButton: 'LOG IN',
+                  signupButton: 'REGISTER',
+                  forgotPasswordButton: 'Forgot password?',
+                  recoverPasswordButton: 'HELP ME',
+                  goBackButton: 'GO BACK',
+                  confirmPasswordError: 'Not match!',
+                  recoverPasswordSuccess: 'Password rescued successfully',
+                ),
+                additionalSignupFields: const [
+                  UserFormField(
+                    keyName: "userName",
+                    displayName: "Name",
+                    userType: LoginUserType.name,
+                    icon: Icon(Icons.people),
+                  )
+                ],
                 theme: LoginTheme(
                   buttonTheme: const LoginButtonTheme(
                       backgroundColor: Color.fromARGB(255, 221, 143, 231)),
@@ -132,6 +192,20 @@ class LoginScreen extends StatelessWidget {
                 onRecoverPassword: _recoverPassword,
               )
             : FlutterLogin(
+                messages: LoginMessages(
+                  userHint: 'User',
+                  passwordHint: 'Password',
+                  confirmPasswordHint: 'Confirm',
+                  loginButton: 'LOG IN',
+                  signupButton: 'REGISTER',
+                  forgotPasswordButton: 'Forgot password?',
+                  recoverPasswordButton: 'HELP ME',
+                  goBackButton: 'GO BACK',
+                  confirmPasswordError: 'Not match!',
+                  recoverPasswordDescription:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+                  recoverPasswordSuccess: 'Password rescued successfully',
+                ),
                 disableCustomPageTransformer: false,
                 theme: LoginTheme(
                   buttonTheme: const LoginButtonTheme(
