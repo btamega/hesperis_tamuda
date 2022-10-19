@@ -23,10 +23,11 @@ class LoginScreen extends StatelessWidget {
 
   Duration get loginTime => const Duration(milliseconds: 2250);
 
-  Future<String?> _recoverPassword(String name) {
-    debugPrint('Name: $name');
+  Future<String?> _recoverPassword(String email) async {
+    debugPrint('Name: $email');
+
     return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
+      if (!users.containsKey(email)) {
         return 'User not exists';
       }
       return null;
@@ -38,10 +39,10 @@ class LoginScreen extends StatelessWidget {
     Orientation orientation = MediaQuery.of(context).orientation;
     Future<String?> _signupUser(SignupData data) async {
       Statut statut;
-      print(data.additionalSignupData!["displayName"]);
       try {
+        var entry = data.additionalSignupData!.entries.toList();
         statut = await createUser(
-          data.additionalSignupData!["displayName"] as String,
+          entry[0].value,
           data.name as String,
           data.password as String,
         );
@@ -155,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                   loginButton: 'LOG IN',
                   signupButton: 'REGISTER',
                   forgotPasswordButton: 'Forgot password?',
-                  recoverPasswordButton: 'HELP ME',
+                  recoverPasswordButton: 'RESENT',
                   goBackButton: 'GO BACK',
                   confirmPasswordError: 'Not match!',
                   recoverPasswordSuccess: 'Password rescued successfully',
@@ -199,13 +200,21 @@ class LoginScreen extends StatelessWidget {
                   loginButton: 'LOG IN',
                   signupButton: 'REGISTER',
                   forgotPasswordButton: 'Forgot password?',
-                  recoverPasswordButton: 'HELP ME',
+                  recoverPasswordButton: 'RESENT',
                   goBackButton: 'GO BACK',
                   confirmPasswordError: 'Not match!',
                   recoverPasswordDescription:
                       'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
                   recoverPasswordSuccess: 'Password rescued successfully',
                 ),
+                additionalSignupFields: const [
+                  UserFormField(
+                    keyName: "userName",
+                    displayName: "Name",
+                    userType: LoginUserType.name,
+                    icon: Icon(Icons.people),
+                  )
+                ],
                 disableCustomPageTransformer: false,
                 theme: LoginTheme(
                   buttonTheme: const LoginButtonTheme(
