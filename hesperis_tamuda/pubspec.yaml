@@ -64,7 +64,7 @@ dependencies:
   get_storage: ^2.0.3
   shared_preferences: ^2.0.15
   internet_connection_checker: ^1.0.0+1
-  firebase_auth: ^3.11.2
+  accordion: ^2.5.1
 
 dev_dependencies:
   flutter_test:

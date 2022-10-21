@@ -8,6 +8,7 @@ import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/pages/loginScreen.dart';
 import 'package:hesperis_tamuda/views/pages/navigation_history.dart';
+import 'package:hesperis_tamuda/views/pages/user/notifications.dart';
 import 'package:hesperis_tamuda/views/pages/user/profil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'transition_route_observer.dart';
@@ -248,6 +249,11 @@ class _DashboardScreenState extends State<DashboardScreen>
           case "History":
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => const NavigationHistory(),
+            ));
+            break;
+          case "Notifications":
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const Notifications(),
             ));
             break;
           default:

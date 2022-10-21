@@ -31,9 +31,8 @@ class User {
     required this.email,
     required this.emailVerifiedAt,
     required this.password,
-    required this.rememberToken,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.role,
   });
 
@@ -42,9 +41,8 @@ class User {
   String email;
   dynamic emailVerifiedAt;
   String password;
-  String rememberToken;
   DateTime createdAt;
-  DateTime updatedAt;
+  DateTime? updatedAt;
   String role;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -53,9 +51,10 @@ class User {
         email: json["email"],
         emailVerifiedAt: json["email_verified_at"],
         password: json["password"],
-        rememberToken: json["remember_token"],
         createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        updatedAt: json["updated_at"] != null
+            ? DateTime.parse(json["updated_at"])
+            : json["updated_at"],
         role: json["role"],
       );
 
@@ -65,9 +64,8 @@ class User {
         "email": email,
         "email_verified_at": emailVerifiedAt,
         "password": password,
-        "remember_token": rememberToken,
         "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
         "role": role,
       };
 }
