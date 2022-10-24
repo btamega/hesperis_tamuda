@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
+import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'errorPage.dart';
 import 'loginScreen.dart';
 import 'user/dashboard_screen.dart';
@@ -36,42 +37,42 @@ class _SearchPageState extends State<SearchPage> {
           title: customSearchBar,
           centerTitle: true,
           backgroundColor: const Color(0xff3b5998),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  if (customIcon.icon == Icons.search) {
-                    customIcon = const Icon(Icons.cancel);
-                    customSearchBar = const ListTile(
-                      leading: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                        size: 28,
-                      ),
-                      title: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Tapez votre recherche...',
-                          hintStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontStyle: FontStyle.italic,
-                          ),
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    );
-                  } else {
-                    customIcon = const Icon(Icons.search);
-                    customSearchBar = const Text('SEARCH');
-                  }
-                });
-              },
-              icon: customIcon,
-            )
+          actions: const [
+            LanguagePickerWidget()
+            // IconButton(
+            //   onPressed: () {
+            //     setState(() {
+            //       if (customIcon.icon == Icons.search) {
+            //         customIcon = const Icon(Icons.cancel);
+            //         customSearchBar = const ListTile(
+            //           leading: Icon(
+            //             Icons.search,
+            //             color: Colors.white,
+            //             size: 28,
+            //           ),
+            //           title: TextField(
+            //             decoration: InputDecoration(
+            //               hintText: 'Tapez votre recherche...',
+            //               hintStyle: TextStyle(
+            //                 color: Colors.white,
+            //                 fontSize: 18,
+            //                 fontStyle: FontStyle.italic,
+            //               ),
+            //               border: InputBorder.none,
+            //             ),
+            //             style: TextStyle(
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         );
+            //       } else {
+            //         customIcon = const Icon(Icons.search);
+            //         customSearchBar = const Text('SEARCH');
+            //       }
+            //     });
+            //   },
+            //   icon: customIcon,
+            // )
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -85,6 +86,7 @@ class _SearchPageState extends State<SearchPage> {
           ],
           onTap: _onItemTapped,
         ),
+        body: const CompleteForm(),
       ),
     );
   }
@@ -136,5 +138,125 @@ class _SearchPageState extends State<SearchPage> {
         ));
       }
     }
+  }
+}
+
+class CompleteForm extends StatefulWidget {
+  const CompleteForm({Key? key}) : super(key: key);
+
+  @override
+  State<CompleteForm> createState() {
+    return _CompleteFormState();
+  }
+}
+
+class _CompleteFormState extends State<CompleteForm> {
+  bool autoValidate = true;
+  bool readOnly = false;
+  bool showSegmentedControl = true;
+  final _formKey = GlobalKey<FormBuilderState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            FormBuilder(
+              key: _formKey,
+              // enabled: false,
+              onChanged: () {
+                _formKey.currentState!.save();
+                debugPrint(_formKey.currentState!.value.toString());
+              },
+              autovalidateMode: AutovalidateMode.disabled,
+              initialValue: const {
+                'movie_rating': 5,
+                'best_language': 'Dart',
+                'age': '13',
+                'gender': 'Male',
+                'languages_filter': ['Dart']
+              },
+              skipDisabled: true,
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 15),
+                  FormBuilderTextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Keywords',
+                        border: OutlineInputBorder(),
+                      ),
+                      name: "keywords"),
+                  const SizedBox(height: 15),
+                  FormBuilderTextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Author',
+                        border: OutlineInputBorder(),
+                      ),
+                      name: "author"),
+                  const SizedBox(height: 15),
+                  FormBuilderTextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Title',
+                        border: OutlineInputBorder(),
+                      ),
+                      name: "title"),
+                  const SizedBox(height: 15),
+                  FormBuilderTextField(
+                      decoration: const InputDecoration(
+                        hintText: 'Volume',
+                        border: OutlineInputBorder(),
+                      ),
+                      name: "volume"),
+                  const SizedBox(height: 15),
+                  FormBuilderDateTimePicker(
+                      inputType: InputType.date,
+                      decoration: const InputDecoration(
+                        hintText: 'Date of publication',
+                        border: OutlineInputBorder(),
+                      ),
+                      name: "date"),
+                ],
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState?.saveAndValidate() ?? false) {
+                        debugPrint(_formKey.currentState?.value.toString());
+                      } else {
+                        debugPrint(_formKey.currentState?.value.toString());
+                        debugPrint('validation failed');
+                      }
+                    },
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      _formKey.currentState?.reset();
+                    },
+                    // color: Theme.of(context).colorScheme.secondary,
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
