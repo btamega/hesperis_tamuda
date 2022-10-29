@@ -22,9 +22,43 @@ class Archive20002009 extends StatefulWidget {
 
 class _Archive20002009State extends State<Archive20002009> {
   int _selectedIndex = 0;
-
+  late Orientation orientation;
+  late Size size;
+  late double height;
+  late double width;
+  final Decoration decoration = BoxDecoration(
+    border: Border.all(
+        color: const Color(0xff3b5998), width: 4.0, style: BorderStyle.solid),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(10.0),
+      topRight: Radius.circular(10.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(10.0),
+    ),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0xff3b5998),
+        offset: Offset(
+          5.0,
+          5.0,
+        ),
+        blurRadius: 10.0,
+        spreadRadius: 2.0,
+      ),
+      BoxShadow(
+        color: Colors.white,
+        offset: Offset(0.0, 0.0),
+        blurRadius: 0.0,
+        spreadRadius: 0.0,
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return SafeArea(
       child: Scaffold(
         drawer: const NavigationDrawerWidget(),
@@ -49,231 +83,443 @@ class _Archive20002009State extends State<Archive20002009> {
           ],
           onTap: _onItemTapped,
         ),
-        body: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(22),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          childAspectRatio: (200 / 357),
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+        body: orientation == Orientation.portrait
+            ? GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(25),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: width / (height / 1.25),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    //height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/1-2001.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
                             );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/2000-2009/1-2001.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/2001-1.png"),
-                      ),
-                      Text(
-                        "2001-1",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-1.png"),
+                            ),
+                            Text(
+                              "2001-1",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    //height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/2-2001.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-2.png"),
+                            ),
+                            Text(
+                              "2001-2",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    //height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris Tamuda 2007.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-2.png"),
+                            ),
+                            Text(
+                              "2007",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris Tamuda 2008.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-1.png"),
+                            ),
+                            Text(
+                              "2008",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris-Tamuda 2009.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-2.png"),
+                            ),
+                            Text(
+                              "2009",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(25),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                childAspectRatio: (200 / 350),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    //height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/1-2001.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-1.png"),
+                            ),
+                            Text(
+                              "2001-1",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    //height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/2-2001.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-2.png"),
+                            ),
+                            Text(
+                              "2001-2",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    //height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris Tamuda 2007.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-2.png"),
+                            ),
+                            Text(
+                              "2007",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris Tamuda 2008.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-1.png"),
+                            ),
+                            Text(
+                              "2008",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris-Tamuda 2009.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/2001-2.png"),
+                            ),
+                            Text(
+                              "2009",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/2000-2009/2-2001.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/2001-2.png"),
-                      ),
-                      Text(
-                        "2001-2",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              padding: const EdgeInsets.all(13),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris Tamuda 2007.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/2001-2.png"),
-                      ),
-                      Text(
-                        "2007",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris Tamuda 2008.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/2001-1.png"),
-                      ),
-                      Text(
-                        "2008",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/2000-2009/Hespéris-Tamuda 2009.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/2001-2.png"),
-                      ),
-                      Text(
-                        "2009",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

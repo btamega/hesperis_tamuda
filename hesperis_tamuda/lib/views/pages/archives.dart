@@ -42,6 +42,33 @@ class _ArchivePageState extends State<ArchivePage> {
   late Size size;
   late double height;
   late double width;
+  final Decoration decoration = BoxDecoration(
+    border: Border.all(
+        color: const Color(0xff3b5998), width: 4.0, style: BorderStyle.solid),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(10.0),
+      topRight: Radius.circular(10.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(10.0),
+    ),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0xff3b5998),
+        offset: Offset(
+          5.0,
+          5.0,
+        ),
+        blurRadius: 10.0,
+        spreadRadius: 2.0,
+      ),
+      BoxShadow(
+        color: Colors.white,
+        offset: Offset(0.0, 0.0),
+        blurRadius: 0.0,
+        spreadRadius: 0.0,
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
     orientation = MediaQuery.of(context).orientation;
@@ -82,14 +109,13 @@ class _ArchivePageState extends State<ArchivePage> {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   crossAxisCount: 2,
-                  childAspectRatio: width / (height),
+                  childAspectRatio: width / (height / 1.19),
                   children: <Widget>[
                     Container(
+                      alignment: Alignment.center,
                       height: height,
                       // padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -123,11 +149,7 @@ class _ArchivePageState extends State<ArchivePage> {
                     ),
                     Container(
                       height: height / 2.5,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
-                      // padding: const EdgeInsets.all(19),
-                      // color: Colors.teal[100],
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -160,11 +182,7 @@ class _ArchivePageState extends State<ArchivePage> {
                     ),
                     Container(
                       height: height / 2.5,
-                      // padding: const EdgeInsets.all(19),
-                      // color: Colors.teal[300],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -198,9 +216,7 @@ class _ArchivePageState extends State<ArchivePage> {
                     Container(
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -235,9 +251,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[400],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -272,9 +286,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[400],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -309,9 +321,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[300],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -345,9 +355,7 @@ class _ArchivePageState extends State<ArchivePage> {
                     Container(
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -381,9 +389,7 @@ class _ArchivePageState extends State<ArchivePage> {
                     Container(
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -418,9 +424,7 @@ class _ArchivePageState extends State<ArchivePage> {
                     Container(
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -455,9 +459,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       // padding: const EdgeInsets.all(19),
                       // color: Colors.teal[400],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -499,17 +501,16 @@ class _ArchivePageState extends State<ArchivePage> {
                 child: GridView.count(
                   physics: const ClampingScrollPhysics(),
                   primary: false,
-                  padding: const EdgeInsets.all(19),
+                  padding: const EdgeInsets.all(20),
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   crossAxisCount: 3,
-                  childAspectRatio: width / (height / 0.32),
+                  childAspectRatio: (200 / 350),
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      height: height,
+                      // padding: const EdgeInsets.all(19),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -522,17 +523,17 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const RecentArchives()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris-Tamuda",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height,
-                                image: const AssetImage(
-                                    "assets/images/cover2020.gif"),
+                                // height: height,
+                                image:
+                                    AssetImage("assets/images/cover2020.gif"),
                               ),
-                              const Text(
+                              Text(
                                 "(2020-2021)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -542,11 +543,8 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
-                      padding: const EdgeInsets.all(19),
-                      // color: Colors.teal[100],
+                      decoration: decoration,
+                      height: height,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -559,17 +557,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive20102019()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris-Tamuda ",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image: const AssetImage(
-                                    "assets/images/2001-2.png"),
+                                image: AssetImage("assets/images/2001-2.png"),
                               ),
-                              const Text(
+                              Text(
                                 "(2010-2019)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -579,11 +575,9 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
+                      height: height / 2.5,
                       // color: Colors.teal[300],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -596,17 +590,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive20002009()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris-Tamuda",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image: const AssetImage(
-                                    "assets/images/2001-2.png"),
+                                image: AssetImage("assets/images/2001-2.png"),
                               ),
-                              const Text(
+                              Text(
                                 "(2000-2009)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -616,10 +608,8 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      height: height / 2.5,
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -632,17 +622,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19901999()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris-Tamuda",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image:
-                                    const AssetImage("assets/images/1991.jpg"),
+                                image: AssetImage("assets/images/1991.jpg"),
                               ),
-                              const Text(
+                              Text(
                                 "(1990-1999)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -652,11 +640,9 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
+                      height: height / 2.5,
                       // color: Colors.teal[400],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -669,17 +655,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19801989()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris-Tamuda",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image: const AssetImage(
-                                    "assets/images/1980-81.png"),
+                                image: AssetImage("assets/images/1980-81.png"),
                               ),
-                              const Text(
+                              Text(
                                 "(1980-1989)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -689,11 +673,9 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
+                      height: height / 2.5,
                       // color: Colors.teal[400],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -706,17 +688,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19701979()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris-Tamuda",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image:
-                                    const AssetImage("assets/images/1972.png"),
+                                image: AssetImage("assets/images/1972.png"),
                               ),
-                              const Text(
+                              Text(
                                 "(1970-1979)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -726,11 +706,9 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
+                      height: height / 2.5,
                       // color: Colors.teal[300],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -743,17 +721,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19601969()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris-Tamuda",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image:
-                                    const AssetImage("assets/images/1966.png"),
+                                image: AssetImage("assets/images/1966.png"),
                               ),
-                              const Text(
+                              Text(
                                 "(1960-1969)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -763,10 +739,8 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      height: height / 2.5,
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -779,17 +753,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19501959()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image: const AssetImage(
-                                    "assets/images/1952ht.png"),
+                                image: AssetImage("assets/images/1952ht.png"),
                               ),
-                              const Text(
+                              Text(
                                 "(1950-1959)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -799,10 +771,8 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      height: height / 2.5,
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -815,18 +785,16 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19401949()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image: const AssetImage(
-                                    "assets/images/1943ht.jpg"),
+                                image: AssetImage("assets/images/1943ht.jpg"),
                                 fit: BoxFit.fill,
                               ),
-                              const Text(
+                              Text(
                                 "(1940-1949)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -837,10 +805,8 @@ class _ArchivePageState extends State<ArchivePage> {
                     ),
                     Container(
                       // height: height * .1,
-                      padding: const EdgeInsets.all(19),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      height: height / 2.5,
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -853,17 +819,15 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19301939()),
                               );
                             },
-                            child: Column(children: [
-                              const Text(
+                            child: Column(children: const [
+                              Text(
                                 "Hespéris",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                height: height / 1.372,
-                                image: const AssetImage(
-                                    "assets/images/1931ht.jpg"),
+                                image: AssetImage("assets/images/1931ht.jpg"),
                               ),
-                              const Text(
+                              Text(
                                 "(1930-1939)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -873,11 +837,9 @@ class _ArchivePageState extends State<ArchivePage> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(19),
+                      height: height / 2.5,
                       // color: Colors.teal[400],
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
+                      decoration: decoration,
                       child: ListView(
                         physics: const ClampingScrollPhysics(),
                         children: [
@@ -892,17 +854,15 @@ class _ArchivePageState extends State<ArchivePage> {
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const Text(
+                              children: const [
+                                Text(
                                   "Hespéris",
                                   textAlign: TextAlign.center,
                                 ),
                                 Image(
-                                  height: height / 1.372,
-                                  image: const AssetImage(
-                                      "assets/images/1921ht.jpg"),
+                                  image: AssetImage("assets/images/1921ht.jpg"),
                                 ),
-                                const Text(
+                                Text(
                                   "(1921-1929)",
                                   textAlign: TextAlign.center,
                                 ),
