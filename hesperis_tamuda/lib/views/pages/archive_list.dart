@@ -41,6 +41,33 @@ class _ArchiveListeState extends State<ArchiveListe> {
   late Size size;
   late double height;
   late double width;
+  final Decoration decoration = BoxDecoration(
+    border: Border.all(
+        color: const Color(0xff3b5998), width: 4.0, style: BorderStyle.solid),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(10.0),
+      topRight: Radius.circular(10.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(10.0),
+    ),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0xff3b5998),
+        offset: Offset(
+          5.0,
+          5.0,
+        ),
+        blurRadius: 10.0,
+        spreadRadius: 2.0,
+      ),
+      BoxShadow(
+        color: Colors.white,
+        offset: Offset(0.0, 0.0),
+        blurRadius: 0.0,
+        spreadRadius: 0.0,
+      ),
+    ],
+  );
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     foregroundColor: Colors.black87,
     backgroundColor: Colors.grey[300],
@@ -96,9 +123,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                             child: Container(
                               height: height / 2.5,
                               // padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                              ),
+                              decoration: decoration,
                               child: ListView(
                                 physics: const ClampingScrollPhysics(),
                                 children: [
@@ -160,8 +185,9 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                                                         index1]
                                                                     .path,
                                                             // width: 300,
-                                                            height:
-                                                                height / 2.8)
+                                                            // height:
+                                                            //     height / 2.8
+                                                          )
                                                         : Container();
                                                   });
                                             } else if (snapshot1.hasError) {
@@ -251,7 +277,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                         },
                         itemCount: snapshot.data!.data.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: width / (height),
+                          childAspectRatio: width / (height / 1.25),
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                           crossAxisCount: 2,
@@ -266,9 +292,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                           return GestureDetector(
                             child: Container(
                               padding: const EdgeInsets.all(19),
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                              ),
+                              decoration: decoration,
                               child: ListView(
                                 physics: const ClampingScrollPhysics(),
                                 children: [

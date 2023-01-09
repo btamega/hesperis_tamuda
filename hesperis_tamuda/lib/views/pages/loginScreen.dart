@@ -149,6 +149,7 @@ class LoginScreen extends StatelessWidget {
         ),
         body: orientation == Orientation.portrait
             ? FlutterLogin(
+                loginAfterSignUp: true,
                 messages: LoginMessages(
                   userHint: 'Email',
                   passwordHint: 'Password',
@@ -170,6 +171,7 @@ class LoginScreen extends StatelessWidget {
                   )
                 ],
                 theme: LoginTheme(
+                  bodyStyle: const TextStyle(color: Colors.white),
                   buttonTheme: const LoginButtonTheme(
                       backgroundColor: Color.fromARGB(255, 221, 143, 231)),
                   inputTheme: const InputDecorationTheme(
@@ -193,6 +195,7 @@ class LoginScreen extends StatelessWidget {
                 onRecoverPassword: _recoverPassword,
               )
             : FlutterLogin(
+                loginAfterSignUp: true,
                 messages: LoginMessages(
                   userHint: 'User',
                   passwordHint: 'Password',

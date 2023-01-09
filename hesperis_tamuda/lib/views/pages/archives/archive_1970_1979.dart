@@ -22,9 +22,43 @@ class Archive19701979 extends StatefulWidget {
 
 class _Archive19701979State extends State<Archive19701979> {
   int _selectedIndex = 0;
-
+  late Orientation orientation;
+  late Size size;
+  late double height;
+  late double width;
+  final Decoration decoration = BoxDecoration(
+    border: Border.all(
+        color: const Color(0xff3b5998), width: 4.0, style: BorderStyle.solid),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(10.0),
+      topRight: Radius.circular(10.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(10.0),
+    ),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0xff3b5998),
+        offset: Offset(
+          5.0,
+          5.0,
+        ),
+        blurRadius: 10.0,
+        spreadRadius: 2.0,
+      ),
+      BoxShadow(
+        color: Colors.white,
+        offset: Offset(0.0, 0.0),
+        blurRadius: 0.0,
+        spreadRadius: 0.0,
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return SafeArea(
       child: Scaffold(
         drawer: const NavigationDrawerWidget(),
@@ -49,360 +83,683 @@ class _Archive19701979State extends State<Archive19701979> {
           ],
           onTap: _onItemTapped,
         ),
-        body: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(22),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          childAspectRatio: (200 / 357),
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+        body: orientation == Orientation.portrait
+            ? GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(22),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: (200 / 350),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1970.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
                             );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1970.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1972.png"),
-                      ),
-                      Text(
-                        "1970\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1972.png"),
+                            ),
+                            Text(
+                              "1970\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1971.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1971.png"),
+                            ),
+                            Text(
+                              "1971\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1972.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1972.png"),
+                            ),
+                            Text(
+                              "1972\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1973.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1972.png"),
+                            ),
+                            Text(
+                              "1973\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1974.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1974.png"),
+                            ),
+                            Text(
+                              "1974\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1975.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1975.png"),
+                            ),
+                            Text(
+                              "1975",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1976-1977.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1976-77.png"),
+                            ),
+                            Text(
+                              "1976-77",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1978_1979.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1978-79.png"),
+                            ),
+                            Text(
+                              "1978-79",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(22),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                childAspectRatio: (200 / 357),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1970.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1972.png"),
+                            ),
+                            Text(
+                              "1970\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1971.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1971.png"),
+                            ),
+                            Text(
+                              "1971\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1972.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1972.png"),
+                            ),
+                            Text(
+                              "1972\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1973.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1972.png"),
+                            ),
+                            Text(
+                              "1973\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1974.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1974.png"),
+                            ),
+                            Text(
+                              "1974\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1975.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1975.png"),
+                            ),
+                            Text(
+                              "1975",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1976-1977.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1976-77.png"),
+                            ),
+                            Text(
+                              "1976-77",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1978_1979.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris Tamuda",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1978-79.png"),
+                            ),
+                            Text(
+                              "1978-79",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1971.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1971.png"),
-                      ),
-                      Text(
-                        "1971\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              padding: const EdgeInsets.all(13),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hesperis-Tamuda 1972.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1972.png"),
-                      ),
-                      Text(
-                        "1972\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1973.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1972.png"),
-                      ),
-                      Text(
-                        "1973\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1974.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1974.png"),
-                      ),
-                      Text(
-                        "1974\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1975.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1975.png"),
-                      ),
-                      Text(
-                        "1975",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1976-1977.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1976-77.png"),
-                      ),
-                      Text(
-                        "1976-77",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1970-1979/Hespéris-Tamuda 1978_1979.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris Tamuda",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1978-79.png"),
-                      ),
-                      Text(
-                        "1978-79",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

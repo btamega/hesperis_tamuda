@@ -22,9 +22,43 @@ class Archive19201929 extends StatefulWidget {
 
 class _Archive19201929State extends State<Archive19201929> {
   int _selectedIndex = 0;
-
+  late Orientation orientation;
+  late Size size;
+  late double height;
+  late double width;
+  final Decoration decoration = BoxDecoration(
+    border: Border.all(
+        color: const Color(0xff3b5998), width: 4.0, style: BorderStyle.solid),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(10.0),
+      topRight: Radius.circular(10.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(10.0),
+    ),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0xff3b5998),
+        offset: Offset(
+          5.0,
+          5.0,
+        ),
+        blurRadius: 10.0,
+        spreadRadius: 2.0,
+      ),
+      BoxShadow(
+        color: Colors.white,
+        offset: Offset(0.0, 0.0),
+        blurRadius: 0.0,
+        spreadRadius: 0.0,
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return SafeArea(
       child: Scaffold(
         drawer: const NavigationDrawerWidget(),
@@ -49,412 +83,783 @@ class _Archive19201929State extends State<Archive19201929> {
           ],
           onTap: _onItemTapped,
         ),
-        body: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(22),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          childAspectRatio: (200 / 358),
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(24.3),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+        body: orientation == Orientation.portrait
+            ? GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(22),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: (200 / 378),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201921.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
                             );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201921.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1921ht.jpg"),
-                      ),
-                      Text(
-                        "1921\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1921ht.jpg"),
+                            ),
+                            Text(
+                              "1921\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201922.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris ",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1922 TOME II FASC.1-2-3.jpg"),
+                            ),
+                            Text(
+                              "1922\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201923.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1923 TOMEIII FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1923\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201924.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1924 TOME IV FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1924\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201925.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1925 TOMEV FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1925",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201926.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1922 TOME II FASC.1-2-3.jpg"),
+                            ),
+                            Text(
+                              "1926",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201927.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1927 TOME VII FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1927",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201928.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1928 TOME VIII FASC.1-2-3.jpg"),
+                            ),
+                            Text(
+                              "1928",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201929.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1929 TOME IX FASC.1-2-3.jpg"),
+                              fit: BoxFit.fill,
+                            ),
+                            Text(
+                              "1929",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(22),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                childAspectRatio: (200 / 358),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201921.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1921ht.jpg"),
+                            ),
+                            Text(
+                              "1921\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201922.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris ",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1922 TOME II FASC.1-2-3.jpg"),
+                            ),
+                            Text(
+                              "1922\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201923.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1923 TOMEIII FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1923\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201924.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1924 TOME IV FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1924\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201925.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1925 TOMEV FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1925",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201926.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1922 TOME II FASC.1-2-3.jpg"),
+                            ),
+                            Text(
+                              "1926",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201927.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1927 TOME VII FASC.1-2-3-4.jpg"),
+                            ),
+                            Text(
+                              "1927",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201928.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1928 TOME VIII FASC.1-2-3.jpg"),
+                            ),
+                            Text(
+                              "1928",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201929.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/images/1929 TOME IX FASC.1-2-3.jpg"),
+                              fit: BoxFit.fill,
+                            ),
+                            Text(
+                              "1929",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              padding: const EdgeInsets.all(24.3),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201922.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris ",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1922 TOME II FASC.1-2-3.jpg"),
-                      ),
-                      Text(
-                        "1922\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(23),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201923.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1923 TOMEIII FASC.1-2-3-4.jpg"),
-                      ),
-                      Text(
-                        "1923\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(23),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201924.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1924 TOME IV FASC.1-2-3-4.jpg"),
-                      ),
-                      Text(
-                        "1924\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201925.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1925 TOMEV FASC.1-2-3-4.jpg"),
-                      ),
-                      Text(
-                        "1925",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201926.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1922 TOME II FASC.1-2-3.jpg"),
-                      ),
-                      Text(
-                        "1926",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201927.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1927 TOME VII FASC.1-2-3-4.jpg"),
-                      ),
-                      Text(
-                        "1927",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201928.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1928 TOME VIII FASC.1-2-3.jpg"),
-                      ),
-                      Text(
-                        "1928",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1921-1929/Hesp%C3%A9ris%20Tamuda%201929.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage(
-                            "assets/images/1929 TOME IX FASC.1-2-3.jpg"),
-                        fit: BoxFit.fill,
-                      ),
-                      Text(
-                        "1929",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

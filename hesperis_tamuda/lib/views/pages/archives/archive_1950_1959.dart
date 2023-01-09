@@ -22,9 +22,43 @@ class Archive19501959 extends StatefulWidget {
 
 class _Archive19501959State extends State<Archive19501959> {
   int _selectedIndex = 0;
-
+  late Orientation orientation;
+  late Size size;
+  late double height;
+  late double width;
+  final Decoration decoration = BoxDecoration(
+    border: Border.all(
+        color: const Color(0xff3b5998), width: 4.0, style: BorderStyle.solid),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(10.0),
+      topRight: Radius.circular(10.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(10.0),
+    ),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0xff3b5998),
+        offset: Offset(
+          5.0,
+          5.0,
+        ),
+        blurRadius: 10.0,
+        spreadRadius: 2.0,
+      ),
+      BoxShadow(
+        color: Colors.white,
+        offset: Offset(0.0, 0.0),
+        blurRadius: 0.0,
+        spreadRadius: 0.0,
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return SafeArea(
       child: Scaffold(
         drawer: const NavigationDrawerWidget(),
@@ -55,13 +89,11 @@ class _Archive19501959State extends State<Archive19501959> {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           crossAxisCount: 2,
-          childAspectRatio: (200 / 358),
+          childAspectRatio: (200 / 367),
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.all(24.3),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -101,10 +133,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -144,10 +174,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              padding: const EdgeInsets.all(24.3),
+              decoration: decoration,
+              height: height / 2.5,
               child: Column(
                 children: [
                   InkWell(
@@ -187,10 +215,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(25),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -230,10 +256,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -273,10 +297,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -316,10 +338,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -359,10 +379,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -402,10 +420,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(
@@ -445,10 +461,8 @@ class _Archive19501959State extends State<Archive19501959> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(19),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
+              height: height / 2.5,
+              decoration: decoration,
               child: Column(
                 children: [
                   InkWell(

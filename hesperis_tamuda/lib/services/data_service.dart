@@ -59,6 +59,27 @@ Future<dynamic> getArchives(
   }
 }
 
+Future<String> getMaxVolume() async {
+  final response =
+      await http.get(Uri.parse("http://127.0.0.1:8000/api/maxVolume"));
+  switch (response.statusCode) {
+    case 200:
+      final volume = jsonDecode(response.body.toString());
+      return volume;
+    case 400: //Bad request
+      throw BadRequestException(jsonDecode(response.body)['message']);
+    case 401: //Unauthorized
+      throw UnAuthorizedException(jsonDecode(response.body)['message']);
+    case 403: //Forbidden
+      throw UnAuthorizedException(jsonDecode(response.body)['message']);
+    case 404: //Resource Not Found
+      throw NotFoundException(jsonDecode(response.body)['message']);
+    case 500: //Internal Server Error
+    default:
+      throw FetchDataException('Something went wrong! ${response.statusCode}');
+  }
+}
+
 Future createCommentaire(
     String email, String userName, String body, BuildContext context) async {
   try {
