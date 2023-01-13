@@ -117,15 +117,17 @@ class _Archive20002009State extends State<Archive20002009> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/2001-1.png"),
+                              height: height * 0.288,
+                              image:
+                                  const AssetImage("assets/images/2001-1.png"),
                             ),
-                            Text(
+                            const Text(
                               "2001-1",
                               textAlign: TextAlign.center,
                             ),
@@ -159,15 +161,17 @@ class _Archive20002009State extends State<Archive20002009> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/2001-2.png"),
+                              height: height * 0.288,
+                              image:
+                                  const AssetImage("assets/images/2001-2.png"),
                             ),
-                            Text(
+                            const Text(
                               "2001-2",
                               textAlign: TextAlign.center,
                             ),
@@ -201,15 +205,17 @@ class _Archive20002009State extends State<Archive20002009> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/2001-2.png"),
+                              height: height * 0.288,
+                              image:
+                                  const AssetImage("assets/images/2001-2.png"),
                             ),
-                            Text(
+                            const Text(
                               "2007",
                               textAlign: TextAlign.center,
                             ),
@@ -242,15 +248,17 @@ class _Archive20002009State extends State<Archive20002009> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/2001-1.png"),
+                              height: height * 0.288,
+                              image:
+                                  const AssetImage("assets/images/2001-1.png"),
                             ),
-                            Text(
+                            const Text(
                               "2008",
                               textAlign: TextAlign.center,
                             ),
@@ -283,15 +291,17 @@ class _Archive20002009State extends State<Archive20002009> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/2001-2.png"),
+                              height: height * 0.288,
+                              image:
+                                  const AssetImage("assets/images/2001-2.png"),
                             ),
-                            Text(
+                            const Text(
                               "2009",
                               textAlign: TextAlign.center,
                             ),

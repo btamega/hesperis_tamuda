@@ -125,7 +125,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                               // padding: const EdgeInsets.all(8),
                               decoration: decoration,
                               child: ListView(
-                                physics: const ClampingScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   InkWell(
                                     onTap: () {
@@ -164,7 +164,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                               return ListView.builder(
                                                   shrinkWrap: true,
                                                   physics:
-                                                      const ClampingScrollPhysics(),
+                                                      const NeverScrollableScrollPhysics(),
                                                   itemCount: 1,
                                                   itemBuilder:
                                                       (context, index1) {
@@ -185,9 +185,8 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                                                         index1]
                                                                     .path,
                                                             // width: 300,
-                                                            // height:
-                                                            //     height / 2.8
-                                                          )
+                                                            height:
+                                                                height * 0.3)
                                                         : Container();
                                                   });
                                             } else if (snapshot1.hasError) {

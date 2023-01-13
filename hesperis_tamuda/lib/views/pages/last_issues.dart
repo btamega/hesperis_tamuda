@@ -117,7 +117,8 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
                                   height: height / 2.5,
                                   decoration: decoration,
                                   child: ListView(
-                                    physics: const ClampingScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     children: [
                                       InkWell(
                                         onTap: () {
@@ -169,6 +170,7 @@ class _LastIssuesPageState extends State<LastIssuesPage> {
                                                           .data[index]
                                                           .vignettes[index1]
                                                           .path,
+                                                  height: height * 0.33,
                                                 )
                                               : Container(),
                                           Text(

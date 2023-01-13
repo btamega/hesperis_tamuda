@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
+import 'package:hesperis_tamuda/views/pages/search_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'errorPage.dart';
@@ -155,7 +157,11 @@ class _CompleteFormState extends State<CompleteForm> {
   bool readOnly = false;
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
-
+  final keyword = TextEditingController();
+  final author = TextEditingController();
+  final title = TextEditingController();
+  final volume = TextEditingController();
+  final dateOfPublication = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -183,6 +189,7 @@ class _CompleteFormState extends State<CompleteForm> {
                 children: <Widget>[
                   const SizedBox(height: 15),
                   FormBuilderTextField(
+                      controller: keyword,
                       decoration: const InputDecoration(
                         hintText: 'Keywords',
                         border: OutlineInputBorder(),
@@ -190,6 +197,7 @@ class _CompleteFormState extends State<CompleteForm> {
                       name: "keywords"),
                   const SizedBox(height: 15),
                   FormBuilderTextField(
+                      controller: author,
                       decoration: const InputDecoration(
                         hintText: 'Author',
                         border: OutlineInputBorder(),
@@ -197,6 +205,7 @@ class _CompleteFormState extends State<CompleteForm> {
                       name: "author"),
                   const SizedBox(height: 15),
                   FormBuilderTextField(
+                      controller: title,
                       decoration: const InputDecoration(
                         hintText: 'Title',
                         border: OutlineInputBorder(),
@@ -204,6 +213,7 @@ class _CompleteFormState extends State<CompleteForm> {
                       name: "title"),
                   const SizedBox(height: 15),
                   FormBuilderTextField(
+                      controller: volume,
                       decoration: const InputDecoration(
                         hintText: 'Volume',
                         border: OutlineInputBorder(),
@@ -211,6 +221,7 @@ class _CompleteFormState extends State<CompleteForm> {
                       name: "volume"),
                   const SizedBox(height: 15),
                   FormBuilderDateTimePicker(
+                      controller: dateOfPublication,
                       inputType: InputType.date,
                       decoration: const InputDecoration(
                         hintText: 'Date of publication',
@@ -224,9 +235,17 @@ class _CompleteFormState extends State<CompleteForm> {
               children: <Widget>[
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState?.saveAndValidate() ?? false) {
-                        debugPrint(_formKey.currentState?.value.toString());
+                        try {
+                          await search(keyword.text, author.text, title.text,
+                              volume.text, dateOfPublication.text);
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const SearchResult(),
+                          ));
+                        } catch (e) {
+                          debugPrint(e.toString());
+                        }
                       } else {
                         debugPrint(_formKey.currentState?.value.toString());
                         debugPrint('validation failed');

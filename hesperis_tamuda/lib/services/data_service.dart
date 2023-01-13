@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:hesperis_tamuda/models/auth.dart';
+import 'package:hesperis_tamuda/models/search.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/models/volume.dart';
 import 'package:hesperis_tamuda/services/exceptions.dart';
@@ -139,6 +140,54 @@ Future<Statut> createUser(String name, String email, String password) async {
     return statutFromJson(response.body.toString());
   } else {
     throw Exception('Failed to create your account.');
+  }
+}
+
+Future<Search?> search(String keyword, String author, String title,
+    String volume, String date) async {
+  final response = await http.post(
+    Uri.parse(rootURL + "/api/query"),
+    headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: jsonEncode(<String, String>{
+      'keyword': keyword,
+      'author': author,
+      'title': title,
+      'volume': volume,
+      'created_at': date,
+    }),
+  );
+  if (response.statusCode == 200) {
+    // debugPrint(response.body.toString());
+    final result = searchFromJson(response.body.toString());
+    return result;
+  } else if (response.statusCode == 201) {
+    return searchFromJson(response.body.toString());
+  } else {
+    throw Exception('Failed to create your account.');
+  }
+}
+
+Future<Statut> resetPassword(String email) async {
+  final response = await http.post(
+    Uri.parse(rootURL + '/api/login'),
+    headers: <String, String>{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: jsonEncode(<String, String>{
+      'email': email,
+    }),
+  );
+  if (response.statusCode == 200) {
+    final statut = statutFromJson(response.body.toString());
+    return statut;
+  } else if (response.statusCode == 201) {
+    return statutFromJson(response.body.toString());
+  } else {
+    throw Exception('Failed to log in.');
   }
 }
 

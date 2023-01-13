@@ -138,6 +138,7 @@ class _RecentArchivesState extends State<RecentArchives> {
                                         rootURL +
                                             '/' +
                                             snapshot.data!.data[index1].cover,
+                                        height: height * 0.3,
                                       ),
                                       Text(
                                         snapshot.data!.data[index1].anne,

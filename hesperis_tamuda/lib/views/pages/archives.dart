@@ -117,7 +117,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // padding: const EdgeInsets.all(19),
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -128,21 +128,24 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const RecentArchives()),
                               );
                             },
-                            child: Column(children: const [
-                              Text(
-                                "Hespéris-Tamuda",
-                                textAlign: TextAlign.center,
-                              ),
-                              Image(
-                                // height: 275,
-                                image:
-                                    AssetImage("assets/images/cover2020.gif"),
-                              ),
-                              Text(
-                                "(2020-2021)\n",
-                                textAlign: TextAlign.center,
-                              ),
-                            ]),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: const [
+                                  Text(
+                                    "Hespéris-Tamuda",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Image(
+                                    // height: 260,
+                                    image: AssetImage(
+                                        "assets/images/cover2020.gif"),
+                                  ),
+                                  Text(
+                                    "(2020-2021)\n",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ]),
                           ),
                         ],
                       ),
@@ -151,7 +154,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -184,7 +187,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -218,7 +221,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // padding: const EdgeInsets.all(19),
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -253,7 +256,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[400],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -288,7 +291,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[400],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -323,7 +326,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[300],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -357,7 +360,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // padding: const EdgeInsets.all(19),
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -391,7 +394,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // padding: const EdgeInsets.all(19),
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -402,17 +405,18 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19401949()),
                               );
                             },
-                            child: Column(children: const [
-                              Text(
+                            child: Column(children: [
+                              const Text(
                                 "Hespéris",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                // height: 275,
-                                image: AssetImage("assets/images/1943ht.jpg"),
+                                height: height * 0.32,
+                                image: const AssetImage(
+                                    "assets/images/1943ht.jpg"),
                                 fit: BoxFit.fill,
                               ),
-                              Text(
+                              const Text(
                                 "(1940-1949)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -426,7 +430,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // padding: const EdgeInsets.all(8),
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -437,16 +441,17 @@ class _ArchivePageState extends State<ArchivePage> {
                                         const Archive19301939()),
                               );
                             },
-                            child: Column(children: const [
-                              Text(
+                            child: Column(children: [
+                              const Text(
                                 "Hespéris",
                                 textAlign: TextAlign.center,
                               ),
                               Image(
-                                // height: 275,
-                                image: AssetImage("assets/images/1931ht.jpg"),
+                                height: height * 0.322,
+                                image: const AssetImage(
+                                    "assets/images/1931ht.jpg"),
                               ),
-                              Text(
+                              const Text(
                                 "(1930-1939)\n",
                                 textAlign: TextAlign.center,
                               ),
@@ -461,7 +466,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[400],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -474,16 +479,17 @@ class _ArchivePageState extends State<ArchivePage> {
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: const [
-                                Text(
+                              children: [
+                                const Text(
                                   "Hespéris",
                                   textAlign: TextAlign.center,
                                 ),
                                 Image(
-                                  height: 275,
-                                  image: AssetImage("assets/images/1921ht.jpg"),
+                                  height: height * 0.32,
+                                  image: const AssetImage(
+                                      "assets/images/1921ht.jpg"),
                                 ),
-                                Text(
+                                const Text(
                                   "(1921-1929)",
                                   textAlign: TextAlign.center,
                                 ),

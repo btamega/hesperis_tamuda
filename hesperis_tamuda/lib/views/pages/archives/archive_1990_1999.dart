@@ -117,15 +117,16 @@ class _Archive19901999State extends State<Archive19901999> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1990.png"),
+                              height: height * 0.3,
+                              image: const AssetImage("assets/images/1990.png"),
                             ),
-                            Text(
+                            const Text(
                               "1990\n",
                               textAlign: TextAlign.center,
                             ),
@@ -199,15 +200,16 @@ class _Archive19901999State extends State<Archive19901999> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1992.png"),
+                              height: height * 0.29,
+                              image: const AssetImage("assets/images/1992.png"),
                             ),
-                            Text(
+                            const Text(
                               "1992\n",
                               textAlign: TextAlign.center,
                             ),
@@ -240,15 +242,16 @@ class _Archive19901999State extends State<Archive19901999> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1993.png"),
+                              height: height * 0.29,
+                              image: const AssetImage("assets/images/1993.png"),
                             ),
-                            Text(
+                            const Text(
                               "1993\n",
                               textAlign: TextAlign.center,
                             ),
@@ -281,15 +284,16 @@ class _Archive19901999State extends State<Archive19901999> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1994.png"),
+                              height: height * 0.3,
+                              image: const AssetImage("assets/images/1994.png"),
                             ),
-                            Text(
+                            const Text(
                               "1994\n",
                               textAlign: TextAlign.center,
                             ),

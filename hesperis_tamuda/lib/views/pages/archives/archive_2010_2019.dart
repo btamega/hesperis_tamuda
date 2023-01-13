@@ -107,7 +107,7 @@ class _Archive20102019State extends State<Archive20102019> {
                               height: height / 2.5,
                               decoration: decoration,
                               child: ListView(
-                                physics: const ClampingScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   InkWell(
                                     onTap: () {
@@ -170,12 +170,11 @@ class _Archive20102019State extends State<Archive20102019> {
                                         textAlign: TextAlign.center,
                                       ),
                                       Image.network(
-                                        rootURL +
-                                            '/' +
-                                            snapshot.data!.data[index1].cover,
-                                        // width: 300,
-                                        // height: height / 2.8
-                                      ),
+                                          rootURL +
+                                              '/' +
+                                              snapshot.data!.data[index1].cover,
+                                          // width: 300,
+                                          height: height * 0.3),
                                       Text(
                                         snapshot.data!.data[index1].anne,
                                         textAlign: TextAlign.center,

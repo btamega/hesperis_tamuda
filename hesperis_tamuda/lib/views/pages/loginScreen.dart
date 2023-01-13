@@ -23,17 +23,6 @@ class LoginScreen extends StatelessWidget {
 
   Duration get loginTime => const Duration(milliseconds: 2250);
 
-  Future<String?> _recoverPassword(String email) async {
-    debugPrint('Name: $email');
-
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(email)) {
-        return 'User not exists';
-      }
-      return null;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
@@ -70,6 +59,57 @@ class LoginScreen extends StatelessWidget {
             },
           ).show();
         }
+      } catch (e) {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.ERROR,
+          animType: AnimType.RIGHSLIDE,
+          headerAnimationLoop: true,
+          title: 'Error',
+          desc: e.toString(),
+          btnOkOnPress: () {},
+          btnOkColor: Colors.red,
+        ).show();
+      }
+      return null;
+    }
+
+    Future<String?> _recoverPassword(String email) async {
+      debugPrint('Email: $email');
+      Statut statut;
+      try {
+        statut = await resetPassword(email);
+        if (statut.error != null && statut.error!.isNotEmpty) {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.ERROR,
+            animType: AnimType.RIGHSLIDE,
+            headerAnimationLoop: true,
+            title: 'Error',
+            desc: statut.error,
+            btnOkOnPress: () {},
+            btnOkColor: Colors.red,
+          ).show();
+        } else if (statut.error == null && statut.success!.isNotEmpty) {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.SUCCES,
+            headerAnimationLoop: true,
+            animType: AnimType.BOTTOMSLIDE,
+            title: 'SUCCESS',
+            desc: statut.success,
+            btnOkOnPress: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('email', statut.user!.email);
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const DashboardScreen(),
+              ));
+            },
+          ).show();
+        }
+        const Center(
+          child: CircularProgressIndicator(),
+        );
       } catch (e) {
         AwesomeDialog(
           context: context,
