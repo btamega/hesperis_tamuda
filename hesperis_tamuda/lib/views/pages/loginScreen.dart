@@ -4,6 +4,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/statut.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
@@ -12,6 +13,7 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hesperis_tamuda/views/pages/user/dashboard_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const users = {
   'dribbble@gmail.com': '12345',
@@ -59,57 +61,6 @@ class LoginScreen extends StatelessWidget {
             },
           ).show();
         }
-      } catch (e) {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.ERROR,
-          animType: AnimType.RIGHSLIDE,
-          headerAnimationLoop: true,
-          title: 'Error',
-          desc: e.toString(),
-          btnOkOnPress: () {},
-          btnOkColor: Colors.red,
-        ).show();
-      }
-      return null;
-    }
-
-    Future<String?> _recoverPassword(String email) async {
-      debugPrint('Email: $email');
-      Statut statut;
-      try {
-        statut = await resetPassword(email);
-        if (statut.error != null && statut.error!.isNotEmpty) {
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.ERROR,
-            animType: AnimType.RIGHSLIDE,
-            headerAnimationLoop: true,
-            title: 'Error',
-            desc: statut.error,
-            btnOkOnPress: () {},
-            btnOkColor: Colors.red,
-          ).show();
-        } else if (statut.error == null && statut.success!.isNotEmpty) {
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.SUCCES,
-            headerAnimationLoop: true,
-            animType: AnimType.BOTTOMSLIDE,
-            title: 'SUCCESS',
-            desc: statut.success,
-            btnOkOnPress: () async {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setString('email', statut.user!.email);
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const DashboardScreen(),
-              ));
-            },
-          ).show();
-        }
-        const Center(
-          child: CircularProgressIndicator(),
-        );
       } catch (e) {
         AwesomeDialog(
           context: context,
@@ -197,6 +148,8 @@ class LoginScreen extends StatelessWidget {
                   loginButton: 'LOG IN',
                   signupButton: 'REGISTER',
                   forgotPasswordButton: 'Forgot password?',
+                  recoverPasswordDescription:
+                      'You will be redirected for a new password',
                   recoverPasswordButton: 'RESENT',
                   goBackButton: 'GO BACK',
                   confirmPasswordError: 'Not match!',
@@ -232,7 +185,9 @@ class LoginScreen extends StatelessWidget {
                     builder: (context) => const HomePage(),
                   ));
                 },
-                onRecoverPassword: _recoverPassword,
+                onRecoverPassword: ((p0) {
+                  launchUrl(Uri.parse(rootURL + '/forgot-password'));
+                }),
               )
             : FlutterLogin(
                 loginAfterSignUp: true,
@@ -243,11 +198,12 @@ class LoginScreen extends StatelessWidget {
                   loginButton: 'LOG IN',
                   signupButton: 'REGISTER',
                   forgotPasswordButton: 'Forgot password?',
+                  confirmRecoverIntro: 'Test',
                   recoverPasswordButton: 'RESENT',
                   goBackButton: 'GO BACK',
                   confirmPasswordError: 'Not match!',
                   recoverPasswordDescription:
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+                      'You will be redirected for a new password',
                   recoverPasswordSuccess: 'Password rescued successfully',
                 ),
                 additionalSignupFields: const [
@@ -280,7 +236,9 @@ class LoginScreen extends StatelessWidget {
                     builder: (context) => const HomePage(),
                   ));
                 },
-                onRecoverPassword: _recoverPassword,
+                onRecoverPassword: ((p0) {
+                  launchUrl(Uri.parse(rootURL + '/forgot-password'));
+                }),
               ),
       ),
     );

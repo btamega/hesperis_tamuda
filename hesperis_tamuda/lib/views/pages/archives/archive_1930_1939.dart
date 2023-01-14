@@ -198,15 +198,17 @@ class _Archive19301939State extends State<Archive19301939> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris ",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1932ht.jpg"),
+                              height: height * 0.333,
+                              image:
+                                  const AssetImage("assets/images/1932ht.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1932\n",
                               textAlign: TextAlign.center,
                             ),
@@ -239,15 +241,17 @@ class _Archive19301939State extends State<Archive19301939> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1933ht.jpg"),
+                              height: height * 0.336,
+                              image:
+                                  const AssetImage("assets/images/1933ht.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1933\n",
                               textAlign: TextAlign.center,
                             ),

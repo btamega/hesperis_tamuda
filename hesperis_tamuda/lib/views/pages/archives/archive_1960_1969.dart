@@ -116,15 +116,16 @@ class _Archive19601969State extends State<Archive19601969> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1962.png"),
+                              height: height * 0.305,
+                              image: const AssetImage("assets/images/1962.png"),
                             ),
-                            Text(
+                            const Text(
                               "1960\n",
                               textAlign: TextAlign.center,
                             ),
@@ -157,15 +158,16 @@ class _Archive19601969State extends State<Archive19601969> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1961.jpg"),
+                              height: height * 0.305,
+                              image: const AssetImage("assets/images/1961.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1961\n",
                               textAlign: TextAlign.center,
                             ),
@@ -198,15 +200,16 @@ class _Archive19601969State extends State<Archive19601969> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1962.png"),
+                              height: height * 0.305,
+                              image: const AssetImage("assets/images/1962.png"),
                             ),
-                            Text(
+                            const Text(
                               "1962\n",
                               textAlign: TextAlign.center,
                             ),
@@ -239,15 +242,16 @@ class _Archive19601969State extends State<Archive19601969> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1962.png"),
+                              height: height * 0.305,
+                              image: const AssetImage("assets/images/1962.png"),
                             ),
-                            Text(
+                            const Text(
                               "1963\n",
                               textAlign: TextAlign.center,
                             ),
@@ -280,15 +284,16 @@ class _Archive19601969State extends State<Archive19601969> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris Tamuda",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1964.png"),
+                              height: height * 0.305,
+                              image: const AssetImage("assets/images/1964.png"),
                             ),
-                            Text(
+                            const Text(
                               "1964\n",
                               textAlign: TextAlign.center,
                             ),

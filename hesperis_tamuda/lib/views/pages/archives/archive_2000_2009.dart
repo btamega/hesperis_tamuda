@@ -90,11 +90,10 @@ class _Archive20002009State extends State<Archive20002009> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
-                childAspectRatio: width / (height / 1.25),
+                childAspectRatio: (200 / 350),
                 children: <Widget>[
                   Container(
                     height: height / 2.5,
-                    //height: height / 2.5,
                     decoration: decoration,
                     child: Column(
                       children: [
@@ -123,7 +122,7 @@ class _Archive20002009State extends State<Archive20002009> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              height: height * 0.288,
+                              height: height * 0.3,
                               image:
                                   const AssetImage("assets/images/2001-1.png"),
                             ),
@@ -138,7 +137,6 @@ class _Archive20002009State extends State<Archive20002009> {
                   ),
                   Container(
                     height: height / 2.5,
-                    //height: height / 2.5,
                     decoration: decoration,
                     child: Column(
                       children: [
@@ -167,7 +165,7 @@ class _Archive20002009State extends State<Archive20002009> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              height: height * 0.288,
+                              height: height * 0.3,
                               image:
                                   const AssetImage("assets/images/2001-2.png"),
                             ),
@@ -211,7 +209,7 @@ class _Archive20002009State extends State<Archive20002009> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              height: height * 0.288,
+                              height: height * 0.3,
                               image:
                                   const AssetImage("assets/images/2001-2.png"),
                             ),
@@ -254,7 +252,7 @@ class _Archive20002009State extends State<Archive20002009> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              height: height * 0.288,
+                              height: height * 0.3,
                               image:
                                   const AssetImage("assets/images/2001-1.png"),
                             ),
@@ -297,7 +295,7 @@ class _Archive20002009State extends State<Archive20002009> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              height: height * 0.288,
+                              height: height * 0.3,
                               image:
                                   const AssetImage("assets/images/2001-2.png"),
                             ),

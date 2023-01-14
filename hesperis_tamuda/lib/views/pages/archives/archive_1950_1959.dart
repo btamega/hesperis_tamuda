@@ -115,15 +115,17 @@ class _Archive19501959State extends State<Archive19501959> {
                                 PDFViewerPage(file: file, fileUrl: url)),
                       );
                     },
-                    child: Column(children: const [
-                      Text(
+                    child: Column(children: [
+                      const Text(
                         "Hespéris",
                         textAlign: TextAlign.center,
                       ),
                       Image(
-                        image: AssetImage("assets/images/1950ht.jpg"),
+                        height: height * 0.324,
+                        fit: BoxFit.fitWidth,
+                        image: const AssetImage("assets/images/1950ht.jpg"),
                       ),
-                      Text(
+                      const Text(
                         "1950\n",
                         textAlign: TextAlign.center,
                       ),

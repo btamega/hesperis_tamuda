@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hesperis_tamuda/models/search.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
@@ -238,10 +240,11 @@ class _CompleteFormState extends State<CompleteForm> {
                     onPressed: () async {
                       if (_formKey.currentState?.saveAndValidate() ?? false) {
                         try {
-                          await search(keyword.text, author.text, title.text,
-                              volume.text, dateOfPublication.text);
+                          final result = await search(keyword.text, author.text,
+                              title.text, volume.text, dateOfPublication.text);
+
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const SearchResult(),
+                            builder: (context) => SearchResult(results: result),
                           ));
                         } catch (e) {
                           debugPrint(e.toString());

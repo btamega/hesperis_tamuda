@@ -630,7 +630,7 @@ class _Archive19901999State extends State<Archive19901999> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1992.png"),
+                              image: AssetImage("assets/images/1996.png"),
                             ),
                             Text(
                               "1992\n",
@@ -671,7 +671,7 @@ class _Archive19901999State extends State<Archive19901999> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1993.png"),
+                              image: AssetImage("assets/images/1996.png"),
                             ),
                             Text(
                               "1993\n",
@@ -712,7 +712,7 @@ class _Archive19901999State extends State<Archive19901999> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1994.png"),
+                              image: AssetImage("assets/images/1995.png"),
                             ),
                             Text(
                               "1994\n",

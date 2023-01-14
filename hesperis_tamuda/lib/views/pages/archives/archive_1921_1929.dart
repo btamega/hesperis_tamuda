@@ -116,15 +116,17 @@ class _Archive19201929State extends State<Archive19201929> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1921ht.jpg"),
+                              height: height * 0.336,
+                              image:
+                                  const AssetImage("assets/images/1921ht.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1921\n",
                               textAlign: TextAlign.center,
                             ),
@@ -157,16 +159,17 @@ class _Archive19201929State extends State<Archive19201929> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris ",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage(
+                              height: height * 0.336,
+                              image: const AssetImage(
                                   "assets/images/1922 TOME II FASC.1-2-3.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1922\n",
                               textAlign: TextAlign.center,
                             ),
@@ -199,16 +202,17 @@ class _Archive19201929State extends State<Archive19201929> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage(
+                              height: height * 0.336,
+                              image: const AssetImage(
                                   "assets/images/1923 TOMEIII FASC.1-2-3-4.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1923\n",
                               textAlign: TextAlign.center,
                             ),
@@ -241,16 +245,17 @@ class _Archive19201929State extends State<Archive19201929> {
                                       PDFViewerPage(file: file, fileUrl: url)),
                             );
                           },
-                          child: Column(children: const [
-                            Text(
+                          child: Column(children: [
+                            const Text(
                               "Hespéris",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage(
+                              height: height * 0.336,
+                              image: const AssetImage(
                                   "assets/images/1924 TOME IV FASC.1-2-3-4.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1924\n",
                               textAlign: TextAlign.center,
                             ),
