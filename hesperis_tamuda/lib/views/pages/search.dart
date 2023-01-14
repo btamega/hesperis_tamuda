@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hesperis_tamuda/constant.dart';
 import 'package:hesperis_tamuda/models/search.dart';
 import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
@@ -10,6 +11,7 @@ import 'package:hesperis_tamuda/views/pages/home.dart';
 import 'package:hesperis_tamuda/views/pages/search_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'errorPage.dart';
 import 'loginScreen.dart';
 import 'user/dashboard_screen.dart';
@@ -240,6 +242,7 @@ class _CompleteFormState extends State<CompleteForm> {
                     onPressed: () async {
                       if (_formKey.currentState?.saveAndValidate() ?? false) {
                         try {
+                          // launchUrl(Uri.parse(rootURL + '/searchWord'));
                           final result = await search(keyword.text, author.text,
                               title.text, volume.text, dateOfPublication.text);
 

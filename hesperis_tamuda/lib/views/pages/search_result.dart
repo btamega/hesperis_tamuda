@@ -90,93 +90,93 @@ class _SearchResultState extends State<SearchResult> {
                                                     const ClampingScrollPhysics(),
                                                 shrinkWrap: true,
                                                 children: [
-                                                  Row(children: [
-                                                    // Expanded(
-                                                    //   flex: 4,
-                                                    //   child: InkWell(
-                                                    //     onTap: () async {
-                                                    //       showDialog(
-                                                    //           context: context,
-                                                    //           builder:
-                                                    //               (context) {
-                                                    //             return Center(
-                                                    //               child: Column(
-                                                    //                 mainAxisSize:
-                                                    //                     MainAxisSize
-                                                    //                         .max,
-                                                    //                 mainAxisAlignment:
-                                                    //                     MainAxisAlignment
-                                                    //                         .center,
-                                                    //                 children: const [
-                                                    //                   CircularProgressIndicator(),
-                                                    //                   Text(
-                                                    //                     "Un instant, nous chargeons le fichier",
-                                                    //                     textAlign:
-                                                    //                         TextAlign.center,
-                                                    //                     style: TextStyle(
-                                                    //                         color: Color.fromARGB(
-                                                    //                             255,
-                                                    //                             35,
-                                                    //                             218,
-                                                    //                             193),
-                                                    //                         fontSize:
-                                                    //                             20),
-                                                    //                   ),
-                                                    //                 ],
-                                                    //               ),
-                                                    //             );
-                                                    //           });
-                                                    //       final url = rootURL +
-                                                    //           '/Downloads/' +
-                                                    //           widget
-                                                    //               .results!
-                                                    //               .searcharticles![
-                                                    //                   index1]!
-                                                    //               .lienTelechargement
-                                                    //               .toString();
-                                                    //       final file =
-                                                    //           await PDFApi
-                                                    //               .loadNetwork(
-                                                    //                   url);
-                                                    //       Navigator.push(
-                                                    //         context,
-                                                    //         MaterialPageRoute(
-                                                    //             builder: (context) =>
-                                                    //                 PDFViewerPage(
-                                                    //                     file:
-                                                    //                         file,
-                                                    //                     fileUrl:
-                                                    //                         url)),
-                                                    //       );
-                                                    //       //  Navigator.of(context).pop();
-                                                    //     },
-                                                    //     child: Text(
-                                                    //       widget
-                                                    //           .results!
-                                                    //           .searcharticles![
-                                                    //               index1]!
-                                                    //           .titre
-                                                    //           .toString(),
-                                                    //       textAlign:
-                                                    //           TextAlign.left,
-                                                    //       style: const TextStyle(
-                                                    //           color: Color(
-                                                    //               0xff2796bd)),
-                                                    //     ),
-                                                    //   ),
-                                                    // ),
-                                                    // Expanded(
-                                                    //   child: Text(
-                                                    //       widget
-                                                    //           .results!
-                                                    //           .searcharticles![
-                                                    //               index1]!
-                                                    //           .nbrePage
-                                                    //           .toString(),
-                                                    //       textAlign:
-                                                    //           TextAlign.right),
-                                                    // ),
-                                                  ])
+                                                  // Row(children: [
+                                                  //   // Expanded(
+                                                  //   //   flex: 4,
+                                                  //   //   child: InkWell(
+                                                  //   //     onTap: () async {
+                                                  //   //       showDialog(
+                                                  //   //           context: context,
+                                                  //   //           builder:
+                                                  //   //               (context) {
+                                                  //   //             return Center(
+                                                  //   //               child: Column(
+                                                  //   //                 mainAxisSize:
+                                                  //   //                     MainAxisSize
+                                                  //   //                         .max,
+                                                  //   //                 mainAxisAlignment:
+                                                  //   //                     MainAxisAlignment
+                                                  //   //                         .center,
+                                                  //   //                 children: const [
+                                                  //   //                   CircularProgressIndicator(),
+                                                  //   //                   Text(
+                                                  //   //                     "Un instant, nous chargeons le fichier",
+                                                  //   //                     textAlign:
+                                                  //   //                         TextAlign.center,
+                                                  //   //                     style: TextStyle(
+                                                  //   //                         color: Color.fromARGB(
+                                                  //   //                             255,
+                                                  //   //                             35,
+                                                  //   //                             218,
+                                                  //   //                             193),
+                                                  //   //                         fontSize:
+                                                  //   //                             20),
+                                                  //   //                   ),
+                                                  //   //                 ],
+                                                  //   //               ),
+                                                  //   //             );
+                                                  //   //           });
+                                                  //   //       final url = rootURL +
+                                                  //   //           '/Downloads/' +
+                                                  //   //           widget
+                                                  //   //               .results!
+                                                  //   //               .searcharticles![
+                                                  //   //                   index1]!
+                                                  //   //               .lienTelechargement
+                                                  //   //               .toString();
+                                                  //   //       final file =
+                                                  //   //           await PDFApi
+                                                  //   //               .loadNetwork(
+                                                  //   //                   url);
+                                                  //   //       Navigator.push(
+                                                  //   //         context,
+                                                  //   //         MaterialPageRoute(
+                                                  //   //             builder: (context) =>
+                                                  //   //                 PDFViewerPage(
+                                                  //   //                     file:
+                                                  //   //                         file,
+                                                  //   //                     fileUrl:
+                                                  //   //                         url)),
+                                                  //   //       );
+                                                  //   //       //  Navigator.of(context).pop();
+                                                  //   //     },
+                                                  //   //     child: Text(
+                                                  //   //       widget
+                                                  //   //           .results!
+                                                  //   //           .searcharticles![
+                                                  //   //               index1]!
+                                                  //   //           .titre
+                                                  //   //           .toString(),
+                                                  //   //       textAlign:
+                                                  //   //           TextAlign.left,
+                                                  //   //       style: const TextStyle(
+                                                  //   //           color: Color(
+                                                  //   //               0xff2796bd)),
+                                                  //   //     ),
+                                                  //   //   ),
+                                                  //   // ),
+                                                  //   // Expanded(
+                                                  //   //   child: Text(
+                                                  //   //       widget
+                                                  //   //           .results!
+                                                  //   //           .searcharticles![
+                                                  //   //               index1]!
+                                                  //   //           .nbrePage
+                                                  //   //           .toString(),
+                                                  //   //       textAlign:
+                                                  //   //           TextAlign.right),
+                                                  //   // ),
+                                                  // ])
                                                 ],
                                               ),
                                             );
