@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hesperis_tamuda/constant.dart';
@@ -241,17 +242,21 @@ class _CompleteFormState extends State<CompleteForm> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState?.saveAndValidate() ?? false) {
-                        try {
-                          // launchUrl(Uri.parse(rootURL + '/searchWord'));
-                          final result = await search(keyword.text, author.text,
-                              title.text, volume.text, dateOfPublication.text);
-
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SearchResult(results: result),
-                          ));
-                        } catch (e) {
-                          debugPrint(e.toString());
-                        }
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.INFO,
+                          animType: AnimType.RIGHSLIDE,
+                          headerAnimationLoop: true,
+                          title: 'Information',
+                          desc:
+                              'Search function under development, thank you for your patience.',
+                          btnOkOnPress: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ));
+                          },
+                          btnOkColor: Colors.green,
+                        ).show();
                       } else {
                         debugPrint(_formKey.currentState?.value.toString());
                         debugPrint('validation failed');

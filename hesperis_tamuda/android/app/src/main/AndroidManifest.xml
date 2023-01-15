@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hesperis_tamuda">
+    package="com.hesperis_tamuda.apps">
    <application
         android:label="Hesperis Tamuda"
         android:name="${applicationName}"
