@@ -247,14 +247,30 @@ class _DashboardScreenState extends State<DashboardScreen>
 
             break;
           case "History":
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const NavigationHistory(),
-            ));
+            dialog.AwesomeDialog(
+              context: context,
+              dialogType: dialog.DialogType.INFO,
+              animType: dialog.AnimType.RIGHSLIDE,
+              headerAnimationLoop: true,
+              title: 'Information',
+              desc:
+                  'History function under development, thank you for your patience.',
+              btnOkOnPress: () {},
+              btnOkColor: Colors.green,
+            ).show();
             break;
           case "Notifications":
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const Notifications(),
-            ));
+            dialog.AwesomeDialog(
+              context: context,
+              dialogType: dialog.DialogType.INFO,
+              animType: dialog.AnimType.RIGHSLIDE,
+              headerAnimationLoop: true,
+              title: 'Information',
+              desc:
+                  'Notifications function under development, thank you for your patience.',
+              btnOkOnPress: () {},
+              btnOkColor: Colors.green,
+            ).show();
             break;
           default:
         }

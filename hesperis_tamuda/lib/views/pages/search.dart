@@ -38,43 +38,7 @@ class _SearchPageState extends State<SearchPage> {
           title: customSearchBar,
           centerTitle: true,
           backgroundColor: const Color(0xff3b5998),
-          actions: const [
-            LanguagePickerWidget()
-            // IconButton(
-            //   onPressed: () {
-            //     setState(() {
-            //       if (customIcon.icon == Icons.search) {
-            //         customIcon = const Icon(Icons.cancel);
-            //         customSearchBar = const ListTile(
-            //           leading: Icon(
-            //             Icons.search,
-            //             color: Colors.white,
-            //             size: 28,
-            //           ),
-            //           title: TextField(
-            //             decoration: InputDecoration(
-            //               hintText: 'Tapez votre recherche...',
-            //               hintStyle: TextStyle(
-            //                 color: Colors.white,
-            //                 fontSize: 18,
-            //                 fontStyle: FontStyle.italic,
-            //               ),
-            //               border: InputBorder.none,
-            //             ),
-            //             style: TextStyle(
-            //               color: Colors.white,
-            //             ),
-            //           ),
-            //         );
-            //       } else {
-            //         customIcon = const Icon(Icons.search);
-            //         customSearchBar = const Text('SEARCH');
-            //       }
-            //     });
-            //   },
-            //   icon: customIcon,
-            // )
-          ],
+          actions: const [LanguagePickerWidget()],
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.black,
