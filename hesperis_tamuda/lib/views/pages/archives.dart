@@ -518,7 +518,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // padding: const EdgeInsets.all(19),
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -552,7 +552,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       decoration: decoration,
                       height: height,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -585,7 +585,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[300],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -617,7 +617,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -650,7 +650,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[400],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -683,7 +683,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[400],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -716,7 +716,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[300],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -748,7 +748,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -780,7 +780,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -814,7 +814,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       height: height / 2.5,
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -847,7 +847,7 @@ class _ArchivePageState extends State<ArchivePage> {
                       // color: Colors.teal[400],
                       decoration: decoration,
                       child: ListView(
-                        physics: const ClampingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           InkWell(
                             onTap: () {
@@ -860,15 +860,17 @@ class _ArchivePageState extends State<ArchivePage> {
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: const [
-                                Text(
+                              children: [
+                                const Text(
                                   "Hespéris",
                                   textAlign: TextAlign.center,
                                 ),
                                 Image(
-                                  image: AssetImage("assets/images/1921ht.jpg"),
+                                  height: height * 0.93,
+                                  image: const AssetImage(
+                                      "assets/images/1921ht.jpg"),
                                 ),
-                                Text(
+                                const Text(
                                   "(1921-1929)",
                                   textAlign: TextAlign.center,
                                 ),

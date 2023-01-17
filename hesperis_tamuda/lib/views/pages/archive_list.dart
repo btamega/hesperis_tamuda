@@ -290,7 +290,9 @@ class _ArchiveListeState extends State<ArchiveListe> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             child: Container(
-                              padding: const EdgeInsets.all(19),
+                              height: height,
+
+                              // padding: const EdgeInsets.all(19),
                               decoration: decoration,
                               child: ListView(
                                 physics: const ClampingScrollPhysics(),
@@ -332,7 +334,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                                               return ListView.builder(
                                                   shrinkWrap: true,
                                                   physics:
-                                                      const ClampingScrollPhysics(),
+                                                      const NeverScrollableScrollPhysics(),
                                                   itemCount: 1,
                                                   itemBuilder:
                                                       (context, index1) {

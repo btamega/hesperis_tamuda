@@ -83,429 +83,855 @@ class _Archive19501959State extends State<Archive19501959> {
           ],
           onTap: _onItemTapped,
         ),
-        body: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(22),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          childAspectRatio: (200 / 367),
-          children: <Widget>[
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+        body: orientation == Orientation.portrait
+            ? GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(22),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: (200 / 350),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1950.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
                             );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1950.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: [
-                      const Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        height: height * 0.324,
-                        fit: BoxFit.fitWidth,
-                        image: const AssetImage("assets/images/1950ht.jpg"),
-                      ),
-                      const Text(
-                        "1950\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                          },
+                          child: Column(children: [
+                            const Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              height: height * 0.324,
+                              fit: BoxFit.fitWidth,
+                              image:
+                                  const AssetImage("assets/images/1950ht.jpg"),
+                            ),
+                            const Text(
+                              "1950\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1951.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1951ht.png"),
+                            ),
+                            Text(
+                              "1951\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1952.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris ",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1952ht.png"),
+                            ),
+                            Text(
+                              "1952\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1953.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1953ht.jpg"),
+                            ),
+                            Text(
+                              "1953\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1954.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1954ht.jpg"),
+                            ),
+                            Text(
+                              "1954\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1955.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1955ht.png"),
+                            ),
+                            Text(
+                              "1955",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1956.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1956ht.jpg"),
+                            ),
+                            Text(
+                              "1956",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1957.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1957ht.jpg"),
+                            ),
+                            Text(
+                              "1957",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1958.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1958ht.jpg"),
+                            ),
+                            Text(
+                              "1958",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1959.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1959ht.jpg"),
+                              fit: BoxFit.fill,
+                            ),
+                            Text(
+                              "1959",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(22),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                childAspectRatio: (200 / 357),
+                children: <Widget>[
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1950.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: [
+                            const Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              height: height * 0.88,
+                              image:
+                                  const AssetImage("assets/images/1950ht.jpg"),
+                            ),
+                            const Text(
+                              "1950\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1951.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1951ht.png"),
+                            ),
+                            Text(
+                              "1951\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: height / 2.5,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1952.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris ",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1952ht.png"),
+                            ),
+                            Text(
+                              "1952\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1953.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1953ht.jpg"),
+                            ),
+                            Text(
+                              "1953\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1954.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              height: height * 0.9,
+                              image: AssetImage("assets/images/1954ht.jpg"),
+                            ),
+                            Text(
+                              "1954\n",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1955.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1955ht.png"),
+                            ),
+                            Text(
+                              "1955",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1956.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1956ht.jpg"),
+                            ),
+                            Text(
+                              "1956",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1957.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1957ht.jpg"),
+                            ),
+                            Text(
+                              "1957",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1958.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1958ht.jpg"),
+                            ),
+                            Text(
+                              "1958",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: height / 2.5,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            const url =
+                                'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1959.pdf';
+                            final file = await PDFApi.loadNetwork(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PDFViewerPage(file: file, fileUrl: url)),
+                            );
+                          },
+                          child: Column(children: const [
+                            Text(
+                              "Hespéris",
+                              textAlign: TextAlign.center,
+                            ),
+                            Image(
+                              image: AssetImage("assets/images/1959ht.jpg"),
+                              fit: BoxFit.fill,
+                            ),
+                            Text(
+                              "1959",
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1951.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1951ht.png"),
-                      ),
-                      Text(
-                        "1951\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: decoration,
-              height: height / 2.5,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1952.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris ",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1952ht.png"),
-                      ),
-                      Text(
-                        "1952\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1953.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1953ht.jpg"),
-                      ),
-                      Text(
-                        "1953\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1954.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1954ht.jpg"),
-                      ),
-                      Text(
-                        "1954\n",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1955.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1955ht.png"),
-                      ),
-                      Text(
-                        "1955",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1956.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1956ht.jpg"),
-                      ),
-                      Text(
-                        "1956",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1957.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1957ht.jpg"),
-                      ),
-                      Text(
-                        "1957",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1958.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1958ht.jpg"),
-                      ),
-                      Text(
-                        "1958",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: height / 2.5,
-              decoration: decoration,
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      const url =
-                          'https://hesperis-tamuda.com/Downloads/1950-1959/Hespéris Tamuda 1959.pdf';
-                      final file = await PDFApi.loadNetwork(url);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PDFViewerPage(file: file, fileUrl: url)),
-                      );
-                    },
-                    child: Column(children: const [
-                      Text(
-                        "Hespéris",
-                        textAlign: TextAlign.center,
-                      ),
-                      Image(
-                        image: AssetImage("assets/images/1959ht.jpg"),
-                        fit: BoxFit.fill,
-                      ),
-                      Text(
-                        "1959",
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

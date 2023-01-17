@@ -200,10 +200,10 @@ class _Archive20102019State extends State<Archive20102019> {
                           itemCount: snapshot.data!.data.length,
                           itemBuilder: (context, index1) {
                             return Container(
-                              padding: const EdgeInsets.all(19),
+                              height: height,
                               decoration: decoration,
                               child: ListView(
-                                physics: const ClampingScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   InkWell(
                                     onTap: () {

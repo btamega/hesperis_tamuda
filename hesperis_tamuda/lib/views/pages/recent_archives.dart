@@ -166,10 +166,11 @@ class _RecentArchivesState extends State<RecentArchives> {
                           itemCount: snapshot.data!.data.length,
                           itemBuilder: (context, index1) {
                             return Container(
-                              padding: const EdgeInsets.all(19),
+                              height: height,
+                              // padding: const EdgeInsets.all(19),
                               decoration: decoration,
                               child: ListView(
-                                physics: const ClampingScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   InkWell(
                                     onTap: () {
