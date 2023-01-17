@@ -295,7 +295,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                               // padding: const EdgeInsets.all(19),
                               decoration: decoration,
                               child: ListView(
-                                physics: const ClampingScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   InkWell(
                                     onTap: () {
@@ -447,7 +447,7 @@ class _ArchiveListeState extends State<ArchiveListe> {
                         itemCount: snapshot.data!.data.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: (200 / 350),
+                          childAspectRatio: (200 / 345),
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                           crossAxisCount: 3,

@@ -513,7 +513,7 @@ class _Archive19401949State extends State<Archive19401949> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
-                childAspectRatio: (200 / 358),
+                childAspectRatio: (200 / 372),
                 children: <Widget>[
                   Container(
                     height: height / 2.5,
@@ -750,7 +750,7 @@ class _Archive19401949State extends State<Archive19401949> {
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              image: AssetImage("assets/images/1945ht.jpg"),
+                              image: AssetImage("assets/images/1949ht.jpg"),
                             ),
                             Text(
                               "1945",

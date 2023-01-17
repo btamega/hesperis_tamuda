@@ -2,17 +2,11 @@ import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hesperis_tamuda/constant.dart';
-import 'package:hesperis_tamuda/models/search.dart';
-import 'package:hesperis_tamuda/services/data_service.dart';
 import 'package:hesperis_tamuda/views/include/navbar.dart';
 import 'package:hesperis_tamuda/views/menu/language.dart';
 import 'package:hesperis_tamuda/views/pages/home.dart';
-import 'package:hesperis_tamuda/views/pages/search_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'errorPage.dart';
 import 'loginScreen.dart';
 import 'user/dashboard_screen.dart';

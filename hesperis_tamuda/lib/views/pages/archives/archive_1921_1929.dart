@@ -483,7 +483,7 @@ class _Archive19201929State extends State<Archive19201929> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
-                childAspectRatio: (200 / 358),
+                childAspectRatio: (200 / 372),
                 children: <Widget>[
                   Container(
                     height: height / 2.5,

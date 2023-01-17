@@ -707,15 +707,16 @@ class _Archive19501959State extends State<Archive19501959> {
                             );
                           },
                           child: Column(children: [
-                            Text(
+                            const Text(
                               "Hespéris",
                               textAlign: TextAlign.center,
                             ),
                             Image(
-                              height: height * 0.9,
-                              image: AssetImage("assets/images/1954ht.jpg"),
+                              height: height * 0.894,
+                              image:
+                                  const AssetImage("assets/images/1958ht.jpg"),
                             ),
-                            Text(
+                            const Text(
                               "1954\n",
                               textAlign: TextAlign.center,
                             ),

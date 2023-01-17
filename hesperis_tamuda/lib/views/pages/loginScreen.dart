@@ -187,6 +187,7 @@ class LoginScreen extends StatelessWidget {
                 },
                 onRecoverPassword: ((p0) {
                   launchUrl(Uri.parse(rootURL + '/forgot-password'));
+                  return null;
                 }),
               )
             : FlutterLogin(
@@ -238,6 +239,7 @@ class LoginScreen extends StatelessWidget {
                 },
                 onRecoverPassword: ((p0) {
                   launchUrl(Uri.parse(rootURL + '/forgot-password'));
+                  return null;
                 }),
               ),
       ),
