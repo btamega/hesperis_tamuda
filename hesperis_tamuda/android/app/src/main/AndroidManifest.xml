@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hesperis_tamuda.apps">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="Hesperis Tamuda"
         android:name="${applicationName}"
